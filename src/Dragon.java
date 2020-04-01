@@ -1,3 +1,4 @@
+import animations.DragonAnimation;
 
 // ASSUMING FOOD AND LOVE METERS GO UP TO 5
 // ASSUMING DRAGON HAS 3 STAGES OF LIFE
@@ -39,6 +40,18 @@ public class Dragon {
 			this.age++;
 		}
 		return this.age;
+	}
+	private void animateIdle() {
+		if (this.age == 0) {
+			DragonAnimation.eggIdle();
+		}
+		else if (this.age == 1) {
+			DragonAnimation.babyIdle();
+		}
+		else {
+			DragonAnimation.adultIdle();
+		}
+		
 	}
 	
 	// displays the proper animation for feeding the dragon based on its age
