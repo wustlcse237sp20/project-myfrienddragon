@@ -7,30 +7,22 @@ public class Game {
 	private Dragon dragon;
 	
 	public Game() {
-		dragon = new Dragon();
+		dragon = new Baby();
 	}
 	
 	public void setUpScreen() {
 		StdDraw.setCanvasSize(400, 400);
 		DragonAnimation.redrawUI();
-		drawDragon();
 	}
 	
-	private void drawDragon() {
-		if(dragon.age == 0) {
-			DragonAnimation.eggIdle();
-		}
-		if(dragon.age == 1) {
-			DragonAnimation.babyIdle();
-		}
-		if(dragon.age == 2) {
-			DragonAnimation.adultIdle();
-		}
-			
+	public void drawDragon() {
+		dragon.show();
 	}
 	
 	public static void main(String[] args) {
 		Game game = new Game();
 		game.setUpScreen();
+		game.drawDragon();
+		
 	}
 }
