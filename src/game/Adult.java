@@ -1,6 +1,7 @@
 package game;
 
 import animations.DragonAnimation;
+import edu.princeton.cs.introcs.StdDraw;
 
 public class Adult implements Dragon {
 
@@ -49,6 +50,7 @@ public class Adult implements Dragon {
 		DragonAnimation.adultIdle(frame);
 		
 	}
+<<<<<<< Updated upstream
 
 	@Override
 	public Interactions checkInteraction(double mouseX, double mouseY) {
@@ -68,9 +70,27 @@ public class Adult implements Dragon {
 			if ((mouseX > 175 && mouseX< 250) && (mouseY > 20 && mouseY<100)) {
 				 return Interactions.feed;
 			}
+<<<<<<< Updated upstream
 			if ((mouseX >350 && mouseX < 410 ) && (mouseY > 20 && mouseY < 100)) {
 				return Interactions.pet;
 			}
+=======
+=======
+	@Override
+	public Interactions checkInteraction(double mousex, double mousey) {
+		// TODO Auto-generated method stub
+			if ((mousex > 25 && mousex < 85) && (mousey > 20 && mousey < 100)) {
+				return Interactions.game;
+				
+			}
+			if ((mousex > 175 && mousex< 250) && (mousey > 20 && mousey<100)) {
+				 return Interactions.feed;
+			}
+			if ((mousex >350 && mousex < 410 ) && (mousey > 20 && mousey < 100)) {
+				return Interactions.pet;
+			}
+>>>>>>> Stashed changes
+>>>>>>> Stashed changes
 			else {
 				return Interactions.idle;
 			}
@@ -88,6 +108,7 @@ public class Adult implements Dragon {
 			this.feed();
 			}
 		}
+<<<<<<< Updated upstream
 		if (interactionValue == Interactions.pet) {
 			this.animatePet(frame);
 			if (frame == 0) {
@@ -95,13 +116,40 @@ public class Adult implements Dragon {
 			}
 		}
 >>>>>>> Stashed changes
+=======
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
 		
 	}
 
 	@Override
 	public Dragon ageUp() {
+<<<<<<< Updated upstream
 		// TODO Auto-generated method stub
 		return null;
+=======
+		if (this.foodLevel == 5) {
+			System.out.println("Dragon is fully grown, congratulations");
+			
+=======
+		if (interactionValue == Interactions.pet) {
+			this.animatePet(frame);
+			if (frame == 0) {
+				this.pet();
+			}
+		}
+		
+	}
+	
+	@Override
+	public Dragon ageUp() {
+		if (this.foodLevel == 5 && this.loveLevel == 5) {
+		StdDraw.clear();
+		StdDraw.text(200, 200, "Congratulations, you raised your dragon to an adult");
+>>>>>>> Stashed changes
+		}
+		return this;
+>>>>>>> Stashed changes
 	}
 	
 }

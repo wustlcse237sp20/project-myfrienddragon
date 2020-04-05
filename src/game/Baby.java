@@ -32,6 +32,7 @@ public class Baby implements Dragon {
 		return this.foodLevel;
 	}
 	
+<<<<<<< Updated upstream
 	public Interactions checkInteraction(double mouseX, double mouseY) {
 		if ((mouseX > 25 && mouseX < 75) && (mouseY > 20 && mouseY < 70)) {
 			return Interactions.game ;
@@ -46,6 +47,12 @@ public class Baby implements Dragon {
 	
 	}
 	
+=======
+<<<<<<< Updated upstream
+//increases the age of the dragon by 1 and animates the dragon at its new age
+=======
+>>>>>>> Stashed changes
+>>>>>>> Stashed changes
 	// increases the age of the dragon by 1 and animates the dragon at its new age
 	public Dragon ageUp() {
 		if (this.foodLevel == 5 && this.loveLevel == 5) {
@@ -91,6 +98,12 @@ public class Baby implements Dragon {
 		
 		}
 	
+<<<<<<< Updated upstream
+=======
+<<<<<<< Updated upstream
+	}
+=======
+>>>>>>> Stashed changes
 	
 >>>>>>> Stashed changes
 	@Override
@@ -100,6 +113,10 @@ public class Baby implements Dragon {
 		}
 		if (interactionValue == Interactions.feed) {
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
+=======
+			if (frame == 1) {
+>>>>>>> Stashed changes
 			this.feed();
 			this.animateFeed(frame);
 =======
@@ -117,6 +134,27 @@ public class Baby implements Dragon {
 		}
 		
 	}
+<<<<<<< Updated upstream
 
 	
+=======
+=======
+			this.animateFeed(frame);
+			if (frame == 0) {
+			this.feed();
+			}
+		}
+		if (interactionValue == Interactions.pet) {
+			this.animatePet(frame);
+			if (frame == 0) {
+				this.pet();
+			}
+		}
+		
+	}
+>>>>>>> Stashed changes
 }
+
+>>>>>>> Stashed changes
+	
+
