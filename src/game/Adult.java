@@ -31,7 +31,7 @@ public class Adult implements Dragon {
 		return this.foodLevel;
 	}
 	
-	// displays the proper animation for feeding the dragon
+
 	@Override
 	public void animateFeed(int frame) {
 		DragonAnimation.adultEat(frame);
@@ -50,35 +50,9 @@ public class Adult implements Dragon {
 		DragonAnimation.adultIdle(frame);
 		
 	}
-<<<<<<< Updated upstream
 
-	@Override
-	public Interactions checkInteraction(double mouseX, double mouseY) {
-<<<<<<< Updated upstream
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public void update(Interactions interactionLevel, int frame) {
-		// TODO Auto-generated method stub
-=======
-			if ((mouseX > 25 && mouseX < 85) && (mouseY > 20 && mouseY < 100)) {
-				return Interactions.game;
-				
-			}
-			if ((mouseX > 175 && mouseX< 250) && (mouseY > 20 && mouseY<100)) {
-				 return Interactions.feed;
-			}
-<<<<<<< Updated upstream
-			if ((mouseX >350 && mouseX < 410 ) && (mouseY > 20 && mouseY < 100)) {
-				return Interactions.pet;
-			}
-=======
-=======
 	@Override
 	public Interactions checkInteraction(double mousex, double mousey) {
-		// TODO Auto-generated method stub
 			if ((mousex > 25 && mousex < 85) && (mousey > 20 && mousey < 100)) {
 				return Interactions.game;
 				
@@ -89,15 +63,12 @@ public class Adult implements Dragon {
 			if ((mousex >350 && mousex < 410 ) && (mousey > 20 && mousey < 100)) {
 				return Interactions.pet;
 			}
->>>>>>> Stashed changes
->>>>>>> Stashed changes
 			else {
 				return Interactions.idle;
-			}
+      }
 		
-		}
+}
 
-	@Override
 	public void update(Interactions interactionValue, int frame) {
 		if (interactionValue ==  Interactions.idle) {
 			this.animateIdle(frame);
@@ -108,48 +79,22 @@ public class Adult implements Dragon {
 			this.feed();
 			}
 		}
-<<<<<<< Updated upstream
 		if (interactionValue == Interactions.pet) {
 			this.animatePet(frame);
 			if (frame == 0) {
 				this.pet();
 			}
 		}
->>>>>>> Stashed changes
-=======
-<<<<<<< Updated upstream
->>>>>>> Stashed changes
 		
-	}
+}
 
-	@Override
-	public Dragon ageUp() {
-<<<<<<< Updated upstream
-		// TODO Auto-generated method stub
-		return null;
-=======
-		if (this.foodLevel == 5) {
-			System.out.println("Dragon is fully grown, congratulations");
-			
-=======
-		if (interactionValue == Interactions.pet) {
-			this.animatePet(frame);
-			if (frame == 0) {
-				this.pet();
-			}
-		}
-		
-	}
 	
 	@Override
 	public Dragon ageUp() {
 		if (this.foodLevel == 5 && this.loveLevel == 5) {
 		StdDraw.clear();
 		StdDraw.text(200, 200, "Congratulations, you raised your dragon to an adult");
->>>>>>> Stashed changes
 		}
 		return this;
->>>>>>> Stashed changes
 	}
-	
 }

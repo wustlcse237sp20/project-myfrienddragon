@@ -4,7 +4,8 @@ import animations.DragonAnimation;
 import edu.princeton.cs.introcs.StdDraw;
 
 public class Game {
-	
+
+
 	public void setUpScreen() {
 		StdDraw.setCanvasSize(400, 400);
 		StdDraw.setXscale(0,400);
@@ -57,3 +58,4 @@ public class Game {
 		}
 	}	
 	
+

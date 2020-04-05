@@ -31,24 +31,15 @@ public class Egg implements Dragon {
 	
 	// increments the food level of the dragon if it is not already maxed out and returns the current food level
 	public int feed() {
-		System.out.println("Current food level: " + this.foodLevel);
 		if (this.foodLevel < 5) {
 			this.foodLevel++;
-<<<<<<< Updated upstream
-			System.out.println(this.foodLevel);
-=======
-<<<<<<< Updated upstream
-		System.out.println("Current food level: " + this.foodLevel);
-=======
->>>>>>> Stashed changes
->>>>>>> Stashed changes
 		}
 		return this.foodLevel;
 	}
 	
 	// increases the age of the dragon by 1 and animates the dragon at its new age
 	public Dragon ageUp() {
-		if (this.foodLevel == 5) {
+		if (this.foodLevel == 5 && this.loveLevel == 5) {
 			Baby dragon = new Baby();
 			return dragon;
 			
@@ -60,7 +51,6 @@ public class Egg implements Dragon {
 	//plays dragon-age-appropriate animation for being pet based on the frame count
 	@Override
 	public void animatePet(int frame) {
-		// TODO Auto-generated method stub
 		DragonAnimation.eggPet(frame);
 	}
 
@@ -117,7 +107,4 @@ public class Egg implements Dragon {
 		}
 		
 	}
-
-
-	
 }

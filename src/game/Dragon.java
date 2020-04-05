@@ -12,5 +12,4 @@ public interface Dragon {
 	public Dragon ageUp();
 	
 	
-	
 }
