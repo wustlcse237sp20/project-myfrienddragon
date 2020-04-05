@@ -18,7 +18,6 @@ public class Baby implements Dragon {
 	public int pet() {
 		if (this.loveLevel < 5) {
 			this.loveLevel++;
-			this.animatePet();
 		}
 		return this.loveLevel;
 	}
@@ -27,25 +26,62 @@ public class Baby implements Dragon {
 	public int feed() {
 		if (this.foodLevel < 5) {
 			this.foodLevel++;
-			this.animateFeed();
 		}
 		return this.foodLevel;
 	}
 	
+//increases the age of the dragon by 1 and animates the dragon at its new age
 	// increases the age of the dragon by 1 and animates the dragon at its new age
-	public void ageUp() {
-		this.age++;
-		DragonAnimation.adultIdle();
+	public Dragon ageUp() {
+		if (this.foodLevel == 5 && this.loveLevel == 5) {
+		Adult dragon = new Adult();
+		return dragon;
+		}
+		return this;
 	}
 	
 	// displays the proper animation for feeding the dragon
-	public void animateFeed() {
-		DragonAnimation.babyEat();
+	public void animateFeed(int frame) {
+		DragonAnimation.babyEat(frame);
 	}
 	
 	// displays the proper animation for petting the dragon
-	public void animatePet() {
-		DragonAnimation.babyPet();
+	public void animatePet(int frame) {
+		DragonAnimation.babyPet(frame);
+	}
+
+	@Override
+	public void animateIdle(int frame) {
+		DragonAnimation.babyIdle(frame);
+		
+	}
+	
+	@Override
+	public Interactions checkInteraction(double mouseX, double mouseY) {
+		if ((mouseX > 25 && mouseX < 75) && (mouseY > 20 && mouseY < 70)) {
+			return Interactions.game ;
+			
+		}
+		if ((mouseX > 225 && mouseX< 270) && (mouseY > 40 && mouseY<75)) {
+			 return Interactions.feed;
+		}
+		else {
+			return Interactions.idle;
+		}
+	
+	}
+	@Override
+	public void update(Interactions interactionValue, int frame) {
+		if (interactionValue ==  Interactions.idle) {
+			this.animateIdle(frame);
+		}
+		if (interactionValue == Interactions.feed) {
+			if (frame == 1) {
+			this.feed();
+			}
+			this.animateFeed(frame);
+		}
+		
 	}
 	
 }
