@@ -16,8 +16,8 @@ public class DragonAnimation {
 		StdDraw.setPenColor(pinkColor);
 		StdDraw.filledRectangle(0, 0, 400, 75);
 		StdDraw.picture(25, 40, "interface_resources/game_boy.png", 60, 60);
-		StdDraw.picture(175, 40, "interface_resources/179-1797376_pizza-kawaii-pixel-art-kawaii-food-pixel-art.png",60, 60 );
-		StdDraw.picture(350, 40, "interface_resources/cursor_hand.png",60, 60);
+		StdDraw.picture(200, 40, "interface_resources/179-1797376_pizza-kawaii-pixel-art-kawaii-food-pixel-art.png",60, 60 );
+		StdDraw.picture(370, 40, "interface_resources/cursor_hand.png",60, 60);
 //		StdDraw.picture(0.05, 0.1, "interface_resources/game_boy.png", 0.2, 0.2);
 //		StdDraw.picture(0.5, 0.1, "interface_resources/179-1797376_pizza-kawaii-pixel-art-kawaii-food-pixel-art.png",0.2, 0.2 );
 //		StdDraw.picture(0.95, 0.1, "interface_resources/cursor_hand.png",0.15, 0.15);

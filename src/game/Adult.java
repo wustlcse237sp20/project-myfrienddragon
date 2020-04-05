@@ -1,6 +1,7 @@
 package game;
 
 import animations.DragonAnimation;
+import edu.princeton.cs.introcs.StdDraw;
 
 public class Adult implements Dragon {
 
@@ -51,21 +52,23 @@ public class Adult implements Dragon {
 	}
 
 	@Override
-	public Interactions checkInteraction(double mouseX, double mouseY) {
-			if ((mouseX > 25 && mouseX < 75) && (mouseY > 20 && mouseY < 70)) {
+	public Interactions checkInteraction(double mousex, double mousey) {
+			if ((mousex > 25 && mousex < 85) && (mousey > 20 && mousey < 100)) {
 				return Interactions.game;
 				
 			}
-			if ((mouseX > 225 && mouseX< 270) && (mouseY > 40 && mouseY<75)) {
+			if ((mousex > 175 && mousex< 250) && (mousey > 20 && mousey<100)) {
 				 return Interactions.feed;
+			}
+			if ((mousex >350 && mousex < 410 ) && (mousey > 20 && mousey < 100)) {
+				return Interactions.pet;
 			}
 			else {
 				return Interactions.idle;
-			}
+      }
 		
-		}
+}
 
-	@Override
 	public void update(Interactions interactionValue, int frame) {
 		if (interactionValue ==  Interactions.idle) {
 			this.animateIdle(frame);
@@ -76,13 +79,21 @@ public class Adult implements Dragon {
 			this.feed();
 			}
 		}
+		if (interactionValue == Interactions.pet) {
+			this.animatePet(frame);
+			if (frame == 0) {
+				this.pet();
+			}
+		}
 		
-	}
+}
 
+	
+	@Override
 	public Dragon ageUp() {
-		if (this.foodLevel == 5) {
-			System.out.println("Dragon is fully grown, congratulations");
-			
+		if (this.foodLevel == 5 && this.loveLevel == 5) {
+		StdDraw.clear();
+		StdDraw.text(200, 200, "Congratulations, you raised your dragon to an adult");
 		}
 		return this;
 	}
