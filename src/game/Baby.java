@@ -1,6 +1,10 @@
 package game;
 
 import animations.DragonAnimation;
+import edu.princeton.cs.introcs.StdDraw;
+import game.Dragon;
+import game.Interactions;
+import animations.DragonAnimation;
 
 public class Baby implements Dragon {
 
@@ -50,24 +54,28 @@ public class Baby implements Dragon {
 	}
 
 	/**
-	 * assigns appropriate interaction based on where the user clicks
+	 * returns an interaction value based on where the user clicks
 	 */
 	@Override
 	public Interactions checkInteraction(double mouseX, double mouseY) {
-		if ((mouseX > 25 && mouseX < 75) && (mouseY > 20 && mouseY < 70)) {
-			return Interactions.game ;
+		if ((mouseX > 25 && mouseX < 85) && (mouseY > 20 && mouseY < 100)) {
+			return Interactions.game;
 
 		}
-		if ((mouseX > 225 && mouseX< 270) && (mouseY > 40 && mouseY<75)) {
+		if ((mouseX > 175 && mouseX< 250) && (mouseY > 20 && mouseY<100)) {
 			return Interactions.feed;
+		}
+		if ((mouseX >350 && mouseX < 410 ) && (mouseY > 20 && mouseY < 100)) {
+			return Interactions.pet;
 		}
 		else {
 			return Interactions.idle;
 		}
+
 	}
 
 	/**
-	 * updates the dragon animation based on the actions of the user
+	 * displays the appropriate animation based on the user click
 	 */
 	@Override
 	public void update(Interactions interactionValue, int frame) {
@@ -75,12 +83,17 @@ public class Baby implements Dragon {
 			this.animateIdle(frame);
 		}
 		if (interactionValue == Interactions.feed) {
-			if (frame == 1) {
+			this.animateFeed(frame);
+			if (frame == 0) {
 				this.feed();
 			}
-			this.animateFeed(frame);
 		}
-
+		if (interactionValue == Interactions.pet) {
+			this.animatePet(frame);
+			if (frame == 0) {
+				this.pet();
+			}
+		}	
 	}
-
+	
 }

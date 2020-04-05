@@ -53,7 +53,7 @@ public class Adult implements Dragon {
 	}
 
 	/**
-	 * assigns appropriate interaction based on where the user clicks
+	 * returns an interaction value based on where the user clicks
 	 */
 	@Override
 	public Interactions checkInteraction(double mouseX, double mouseY) {
@@ -67,11 +67,10 @@ public class Adult implements Dragon {
 		else {
 			return Interactions.idle;
 		}
-
 	}
 
 	/**
-	 * updates the dragon animation based on the actions of the user
+	 * displays the appropriate animation based on the user click
 	 */
 	@Override
 	public void update(Interactions interactionValue, int frame) {
@@ -84,7 +83,6 @@ public class Adult implements Dragon {
 				this.feed();
 			}
 		}
-
 	}
 
 }

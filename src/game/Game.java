@@ -53,6 +53,5 @@ public class Game {
 		game.setUpScreen();
 		game.playGame();
 	}
-}	
-
-
+	
+}
