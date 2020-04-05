@@ -5,6 +5,4 @@ public enum Interactions {
 		feed,
 		pet,
 		game
-
-
 }
