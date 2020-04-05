@@ -70,14 +70,50 @@ public class Baby implements Dragon {
 		DragonAnimation.babyIdle(frame);
 		
 	}
+<<<<<<< Updated upstream
+=======
+	
+	@Override
+	public Interactions checkInteraction(double mouseX, double mouseY) {
+			if ((mouseX > 25 && mouseX < 85) && (mouseY > 20 && mouseY < 100)) {
+				return Interactions.game;
+				
+			}
+			if ((mouseX > 175 && mouseX< 250) && (mouseY > 20 && mouseY<100)) {
+				 return Interactions.feed;
+			}
+			if ((mouseX >350 && mouseX < 410 ) && (mouseY > 20 && mouseY < 100)) {
+				return Interactions.pet;
+			}
+			else {
+				return Interactions.idle;
+			}
+		
+		}
+	
+	
+>>>>>>> Stashed changes
 	@Override
 	public void update(Interactions interactionValue, int frame) {
 		if (interactionValue ==  Interactions.idle) {
 			this.animateIdle(frame);
 		}
 		if (interactionValue == Interactions.feed) {
+<<<<<<< Updated upstream
 			this.feed();
 			this.animateFeed(frame);
+=======
+			this.animateFeed(frame);
+			if (frame == 0) {
+			this.feed();
+			}
+		}
+		if (interactionValue == Interactions.pet) {
+			this.animatePet(frame);
+			if (frame == 0) {
+				this.pet();
+			}
+>>>>>>> Stashed changes
 		}
 		
 	}
