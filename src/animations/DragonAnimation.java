@@ -96,6 +96,7 @@ public class DragonAnimation {
 		StdDraw.clear();
 	}
 	//Animation for baby being pet
+<<<<<<< Updated upstream
 	public static void babyPet() {
 		StdDraw.clear();
 		StdDraw.enableDoubleBuffering();
@@ -155,6 +156,44 @@ public class DragonAnimation {
 		StdDraw.show();
 		StdDraw.pause(500);
 		StdDraw.clear();
+=======
+	public static void babyPet(int frameCounter) {
+		if (frameCounter > 0 && frameCounter < 14) {
+		StdDraw.picture(200,  200, "dragon_resources/infant/baby_pet_1.png");
+		}
+		else if (frameCounter > 13 && frameCounter < 30) {
+		StdDraw.picture(200, 200 , "dragon_resources/infant/baby_pet_2.png");
+		}
+	}
+	//Animation for adult idling (default adult animation)
+	public static void adultIdle(int frameCounter) {
+		if (frameCounter > 0 && frameCounter < 14) {
+		StdDraw.picture(200,  200, "dragon_resources/adult/adult_idle_1.png");
+		}
+		else if (frameCounter > 13 && frameCounter < 30 ) {
+		StdDraw.picture(200, 200 , "dragon_resources/adult/adult_idle_2.png");
+		}
+
+	}
+	//Animation for adult eating
+	public static void adultEat(int frameCounter) {
+		if (frameCounter > 0 && frameCounter < 14) {
+		StdDraw.picture(200,  200, "dragon_resources/adult/adult_eating_1.png");
+		}
+		else if (frameCounter > 13 && frameCounter < 30 ) {
+		StdDraw.picture(200, 200 , "dragon_resources/adult/adult_eating_2.png");
+		}
+	}
+
+	//Animation for adult being pet
+	public static void adultPet(int frameCounter) {
+		if (frameCounter > 0 && frameCounter < 14) {
+		StdDraw.picture(200,  200, "dragon_resources/adult/adult_pet_1.png");
+		}
+		else if (frameCounter > 13 && frameCounter < 30 ) {
+		StdDraw.picture(200, 200 , "dragon_resources/adult/adult_pet_2.png");
+		}
+>>>>>>> Stashed changes
 	}
 
 
