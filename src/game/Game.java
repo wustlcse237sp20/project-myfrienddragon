@@ -4,7 +4,13 @@ import animations.DragonAnimation;
 import edu.princeton.cs.introcs.StdDraw;
 
 public class Game {
-
+	int frame;
+	boolean clicked;
+	double mouseX = 0;
+	double mouseY = 0;
+	Dragon dragon;
+	Interactions interactionLevel;
+	
 	public void setUpScreen() {
 		StdDraw.setCanvasSize(400, 400);
 		StdDraw.setXscale(0,400);
@@ -12,13 +18,32 @@ public class Game {
 		StdDraw.enableDoubleBuffering();
 	}
 	
+	//checks possible click interactions every frame
+	public Interactions onClick() {
+		if (StdDraw.isMousePressed()) {
+			 clicked = true;
+			 mouseX = StdDraw.mouseX();
+			 mouseY = StdDraw.mouseY();
+		}
+		if (clicked == true && !StdDraw.isMousePressed()) {
+				clicked = false;
+				 interactionLevel = dragon.checkInteraction(mouseX, mouseY);
+				if (interactionLevel != Interactions.idle) {
+					frame = 0;
+				}
+			}
+		return interactionLevel;
+	}
+	
+	public boolean isMousePressed() {
+		return StdDraw.isMousePressed();
+	}
+	
+	//updates frames, checks interactions
 	public void playGame() {
-		boolean clicked = false;
-		Dragon dragon = new Egg();
-		double mouseX = 0;
-		double mouseY = 0;
-		int frame = 0;
-		Interactions interactionLevel = Interactions.idle;
+		clicked = false;
+		dragon = new Egg();
+		interactionLevel = Interactions.idle;
 		while (true){
 			if (frame == 30) { // resetting the frame counter each time it reaches 30 and idling the dragon
 				interactionLevel = Interactions.idle;
@@ -27,20 +52,7 @@ public class Game {
 				StdDraw.clear();
 			}
 			frame++;
-			if (StdDraw.mousePressed()) { // tracks the user click and stores in variables
-				clicked = true;
-				System.out.println("Mouse pressed");
-				mouseX = StdDraw.mouseX();
-				mouseY = StdDraw.mouseY();
-			}
-			if (clicked == true && !StdDraw.mousePressed()) { // once the user has lifted the click, determine the interaction
-				clicked = false;
-				System.out.println("Mouse released");
-				interactionLevel = dragon.checkInteraction(mouseX, mouseY);
-				if (interactionLevel != Interactions.idle) {
-					frame = 0;
-				}
-			}
+			interactionLevel = this.onClick();
 			DragonAnimation.redrawUI();
 			dragon.update(interactionLevel,frame);
 			StdDraw.show();
