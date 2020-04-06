@@ -1,6 +1,14 @@
 # CSE237 - My Friend Dragon
 By: Julia Smith, Katrina Ragbeer, Matthew Alexander, and Shahd Alyasiry
 
+# How to Run From Command Line
+From the project repository directory, type the following into the command line:
+
+```
+./gradlew build
+./gradlew run
+```
+
 ### Iteration 1
 During this iteration, we completed 6 stories. These stories included a functional UI of our game with a bit of backend support.
 This included modification of the dragon's needs when it is fed or pet, aging-up the dragon when it's needs are fully met, and 
