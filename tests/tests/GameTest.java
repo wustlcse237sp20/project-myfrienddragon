@@ -10,7 +10,7 @@ import game.Dragon;
 import game.Egg;
 import game.Game;
 import game.Interactions;
-
+import edu.princeton.cs.introcs.StdDraw;
 class GameTest {
 
 	@Test
