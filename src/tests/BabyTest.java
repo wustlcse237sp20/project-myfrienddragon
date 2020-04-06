@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
 
+import game.Adult;
 import game.Baby;
 import game.Dragon;
 import game.Egg;
