@@ -38,7 +38,6 @@ public class Game {
 	public boolean isMousePressed() {
 		return StdDraw.isMousePressed();
 	}
-	
 	//updates frames, checks interactions
 	public void playGame() {
 		clicked = false;
