@@ -8,11 +8,11 @@ public class Invader {
 	public Invader(int x, int y) {
 		this.x = x;
 		this.y = y;
-		this.health = 500;
+		this.health = 2;
 	}
 	
-	public void hurt(int damage) {
-		health = health - damage;
+	public void hurt( ) {
+		health = health - 1;
 		if(health < 0) {
 			health = 0;
 		}
@@ -30,5 +30,8 @@ public class Invader {
 	public int getHealth() {
 		return health;
 	}
+	
+
+	
 	
 }

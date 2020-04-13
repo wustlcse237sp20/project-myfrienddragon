@@ -29,6 +29,10 @@ public class GameBoard {
 	public void drawSprites() {
 		
 	}
+	
+	public void checkCollision() {
+		
+	}
 	public void redrawUI() {
 		
 	}
