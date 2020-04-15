@@ -18,7 +18,6 @@ public class SpaceInvaderBullet implements Sprite {
 		this.onScreen=true;
 	}
 	
-	public void updateBullet() {
 		
 	@Override	
 	public void move() {
@@ -55,11 +54,6 @@ public class SpaceInvaderBullet implements Sprite {
 		//don't need for space invader bullet
 		
 	}
-
-	@Override
-	public void collision() {
-		// TODO Auto-generated method stub
-		
-	}
+	
 
 }
