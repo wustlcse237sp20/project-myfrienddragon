@@ -22,6 +22,22 @@ public class Invader implements Sprite {
 		if(health < 0) {
 			health = 0;
 		}
+		if(isDead()) {
+			destroy();
+		}
+	}
+	
+	public boolean isDead() {
+		if (health == 0) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	} 
+	
+	private void destroy() {
+		// run animation
 	}
 	
 	public int getHealth() {
