@@ -7,18 +7,17 @@ public class Invader implements Sprite {
 	HitBoxTile SpaceInvaderTile;
 	final double invaderWidth = 127;
 	final double invaderHeight = 95;
+	final int startingHealth = 2;
 	
 	public Invader(double x, double y) {
 		this.xPos = x;
 		this.yPos = y;
-		this.health = 2;
+		this.health = startingHealth;
 		this.SpaceInvaderTile = new HitBoxTile(this.xPos, this.yPos, invaderHeight , invaderWidth);
-		
-
 	}
 	
-	public void hurt(int damage) {
-		health = health - damage;
+	public void hurt() {
+		health = health - 1;
 		if(health < 0) {
 			health = 0;
 		}
@@ -36,10 +35,6 @@ public class Invader implements Sprite {
 		}
 	} 
 	
-	private void destroy() {
-		// run animation
-	}
-	
 	public int getHealth() {
 		return health;
 	}
@@ -47,13 +42,11 @@ public class Invader implements Sprite {
 	@Override
 	public void move() {
 		
-		
 	}
 
 	@Override
 	public void updateHitBoxPos() {
 		this.SpaceInvaderTile = new HitBoxTile(this.xPos, this.yPos, invaderHeight , invaderWidth);
-		
 	}
 
 	@Override
@@ -66,14 +59,12 @@ public class Invader implements Sprite {
 
 	@Override
 	public double getX() {
-		// TODO Auto-generated method stub
-		return 0;
+		return xPos;
 	}
 
 	@Override
 	public double getY() {
-		// TODO Auto-generated method stub
-		return 0;
+		return yPos;
 	}
 
 	@Override

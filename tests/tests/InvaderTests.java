@@ -22,29 +22,26 @@ class InvaderTests {
 	@Test
 	void testDamage() {
 		int initHealth = invader.getHealth();
-		int damage = 300;
+		invader.hurt();
 		
-		invader.hurt(damage);
-		
-		assertEquals(invader.getHealth(), initHealth - damage);
+		assertEquals(invader.getHealth(), initHealth - 1);
 	}
+	
+	
 	
 	@Test
 	void testDamageEqualToHealth() {
-		int initHealth = invader.getHealth();
-		int damage = initHealth;
-		
-		invader.hurt(damage);
+		invader.hurt();
+		invader.hurt();
 		
 		assertEquals(invader.getHealth(), 0);
 	}
 	
 	@Test 
 	void testDamageGreaterThanHealth() {
-		int initHealth = invader.getHealth();
-		int damage = 1 + initHealth;
-		
-		invader.hurt(damage);
+		invader.hurt();
+		invader.hurt();
+		invader.hurt();
 		
 		assertEquals(invader.getHealth(), 0);
 	}

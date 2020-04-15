@@ -19,13 +19,23 @@ class FleetTests {
 	@Test
 	void testInvaderDestroyed() {
 		Invader invader = fleet.getInvader(0);
-		int initHealth = invader.getHealth();
-		int damage = initHealth;
-		invader.hurt(damage);
+		invader.hurt();
+		invader.hurt();
 		
 		fleet.removeDeadInvaders();
 		
 		assertEquals(fleet.getInvader(0), null); 
 	}	
+	
+	@Test
+	void testInvaderNotDestroyed() {
+		Invader invader = fleet.getInvader(0);
+		invader.hurt();
+		
+		fleet.removeDeadInvaders();
+		
+		assertEquals(fleet.getInvader(0), invader);
+	}
 
+	
 }
