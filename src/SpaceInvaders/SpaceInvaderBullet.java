@@ -2,13 +2,9 @@ package SpaceInvaders;
 
 import edu.princeton.cs.introcs.StdDraw;
 
-<<<<<<< Updated upstream
-public class SpaceInvaderBullet {
-=======
 public class SpaceInvaderBullet implements Sprite {
 	final double bulletWidth = 77;
 	final double bulletHeight = 66;
->>>>>>> Stashed changes
 	double xPos;
 	double yPos;
 	HitBoxTile SpaceInvaderHitBox;
@@ -22,10 +18,9 @@ public class SpaceInvaderBullet implements Sprite {
 		this.onScreen=true;
 	}
 	
-<<<<<<< Updated upstream
 	public void updateBullet() {
 		
-=======
+	@Override	
 	public void move() {
 		this.yPos-=25;
 		StdDraw.picture(this.xPos, this.yPos, "src/space_invaders_resources/invader_shot.png");
@@ -64,7 +59,6 @@ public class SpaceInvaderBullet implements Sprite {
 	@Override
 	public void collision() {
 		// TODO Auto-generated method stub
->>>>>>> Stashed changes
 		
 	}
 
