@@ -5,15 +5,20 @@ public class Invader implements Sprite {
 	double yPos;
 	int health;
 	HitBoxTile SpaceInvaderTile;
-	final double invaderWidth = 127;
-	final double invaderHeight = 95;
 	final int startingHealth = 2;
+	final double invaderWidth = 50;
+	final double invaderHeight = 41;
+	final double invaderHitBoxWidth = 32;
+	final double invaderHitBoxHeight = 23;
 	
 	public Invader(double x, double y) {
 		this.xPos = x;
 		this.yPos = y;
 		this.health = startingHealth;
-		this.SpaceInvaderTile = new HitBoxTile(this.xPos, this.yPos, invaderHeight , invaderWidth);
+		this.health = 2;
+		this.SpaceInvaderTile = new HitBoxTile(this.xPos, this.yPos, invaderHitBoxHeight , invaderHitBoxWidth);
+		
+
 	}
 	
 	public void hurt() {
@@ -46,7 +51,7 @@ public class Invader implements Sprite {
 
 	@Override
 	public void updateHitBoxPos() {
-		this.SpaceInvaderTile = new HitBoxTile(this.xPos, this.yPos, invaderHeight , invaderWidth);
+		this.SpaceInvaderTile = new HitBoxTile(this.xPos, this.yPos, invaderHitBoxHeight , invaderHitBoxWidth);
 	}
 
 	@Override
@@ -67,8 +72,9 @@ public class Invader implements Sprite {
 		return yPos;
 	}
 
+
 	@Override
-	public void collision() {
+	public void hurt() {
 		// TODO Auto-generated method stub
 		
 	}

@@ -7,7 +7,8 @@ public interface Sprite {
 	public void hurt();
 	public double getX();
 	public double getY();
-	public void collision();
+	
+	
 	
 	
 
