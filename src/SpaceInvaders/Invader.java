@@ -8,19 +8,13 @@ public class Invader implements Sprite {
 	final double invaderWidth = 127;
 	final double invaderHeight = 95;
 	
-<<<<<<< Updated upstream
-	public Invader(int x, int y) {
-		this.x = x;
-		this.y = y;
-		this.health = 500;
-=======
 	public Invader(double x, double y) {
 		this.xPos = x;
 		this.yPos = y;
 		this.health = 2;
 		this.SpaceInvaderTile = new HitBoxTile(this.xPos, this.yPos, invaderHeight , invaderWidth);
 		
->>>>>>> Stashed changes
+
 	}
 	
 	public void hurt(int damage) {
