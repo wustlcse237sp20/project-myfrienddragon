@@ -1,8 +1,6 @@
 package SpaceInvaders;
 
 public interface Sprite {
-<<<<<<< Updated upstream
-=======
 	public void move();
 	public void updateHitBoxPos();
 	public void destroy();
@@ -12,8 +10,7 @@ public interface Sprite {
 	public void collision();
 	
 	
-	
->>>>>>> Stashed changes
+
 	
 
 }
