@@ -1,5 +1,6 @@
 package game;
 
+import SpaceInvaders.Player;
 import animations.DragonAnimation;
 import edu.princeton.cs.introcs.StdDraw;
 
