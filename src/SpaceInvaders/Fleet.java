@@ -14,7 +14,7 @@ public class Fleet {
 	
 	private void positionInvaders() {
 		for(int i = 0; i < startingSize; i++) {
-			Invader invader = new Invader(42.5 + (i * 44.5), 0);
+			Invader invader = new Invader(25 + (i * 50), 20.5);
 			invaders.add(invader);
 		}
 	}
@@ -29,9 +29,15 @@ public class Fleet {
 		}
 	}
 	
+	public void moveInvaders() {
+		for(int i = 0; i < invaders.size(); i++) {
+			Invader invader = invaders.get(i);
+			invader.move();
+		}
+	}
+	
 	public ArrayList<Invader> getInvaders() {
 		return invaders;
 	}
-	
 
 }

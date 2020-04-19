@@ -41,7 +41,8 @@ public class Invader implements Sprite {
 
 	@Override
 	public void move() {
-		yPos += invaderHeight;	
+		yPos += invaderHeight;
+		updateHitBoxPos();
 	}
 
 	@Override
