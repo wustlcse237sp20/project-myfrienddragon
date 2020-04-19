@@ -1,11 +1,5 @@
 package SpaceInvaders;
 
-<<<<<<< Updated upstream
-public class Fleet {
-	private Invader[] invaders;
-	private final static int startingSize = 8; 
-	
-=======
 import java.util.ArrayList;
 import java.util.Iterator;
 
@@ -14,27 +8,8 @@ public class Fleet {
 	public ArrayList<Invader> invaders;
 	public ArrayList<SpaceInvaderBullet> bullets;
 	private final static int startingSize = 9; 
-
->>>>>>> Stashed changes
-	public Fleet() {
-		invaders = new Invader[startingSize];
-		positionInvaders();
-	}
 	
-<<<<<<< Updated upstream
-	private void positionInvaders() {
-		for(int i = 0; i < startingSize; i++) {
-			invaders[i] = new Invader(25 + (i * 40), 0);
-		}
-	}
 	
-	public void removeDeadInvaders() {
-		for(int i = 0; i < startingSize; i++) {
-			Invader invader = getInvader(i);
-			if(invader.isDead()) {
-				invaders[i] = null;
-			}
-=======
 	//spawns a new row of 9 invaders
 	public void spawnInvaders() {
 		for (int i = 0; i < startingSize; ++i) {
@@ -57,18 +32,10 @@ public class Fleet {
 		while (it.hasNext()) {
 			Invader element = it.next();
 			element.move();
->>>>>>> Stashed changes
 		}
 	}
 	
-	public Invader getInvader(int index) {
-		return invaders[index];
-	}
-<<<<<<< Updated upstream
-}
-=======
 
-	
 	//updates fleet of invaders by checking for collision. if invaders have been destroyed, remove them from array,
 	//preventing them from rendering or further updates
 	public void updateInvaders(DragonBulletCollection dragonBullets) {
@@ -102,4 +69,4 @@ public class Fleet {
 	}
 }
 
->>>>>>> Stashed changes
+

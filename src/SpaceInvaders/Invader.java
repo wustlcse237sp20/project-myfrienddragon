@@ -58,13 +58,7 @@ public class Invader implements Sprite {
 	}
 
 
-	@Override
-	public void hurt() {
-		// TODO Auto-generated method stub
-		
-	}
-<<<<<<< Updated upstream
-=======
+
 	
 	public HitBoxTile getHitBox() {
 		return this.SpaceInvaderTile;
@@ -89,7 +83,23 @@ public class Invader implements Sprite {
 	public void destroy() {
 		// TODO Auto-generated method stub
 		
+	}
+	@Override
+	public double getHitBoxBottomLeftX() {
+		return this.getHitBox().getBottomLeftX();
+	}
+	@Override
+	public double getHitBoxBottomLeftY() {
+		// TODO Auto-generated method stub
+		return this.getHitBox().getBottomLeftY();
+	}
+	@Override
+	public double getHitBoxBottomRightX() {
+		return this.getHitBox().getBottomRightX();
+	}
+	@Override
+	public double getHitBoxTopLeftY() {
+		return this.getHitBox().getTopLeftY();
 	}	
->>>>>>> Stashed changes
 	
 }
