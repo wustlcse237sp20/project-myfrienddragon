@@ -1,30 +1,37 @@
 package SpaceInvaders;
 
+
+import java.util.ArrayList;
+
 public class Fleet {
-	private Invader[] invaders;
+	private ArrayList<Invader> invaders;
 	private final static int startingSize = 8; 
 	
 	public Fleet() {
-		invaders = new Invader[startingSize];
+		invaders = new ArrayList<Invader>();
 		positionInvaders();
 	}
 	
 	private void positionInvaders() {
 		for(int i = 0; i < startingSize; i++) {
-			invaders[i] = new Invader(25 + (i * 40), 0);
+			Invader invader = new Invader(42.5 + (i * 44.5), 0);
+			invaders.add(invader);
 		}
 	}
 	
 	public void removeDeadInvaders() {
-		for(int i = 0; i < startingSize; i++) {
-			Invader invader = getInvader(i);
+		for(int i = 0; i < invaders.size(); i++) {
+			Invader invader = invaders.get(i);
 			if(invader.isDead()) {
-				invaders[i] = null;
+				invaders.remove(i);
+				i--;
 			}
 		}
 	}
 	
-	public Invader getInvader(int index) {
-		return invaders[index];
+	public ArrayList<Invader> getInvaders() {
+		return invaders;
 	}
+	
+
 }
