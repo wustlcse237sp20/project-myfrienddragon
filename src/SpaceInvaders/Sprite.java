@@ -6,12 +6,5 @@ public interface Sprite {
 	public void destroy();
 	public void hurt();
 	public double getX();
-	public double getY();
-	
-	
-	
-	
-
-	
-
+	public double getY();		
 }
