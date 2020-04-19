@@ -1,19 +1,16 @@
 package SpaceInvaders;
 
-import edu.princeton.cs.introcs.StdDraw;
-
 public class DragonBullet implements Sprite {
 	double xPos;
 	double yPos;
 	HitBoxTile DragonBulletHitBox;
 	boolean onScreen;
-	final double bulletHeight = 64;
-	final double bulletWidth = 32;
+	final double bulletHeight = 32;
+	final double bulletWidth = 16;
 	
 	public DragonBullet(double xPos, double yPos) {
 		this.xPos = xPos;
 		this.yPos = yPos;
-		StdDraw.picture(xPos, yPos, "src/space_invaders_resources/dragon_shot.png");
 		this.DragonBulletHitBox = new HitBoxTile(xPos, yPos, bulletHeight, bulletWidth);
 		this.onScreen=true;
 	}
@@ -21,16 +18,7 @@ public class DragonBullet implements Sprite {
 		
 	@Override	
 	public void move() {
-		this.yPos-=25;
-		StdDraw.picture(this.xPos, this.yPos, "src/space_invaders_resources/dragon_shot.png");
-		this.updateHitBoxPos();	
-	}
-
-
-	@Override
-	public void destroy() {
-		this.onScreen = false;
-		
+		this.yPos+=25;
 	}
 	
 	@Override
@@ -42,20 +30,65 @@ public class DragonBullet implements Sprite {
 	public double getY() {
 		return this.yPos;
 	}
+	public boolean getOnScreen() {
+		return this.onScreen;
+	}
 
 	@Override
 	public void updateHitBoxPos() {
 		this.DragonBulletHitBox = new HitBoxTile(xPos, yPos, bulletHeight, bulletWidth);			
 		
 	}
+	public void update() {
+		this.move();
+		if (this.xPos > 400 && this.yPos > 400) {
+			this.hurt();
+		}
+		this.updateHitBoxPos();
+	}
+	
 
 	@Override
 	public void hurt() {
-		//don't need for space invader bullet
+		this.onScreen=false;
 		
 	}
+
+
+	@Override
+	public double getHitBoxBottomLeftX() {
+		return this.DragonBulletHitBox.bottomLeftX;
+	}
+
+
+	@Override
+	public double getHitBoxBottomLeftY() {
+		return this.DragonBulletHitBox.bottomLeftY;
+	}
+
+
+	@Override
+	public double getHitBoxBottomRightX() {
+		return this.DragonBulletHitBox.bottomRightX;
+	}
+
+
+	@Override
+	public double getHitBoxTopLeftY() {
+		return this.DragonBulletHitBox.topLeftY;
+	}
+
+
+	public HitBoxTile getHitBox() {
+		return this.DragonBulletHitBox;
+	}
+
+
+	@Override
+	public void destroy() {
+		// TODO Auto-generated method stub
 		
-	
+	}	
 	
 
 }
