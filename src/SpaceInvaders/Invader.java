@@ -1,18 +1,18 @@
 package SpaceInvaders;
 
 public class Invader implements Sprite {
-	double xPos;
-	double yPos;
-	int health;
-	HitBoxTile SpaceInvaderTile;
-	final double invaderWidth = 127;
-	final double invaderHeight = 95;
-	final int startingHealth = 2;
+	private double xPos;
+	private double yPos;
+	private int health;
+	private HitBoxTile SpaceInvaderTile;
+	private final double invaderWidth = 127;
+	private final double invaderHeight = 95;
+	
 	
 	public Invader(double x, double y) {
 		this.xPos = x;
 		this.yPos = y;
-		this.health = startingHealth;
+		this.health = 2;
 		this.SpaceInvaderTile = new HitBoxTile(this.xPos, this.yPos, invaderHeight , invaderWidth);
 	}
 	
@@ -34,14 +34,10 @@ public class Invader implements Sprite {
 			return false;
 		}
 	} 
-	
-	public int getHealth() {
-		return health;
-	}
 
 	@Override
 	public void move() {
-		
+		yPos += invaderHeight;	
 	}
 
 	@Override
