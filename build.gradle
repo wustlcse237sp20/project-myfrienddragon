@@ -50,5 +50,5 @@ testImplementation 'org.junit.jupiter:junit-jupiter-api:5.3.1'
 
 application {
     // Define the main class for the application.
-    mainClassName = 'SpaceInvaders.gameBoard'
+    mainClassName = 'SpaceInvaders.GameBoard'
 }
