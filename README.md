@@ -54,7 +54,7 @@ the UI is redrawing every few milliseconds, and will look into making the shots 
 
 4) If the player scoots all the way to the edge of the screen, the game may stop updating. This is likely caused by the fact that if checking the boundaries returns false, the game will not update. This will be fixed in the next iteration.
 
-5) One test player reported that the game intermittently stopped taking keyboard input after a row was added or if the player was idle for a long time. While none of us experienced this issue ourselves, you may experience it. We will be fixing it next iteration.
+5) One test player reported that the game intermittently stopped taking keyboard input for seemingly no common circumstance. While none of us experienced this issue ourselves, you may experience it. We will be fixing it next iteration.
 
 ### Next Iteration
 
