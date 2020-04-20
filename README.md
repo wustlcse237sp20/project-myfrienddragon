@@ -45,7 +45,7 @@ Internally, the invader is losing health each time it is shot, but we have yet t
 the UI. Additionally, there is no winning condition in the game, so that will also be handled in iteration 3.
 
 ### Bugs
-1)The issue is that the invader bullets are not shot at exactly 20ms apart. We believe that this is because
+1) The issue is that the invader bullets are not shot at exactly 20ms apart. We believe that this is because
 the UI is redrawing every few milliseconds, and will look into making the shots more precise in the next iteration.
 
 2) There may also be a problem with the hit detection that will cause shots that graze the edge of the dragon's wings to miss--again, something to be corrected in the next iteration.
