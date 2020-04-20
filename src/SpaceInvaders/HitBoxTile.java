@@ -34,8 +34,8 @@ public class HitBoxTile {
 	public boolean isColliding(HitBoxTile comparator) {
 		if ((this.getTopLeftY() >= comparator.getBottomLeftY())
 				&& (this.getBottomLeftY() <= comparator.getTopLeftY())
-				&& (this.getBottomLeftX() >= comparator.getBottomLeftX()) 
-				&& (this.getBottomLeftX() <= comparator.getBottomRightX())
+				&& (this.getBottomLeftX() <= comparator.getBottomRightX()) 
+				&& (this.getBottomRightX() >= comparator.getBottomLeftX())
 				) {
 			return true;
 		}
