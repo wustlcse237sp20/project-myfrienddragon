@@ -23,3 +23,23 @@ form (an animation).
 
 Currently, everything that we have implemented works as intended. The only thing that doesn't work is the minigame tab, but we
 plan to implement that during iteration 2.
+
+### Iteration 2
+In order to see what we accomplished in this iteration, run the Gameboard.java file located in src/SpaceInvaders/ as a Java
+Application. You can move the dragon with WASD and shoot with the X button.
+
+The main focus of this iteration was the Space Invaders minigame. Our goal was to create a functional game with both UI and
+backend support. Currently, the game is fully functional save for a few known bugs that we intend to correct in the next
+iteration. The first known bug is the fact that the hit detection is working fully; if the dragon gets hit on the edge of its 
+wing, it will not register as being hit. So we will fix that bug and make the hit detection more accurate. The next known bug 
+is that the invader bullets are not shot at exactly 20ms apart. We believe that this is because the UI is redrawing every few 
+milliseconds, and will look into making the shots more precise in the next iteration.
+
+Otherwise, we implemented the game so that the player can move the dragon, shoot at the invaders, and be shot by the invaders.
+Internally, the invader is losing health each time it is shot, but we have yet to implement the health and scoring visuals on
+the UI. Additionally, there is no winning condition in the game, so that will also be handled in iteration 3.
+
+For the next iteration, in addition to correcting the preidentified bugs, we plan to integrate the Space Invaders game with
+our full game. To do this, we will create a menu that is visible from the main screen. From there, the user can select the 
+game they would like to play. We also plan to implement the Dragon Pong game and fully integrate that with the full project.
+
