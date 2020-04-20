@@ -32,7 +32,7 @@ Application.
 
 ###How to Play###
 
-You can move the dragon side to side with the D and shoot with the X button.
+You can move the dragon side to side with the A and D keys and shoot with the X key.
 
 ###Completed Stories###
 
