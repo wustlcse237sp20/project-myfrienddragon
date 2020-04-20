@@ -6,7 +6,7 @@ import java.util.Iterator;
 public class Fleet {
 	public ArrayList<Invader> invaders;
 	public ArrayList<SpaceInvaderBullet> bullets;
-	private final static int startingSize = 9; 
+	private final static int startingSize = 8; 
 
 	public Fleet() {
 		invaders = new ArrayList<Invader>();
@@ -26,7 +26,7 @@ public class Fleet {
 	
 	public void spawnInvaders() {
 		for (int i = 0; i < startingSize; ++i) {
-			Invader toAdd = new Invader(20 + (i * 50), 350);
+			Invader toAdd = new Invader(25 + (i * 50), 350);
 			this.invaders.add(toAdd);
 		}
 	}
