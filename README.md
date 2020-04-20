@@ -32,7 +32,7 @@ Application.
 
 ### How to Play 
 
-You can move the dragon side to side with the A and D keys and shoot with the X key.
+You can move the dragon side to side with the A and D keys and shoot with the X key. Note that the game does not yet take continuous keyboard input, so you will have to continually tap the keys.
 
 ### Completed Stories
 
@@ -68,4 +68,6 @@ For the next iteration, in addition to correcting the preidentified bugs,
 4) We plan to implement a Space Invaders game over that will display scoring information and ask the user if they wish to play again.
 
 5) We plan to implement minor UI improvements to the base game, including a food and love bar and an intermediate animation when the dragon evolves to the next state of life.
+
+6) We plan to implement continuous keyboard input so that the player does not have to keep tapping keys over and over again in Space Invaders.
 
