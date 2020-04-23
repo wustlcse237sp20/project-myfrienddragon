@@ -1,6 +1,7 @@
 package SpaceInvaders;
 
 import java.awt.Color;
+import java.awt.Font;
 import java.util.ArrayList;
 import java.util.Iterator;
 
@@ -66,8 +67,11 @@ public class GameBoard {
 	
 	private void drawScoreBoard() {
 		StdDraw.setPenColor(Color.black);
-		StdDraw.rectangle(50, 50, 25, 25);
-		StdDraw.text(50.0, 50.0, "" + score);
+		StdDraw.rectangle(60, 80, 55, 15);
+		
+		Font font = new Font("Courier", Font.BOLD, 16);
+		StdDraw.setFont(font);
+		StdDraw.text(60.0, 80.0, "Score: " + score);
 	}
 	
 	private void drawPlayer() {
