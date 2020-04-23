@@ -27,14 +27,14 @@ class InvaderTests {
 		assertEquals(ship.getHealth(),1);
 		assertEquals(ship.getX(), 200);
 		assertEquals(ship.getY(), 200);
-		assertEquals(ship.getOnScreen(), true);
+		assertEquals(ship.isAlive(), true);
 	}
 	
 	@Test
 	void testHurt() {
 		Invader ship = new Invader(200,200);
 		ship.hurt();
-		assertEquals(ship.getOnScreen(), false);
+		assertEquals(ship.isAlive(), false);
 	}
 	
 	@Test
@@ -55,7 +55,7 @@ class InvaderTests {
 		DragonBulletCollection collection = new DragonBulletCollection();
 		collection.addBullet(collider);
 		p.checkCollision(collection);
-		assertEquals(p.getOnScreen(),false);
+		assertEquals(p.isAlive(),false);
 			
 	}
 	
@@ -68,7 +68,7 @@ class InvaderTests {
 		DragonBulletCollection collection = new DragonBulletCollection();
 		collection.addBullet(collider);
 		p.checkCollision(collection);
-		assertEquals(p.getOnScreen(),false);
+		assertEquals(p.isAlive(),false);
 			
 	}
 	
@@ -81,7 +81,7 @@ class InvaderTests {
 		DragonBulletCollection collection = new DragonBulletCollection();
 		collection.addBullet(collider);
 		p.checkCollision(collection);
-		assertEquals(p.getOnScreen(),false);
+		assertEquals(p.isAlive(),false);
 			
 	}
 	@Test 
@@ -93,7 +93,7 @@ class InvaderTests {
 		DragonBulletCollection collection = new DragonBulletCollection();
 		collection.addBullet(collider);
 		p.checkCollision(collection);
-		assertEquals(p.getOnScreen(),false);
+		assertEquals(p.isAlive(),false);
 	}
 	
 	@Test
@@ -107,7 +107,7 @@ class InvaderTests {
 		collection.addBullet(collider);
 		collection.addBullet(collider2);
 		p.checkCollision(collection);
-		assertEquals(p.getOnScreen(),false);
+		assertEquals(p.isAlive(),false);
 		
 	}
 }

@@ -49,6 +49,7 @@ public class Player implements Sprite {
 	public void didHitInvader() {
 		this.score += 20;
 	}
+	
 	public HitBoxTile getHitBox() {
 		return this.dragonHitBox;
 	}
