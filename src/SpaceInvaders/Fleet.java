@@ -4,20 +4,13 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 public class Fleet {
-	public ArrayList<Invader> invaders;
-	public ArrayList<SpaceInvaderBullet> bullets;
-	private final static int startingSize = 8; 
+	private ArrayList<Invader> invaders;
+	private ArrayList<SpaceInvaderBullet> bullets;
+	private final static int numInvadersPerRow = 8; 
 
 	public Fleet() {
 		invaders = new ArrayList<Invader>();
 		bullets = new ArrayList<SpaceInvaderBullet>();
-	}
-
-	public ArrayList<Invader> getInvaders() {
-		return invaders;
-	}
-	public ArrayList<SpaceInvaderBullet> getBullets() {
-		return bullets;
 	}
 
 	public void setInvaders(ArrayList<Invader> invaders) {
@@ -25,7 +18,7 @@ public class Fleet {
 	}
 	
 	public void spawnInvaders() {
-		for (int i = 0; i < startingSize; ++i) {
+		for (int i = 0; i < numInvadersPerRow; ++i) {
 			Invader toAdd = new Invader(25 + (i * 50), 350);
 			this.invaders.add(toAdd);
 		}
@@ -45,31 +38,44 @@ public class Fleet {
 			element.move();
 		}
 		spawnInvaders();
-	
 	}
 
-
-
-	public void update(DragonBulletCollection dragonBullets) {
-		Iterator<Invader> it = invaders.iterator(); 
-		while (it.hasNext()) {
-			Invader element = it.next();
-			element.checkCollision(dragonBullets);
-			if(!element.getOnScreen()) {
-				it.remove();
+	public int numInvadersDestroyed(DragonBulletCollection dragonBullets) {
+		int numDestoryed = 0;
+		Iterator<Invader> invaderIterator = invaders.iterator(); 
+		while (invaderIterator.hasNext()) {
+			Invader invader = invaderIterator.next();
+			if(invader.isHit(dragonBullets)) {
+				numDestoryed++;
 			}
 		}
-		Iterator<SpaceInvaderBullet> it2 = bullets.iterator();
-		while (it2.hasNext()) {
-			SpaceInvaderBullet bullet = it2.next();
+		return numDestoryed;
+	}
+	
+	public void update(DragonBulletCollection dragonBullets) {
+		Iterator<Invader> invaderIterator = invaders.iterator(); 
+		while (invaderIterator.hasNext()) {
+			Invader invader = invaderIterator.next();
+			if(invader.isHit(dragonBullets)) {
+				invaderIterator.remove();
+			}
+		}
+		Iterator<SpaceInvaderBullet> bulletIterator = bullets.iterator();
+		while (bulletIterator.hasNext()) {
+			SpaceInvaderBullet bullet = bulletIterator.next();
 				bullet.update();
 				if (bullet.getOnScreen()==false) {
-					it2.remove();
+					bulletIterator.remove();
 				}
-			}
 		}
+	}
 	
-
+	public ArrayList<Invader> getInvaders() {
+		return invaders;
+	}
+	public ArrayList<SpaceInvaderBullet> getBullets() {
+		return bullets;
+	}
 
 	public Invader getInvader(int i) {
 		return this.invaders.get(i);

@@ -3,6 +3,7 @@ package spaceinvaderstests;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.lang.annotation.ElementType;
+import java.util.ArrayList;
 import java.util.Iterator;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -15,10 +16,14 @@ import SpaceInvaders.DragonBulletCollection;
 
 class FleetTests {
 	private Fleet fleet;
+	private ArrayList<Invader> invaders;
+	private ArrayList<SpaceInvaderBullet> bullets;
 	
 	@BeforeEach
 	void setUpTestingObjects() {
 		fleet = new Fleet();
+		invaders = fleet.getInvaders();
+		bullets = fleet.getBullets();
 	}
 	
 	@Test
@@ -29,15 +34,15 @@ class FleetTests {
 	}
 	@Test
 	void testInitialVars() {
-		assertEquals(fleet.getBullets().size(), 0);
-		assertEquals(fleet.getBullets().size(), 0);
+		assertEquals(bullets.size(), 0);
+		assertEquals(bullets.size(), 0);
 		
 	}
 	
 	@Test
 	void testSpawnInvaders() {
 		fleet.spawnInvaders();
-		assertEquals(fleet.getInvaders().size(), 9);
+		assertEquals(invaders.size(), 8);
 		
 	}
 	
@@ -45,7 +50,7 @@ class FleetTests {
 	void shootBulletTest() {
 		fleet.spawnInvaders();
 		fleet.shootBullets();
-		assertEquals(fleet.getBullets().size(),1);
+		assertEquals(bullets.size(),1);
 	}
 	@Test
 	void testInvaderUpdateRemoval() {
@@ -54,7 +59,7 @@ class FleetTests {
 		DragonBulletCollection collection = new DragonBulletCollection();
 		invader.hurt();
 		fleet.update(collection);
-		assertEquals(fleet.invaders.size(), 8); 
+		assertEquals(invaders.size(), 8); 
 	}
 	
 	@Test
@@ -62,7 +67,7 @@ class FleetTests {
 		fleet.spawnInvaders();
 		DragonBulletCollection collection = new DragonBulletCollection();
 		fleet.update(collection);
-		assertEquals(fleet.invaders.size(), 9); 
+		assertEquals(invaders.size(), 9); 
 	}
 	
 	
@@ -70,12 +75,12 @@ class FleetTests {
 	void testBulletUpdateRemoval() {
 		fleet.addRowOfInvaders();
 		fleet.shootBullets();
-		System.out.println(fleet.bullets.size());
-		SpaceInvaderBullet bullet = fleet.bullets.get(0);
+		System.out.println(bullets.size());
+		SpaceInvaderBullet bullet = bullets.get(0);
 		DragonBulletCollection collection = new DragonBulletCollection();
 		bullet.hurt();
 		fleet.update(collection);
-		assertEquals(fleet.bullets.size(), 0); 
+		assertEquals(bullets.size(), 0); 
 	
 		
 	}
@@ -87,7 +92,7 @@ class FleetTests {
 		fleet.shootBullets();
 		DragonBulletCollection collection = new DragonBulletCollection();
 		fleet.update(collection);
-		assertEquals(fleet.bullets.size(), 1); 
+		assertEquals(bullets.size(), 1); 
 	}
 	
 
