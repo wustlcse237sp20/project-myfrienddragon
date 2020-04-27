@@ -21,6 +21,7 @@ public class Invader implements Sprite {
 	}
 	public void hurt() {
 		this.alive = false;
+		
 	}
 	
 	

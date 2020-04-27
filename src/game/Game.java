@@ -21,6 +21,11 @@ public class Game {
 	
 	//checks possible click interactions every frame
 	public Interactions onClick() {
+		if (dragon.willAge()) {
+			frame = 0;
+			interactionLevel = Interactions.evolve;
+			dragon = dragon.ageUp();
+		}
 		if (StdDraw.isMousePressed()) {
 			 clicked = true;
 			 mouseX = StdDraw.mouseX();
@@ -48,7 +53,6 @@ public class Game {
 			if (frame == 30) { // resetting the frame counter each time it reaches 30 and idling the dragon
 				interactionLevel = Interactions.idle;
 				frame = 0;
-				dragon = dragon.ageUp();
 				StdDraw.clear();
 			}
 			frame++;
