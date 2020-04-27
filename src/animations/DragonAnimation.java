@@ -1,5 +1,6 @@
 package animations;
 import java.awt.Color;
+import java.awt.Font;
 
 import edu.princeton.cs.introcs.StdDraw;
 
@@ -107,5 +108,27 @@ public class DragonAnimation {
 		}
 
 }
+	public static void evolve(int frameCounter) {
+		StdDraw.clear();
+		StdDraw.setPenColor();
+		Font font = new Font("Arial", Font.BOLD, 12);
+		StdDraw.setFont(font);
+		StdDraw.text(200, 350, "Your dragon is evolving into a new form!");
+		if (frameCounter > 0 && frameCounter < 6) {
+			StdDraw.picture(200,200, "dragon_resources/sparkle-frame-1.png");
+		}
+		else if (frameCounter > 6 && frameCounter < 12) {
+			StdDraw.picture(200,200, "dragon_resources/sparkle-frame-2.png");
+		}
+		else if (frameCounter > 12 && frameCounter < 18) {
+			StdDraw.picture(200,200, "dragon_resources/sparkle-frame-3.png");
+		}
+		else if (frameCounter > 18 && frameCounter < 24) {
+			StdDraw.picture(200,200, "dragon_resources/sparkle-frame-4.png");
+		}
+		else if (frameCounter > 24 && frameCounter < 30) {
+			StdDraw.picture(200,200, "dragon_resources/sparkle-frame-5.png");
+		}
+	}
 }
 

@@ -27,14 +27,20 @@ public class Baby implements Dragon {
 		}
 		return this.foodLevel;
 	}
-
-	public Dragon ageUp() {
+	
+	public boolean willAge() {
 		if (this.foodLevel == 5 && this.loveLevel == 5) {
+			return true;
+		
+		}
+		return false;
+	}
+	
+	public Dragon ageUp() {
 			Adult dragon = new Adult();
 			return dragon;
-		}
-		return this;
 	}
+	
 
 	public void animateFeed(int frame) {
 		DragonAnimation.babyEat(frame);
@@ -48,12 +54,17 @@ public class Baby implements Dragon {
 	public void animateIdle(int frame) {
 		DragonAnimation.babyIdle(frame);
 	}
+	
+	public void animateEvolve(int frame) {
+		DragonAnimation.evolve(frame);
+	}
 
 	/**
 	 * returns an interaction based on where the user clicked
 	 */
 	@Override
 	public Interactions checkInteraction(double mouseX, double mouseY) {
+		
 		if ((mouseX > 25 && mouseX < 85) && (mouseY > 20 && mouseY < 100)) {
 			return Interactions.game;
 
@@ -75,6 +86,9 @@ public class Baby implements Dragon {
 	 */
 	@Override
 	public void update(Interactions interactionValue, int frame) {
+		if (interactionValue == Interactions.evolve) {
+			this.animateEvolve(frame);
+		}
 		if (interactionValue ==  Interactions.idle) {
 			this.animateIdle(frame);
 		}
@@ -91,6 +105,7 @@ public class Baby implements Dragon {
 			}
 		}	
 	}
+
 	
 }
 

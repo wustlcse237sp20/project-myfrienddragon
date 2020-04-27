@@ -44,12 +44,23 @@ public class Adult implements Dragon {
 		DragonAnimation.adultIdle(frame);
 	}
 	
+	public void animateEvolve(int frame) {
+		DragonAnimation.evolve(frame);
+	}
+	
+	public boolean willAge() {
+		if (this.foodLevel == 5 && this.loveLevel == 5) {
+			return true;
+		
+		}
+		return false;
+	}
+	
+	
 	@Override
 	public Dragon ageUp() {
-		if (this.foodLevel == 5 && this.loveLevel == 5) {
 			StdDraw.clear();
 			StdDraw.text(200, 200, "Congratulations, you raised your dragon to an adult");
-		}
 		return this;
 	}
 
@@ -77,6 +88,9 @@ public class Adult implements Dragon {
 	 * displays the proper animation updates the dragon based on user interaction
 	 */
 	public void update(Interactions interactionValue, int frame) {
+		if (interactionValue == Interactions.evolve) {
+			this.animateEvolve(frame);
+		}
 		if (interactionValue ==  Interactions.idle) {
 			this.animateIdle(frame);
 		}
