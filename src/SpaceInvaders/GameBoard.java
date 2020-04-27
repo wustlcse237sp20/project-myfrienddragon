@@ -15,12 +15,6 @@ public class GameBoard {
 	Fleet fleet;
 	DragonBulletCollection dragonBullets;
 	
-	public static void main(String[] args) {
-		GameBoard game = new GameBoard();
-		game.setUpGame();
-		game.playGame();
-	}
-	
 	public void setUpGame() {
 		StdDraw.enableDoubleBuffering();
 		StdDraw.setCanvasSize(400, 400);

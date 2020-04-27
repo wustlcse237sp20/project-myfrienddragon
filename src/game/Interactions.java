@@ -5,7 +5,11 @@ public enum Interactions {
 		feed,
 		pet,
 		game,
-		evolve
+		evolve,
+		wait, 
+		pong,
+		invaders,
+		back
 
 
 }
