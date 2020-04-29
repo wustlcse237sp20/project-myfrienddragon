@@ -22,6 +22,12 @@ public class GameBoard {
 	DragonBulletCollection dragonBullets;
 	
 	public void setUpGame() {
+		setUpBoard();
+		setUpSprites();
+	}
+	
+	
+	private void setUpBoard() {
 		StdDraw.enableDoubleBuffering();
 		StdDraw.setCanvasSize(400, 400);
 		StdDraw.setXscale(0,400);
@@ -32,10 +38,24 @@ public class GameBoard {
 		this.initPlayer();
 		this.initFleet();
 	}
+	
+	private void setUpSprites() {
+		initPlayer();
+		initFleet();
+	}
 
+	public void initPlayer() {
+		player = new Player();
+		dragonBullets = new DragonBulletCollection();
+	}
+	
+	public void initFleet() {
+		fleet = new Fleet();
+		fleet.addRowOfInvaders();
+	}
 
 	public void playGame() {
-		while (true){
+		while (gameOver() == false){
 			//randomly shoot bullets every couple seconds
 			if (frameCounter % 20 == 0) {
 				fleet.shootBullets();	
@@ -52,9 +72,40 @@ public class GameBoard {
 			this.drawSprites();
 			StdDraw.show();
 			StdDraw.pause(66);
+		}
+		endGame();
+		StdDraw.show();
 	}
-			
-}
+	
+	private boolean gameOver() {
+		if(fleet.getInvaders().size() == 0) {
+			return true;
+		}
+		else { 
+			return false;
+		}
+	}
+	
+	private void endGame() {
+		displayCongratsMessage();
+		displayButtons();
+	}
+	
+	private void displayButtons() {
+		Font font = new Font("Courier", Font.PLAIN, 14);
+		StdDraw.setFont(font);
+		StdDraw.rectangle(120, 190, 45, 25);
+		StdDraw.text(120, 190, "Play again");
+		StdDraw.rectangle(280, 190, 45, 25);
+		StdDraw.text(280, 190, "Main game");
+	}
+	
+	private void displayCongratsMessage() {
+		Font font = new Font("Courier", Font.BOLD, 24);
+		StdDraw.setFont(font);
+		StdDraw.text(200, 275, "Congrats you won!");
+	}
+	
 	private void fieldUpdates() {
 		player.updatePlayer(dragonBullets, fleet);
 		dragonBullets.update();
@@ -65,10 +116,24 @@ public class GameBoard {
 	private void updateScore() {
 		int invadersDestroyed = fleet.getNumDestroyed();
 		score = invadersDestroyed * 20;
+		fleet.update(dragonBullets);
+		updateScore();
+	}
+	
+	private void updateScore() {
+		int invadersDestroyed = fleet.getNumInvadersDestroyed();
+		score = invadersDestroyed * 20;
+	}
+	
+	public void drawSprites() {
+		this.drawScoreBoard();
+		this.drawPlayer();
+		this.drawFleet();
+		this.drawDragonBullets();
+		this.drawSpaceInvaderBullets();
 	}
 	
 	private void drawScoreBoard() {
-		StdDraw.setPenColor(Color.black);
 		StdDraw.rectangle(60, 80, 55, 15);
 		Font font = new Font("Courier", Font.BOLD, 16);
 		StdDraw.setFont(font);
@@ -121,12 +186,9 @@ public class GameBoard {
 		this.drawSpaceInvaderBullets();
 	}
 	
-	public static void main (String[] args) {
-		GameBoard game = new GameBoard();
-		game.setUpGame();
-		game.playGame();
-	}
-	
-
-
+// 	public static void main (String[] args) {
+// 		GameBoard game = new GameBoard();
+// 		game.setUpGame();
+// 		game.playGame();
+// 	}
 }

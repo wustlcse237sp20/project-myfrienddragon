@@ -6,6 +6,7 @@ import java.util.Iterator;
 public class Fleet {
 	private ArrayList<Invader> invaders;
 	private ArrayList<SpaceInvaderBullet> bullets;
+	private int numInvadersDestroyed;
 	private final static int numInvadersPerRow = 8; 
 	int numDestroyed;
 
@@ -56,14 +57,10 @@ public class Fleet {
 			Invader invader = invaderIterator.next();
 			invader.update(dragonBullets);
 			if(!invader.isAlive()) {
-				System.out.println("Invader " + invader.toString() +" is not alive");
 					invaderIterator.remove();
 					numDestroyed++;
-					System.out.println("Score " + numDestroyed);
-				}
-			}
-		
-		
+				
+				}	
 			
 		Iterator<SpaceInvaderBullet> bulletIterator = bullets.iterator();
 		while (bulletIterator.hasNext()) {
@@ -80,6 +77,10 @@ public class Fleet {
 	}
 	public ArrayList<SpaceInvaderBullet> getBullets() {
 		return bullets;
+	}
+	
+	public int getNumInvadersDestroyed() {
+		return numInvadersDestroyed;
 	}
 
 	public Invader getInvader(int i) {
