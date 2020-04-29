@@ -13,23 +13,31 @@ public class Baby implements Dragon {
 		this.loveLevel = 0;
 		this.age = 1;
 	}
+	
+	public int getFoodLevel() {
+		return this.foodLevel;
+	}
+	
+	public int getLoveLevel() {
+		return this.loveLevel;
+	}
 
 	public int pet() {
-		if (this.loveLevel < 5) {
-			this.loveLevel++;
+		if (this.loveLevel < 100) {
+			this.loveLevel += 5;
 		}
 		return this.loveLevel;
 	}
 
 	public int feed() {
-		if (this.foodLevel < 5) {
-			this.foodLevel++;
+		if (this.foodLevel < 100) {
+			this.foodLevel += 5;
 		}
 		return this.foodLevel;
 	}
 
 	public Dragon ageUp() {
-		if (this.foodLevel == 5 && this.loveLevel == 5) {
+		if (this.foodLevel == 100 && this.loveLevel == 100) {
 			Adult dragon = new Adult();
 			return dragon;
 		}

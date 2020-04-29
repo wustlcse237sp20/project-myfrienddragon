@@ -54,6 +54,7 @@ public class Game {
 			frame++;
 			interactionLevel = this.onClick();
 			DragonAnimation.redrawUI();
+			DragonAnimation.drawLifeBars(dragon);
 			dragon.update(interactionLevel,frame);
 			StdDraw.show();
 			StdDraw.pause(66);

@@ -16,4 +16,8 @@ public interface Dragon {
 	public Interactions checkInteraction(double mouseX, double mouseY);
 	public void update(Interactions interactionLevel, int frame);
 	
+	// getters for dragon status to update food and love meters
+	public int getFoodLevel();
+	public int getLoveLevel();
+	
 }

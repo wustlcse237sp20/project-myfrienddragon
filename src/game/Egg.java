@@ -12,26 +12,33 @@ public class Egg implements Dragon {
 		this.foodLevel = 0;
 		this.loveLevel = 0;
 	}
+	
+	public int getFoodLevel() {
+		return this.foodLevel;
+	}
+	
+	public int getLoveLevel() {
+		return this.loveLevel;
+	}
 
 	public int pet() {
-		if (this.loveLevel < 5) {
-			this.loveLevel++;
+		if (this.loveLevel < 100) {
+			this.loveLevel += 5;
 		}
 		return this.loveLevel;
 	}
 
 	public int feed() {
-		if (this.foodLevel < 5) {
-			this.foodLevel++;
+		if (this.foodLevel < 100) {
+			this.foodLevel += 5;
 		}
 		return this.foodLevel;
 	}
 
 	public Dragon ageUp() {
-		if (this.foodLevel == 5 && this.loveLevel == 5) {
+		if (this.foodLevel == 100 && this.loveLevel == 100) {
 			Baby dragon = new Baby();
 			return dragon;
-
 		}
 		return this;
 	}
