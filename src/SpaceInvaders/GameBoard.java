@@ -26,6 +26,7 @@ public class GameBoard {
 		setUpSprites();
 	}
 	
+	
 	private void setUpBoard() {
 		StdDraw.enableDoubleBuffering();
 		StdDraw.setCanvasSize(400, 400);
@@ -40,6 +41,15 @@ public class GameBoard {
 		initFleet();
 	}
 
+	public void initPlayer() {
+		player = new Player();
+		dragonBullets = new DragonBulletCollection();
+	}
+	
+	public void initFleet() {
+		fleet = new Fleet();
+		fleet.addRowOfInvaders();
+	}
 
 	public void playGame() {
 		while (gameOver() == false){
@@ -73,8 +83,23 @@ public class GameBoard {
 	}
 	
 	private void endGame() {
-		StdDraw.text(200.0, 200.0, "Congrats you won!");
-		System.out.print("x");
+		displayCongratsMessage();
+		displayButtons();
+	}
+	
+	private void displayButtons() {
+		Font font = new Font("Courier", Font.PLAIN, 14);
+		StdDraw.setFont(font);
+		StdDraw.rectangle(120, 190, 45, 25);
+		StdDraw.text(120, 190, "Play again");
+		StdDraw.rectangle(280, 190, 45, 25);
+		StdDraw.text(280, 190, "Main game");
+	}
+	
+	private void displayCongratsMessage() {
+		Font font = new Font("Courier", Font.BOLD, 24);
+		StdDraw.setFont(font);
+		StdDraw.text(200, 275, "Congrats you won!");
 	}
 	
 	private void fieldUpdates() {
@@ -87,6 +112,14 @@ public class GameBoard {
 	private void updateScore() {
 		int invadersDestroyed = fleet.getNumInvadersDestroyed();
 		score = invadersDestroyed * 20;
+	}
+	
+	public void drawSprites() {
+		this.drawScoreBoard();
+		this.drawPlayer();
+		this.drawFleet();
+		this.drawDragonBullets();
+		this.drawSpaceInvaderBullets();
 	}
 	
 	private void drawScoreBoard() {
@@ -123,23 +156,5 @@ public class GameBoard {
 			SpaceInvaderBullet element = it.next();
 			StdDraw.picture(element.getX(), element.getY(), "space_invaders_resources/invader_shot.png");
 		}
-	}
-	
-	public void initPlayer() {
-		player = new Player();
-		dragonBullets = new DragonBulletCollection();
-	}
-	
-	public void initFleet() {
-		fleet = new Fleet();
-		fleet.addRowOfInvaders();
-	}
-	
-	public void drawSprites() {
-		this.drawScoreBoard();
-		this.drawPlayer();
-		this.drawFleet();
-		this.drawDragonBullets();
-		this.drawSpaceInvaderBullets();
 	}
 }
