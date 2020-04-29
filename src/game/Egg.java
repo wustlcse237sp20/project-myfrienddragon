@@ -12,11 +12,11 @@ public class Egg implements Dragon {
 		this.foodLevel = 0;
 		this.loveLevel = 0;
 	}
-	
+
 	public int getFoodLevel() {
 		return this.foodLevel;
 	}
-	
+
 	public int getLoveLevel() {
 		return this.loveLevel;
 	}
@@ -36,11 +36,15 @@ public class Egg implements Dragon {
 	}
 
 	public Dragon ageUp() {
+		Baby dragon = new Baby();
+		return dragon;
+	}
+	
+	public boolean willAge() {
 		if (this.foodLevel == 100 && this.loveLevel == 100) {
-			Baby dragon = new Baby();
-			return dragon;
+			return true;
 		}
-		return this;
+		return false;
 	}
 
 	@Override
@@ -58,11 +62,18 @@ public class Egg implements Dragon {
 		DragonAnimation.eggIdle(frame);
 	}
 
+	public void animateEvolve(int frame) {
+		DragonAnimation.evolve(frame);
+	}
+
 	/**
 	 * returns an interaction based on where the user clicked
 	 */
 	@Override
 	public Interactions checkInteraction(double mouseX, double mouseY) {
+		if (this.willAge()) {
+			return Interactions.evolve;
+		}
 		if ((mouseX > 25 && mouseX < 85) && (mouseY > 20 && mouseY < 100)) {
 			return Interactions.game;
 
@@ -82,6 +93,10 @@ public class Egg implements Dragon {
 	 * displays the proper animation updates the dragon based on user interaction
 	 */	@Override
 	 public void update(Interactions interactionValue, int frame) {
+		 if (interactionValue == Interactions.evolve) {
+
+			 this.animateEvolve(frame);
+		 }
 		 if (interactionValue ==  Interactions.idle) {
 			 this.animateIdle(frame);
 		 }
@@ -98,5 +113,5 @@ public class Egg implements Dragon {
 			 }
 		 }
 	 }
-	 
+
 }

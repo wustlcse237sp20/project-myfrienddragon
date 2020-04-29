@@ -1,5 +1,6 @@
 package animations;
 import java.awt.Color;
+import java.awt.Font;
 
 import edu.princeton.cs.introcs.StdDraw;
 import game.Dragon;
@@ -75,7 +76,7 @@ public class DragonAnimation {
 		}
 
 	}
-	
+
 	//Animation for egg eating
 	public static void eggEat(int frameCounter) {
 		if (frameCounter > 0 && frameCounter < 14) {
@@ -85,7 +86,7 @@ public class DragonAnimation {
 			StdDraw.picture(200, 200, "dragon_resources/egg/egg_eat_2.png");
 		}
 	}
-	
+
 	//Animation for egg being pet
 	public static void eggPet(int frameCounter) {
 		if (frameCounter > 0 && frameCounter < 14) {
@@ -105,7 +106,7 @@ public class DragonAnimation {
 			StdDraw.picture(200, 200 , "dragon_resources/infant/baby_idle_2.png");
 		}
 	}
-	
+
 	//Animation for baby eating
 	public static void babyEat(int frameCounter) {
 		if (frameCounter > 0 && frameCounter < 14) {
@@ -134,7 +135,7 @@ public class DragonAnimation {
 			StdDraw.picture(200, 200 , "dragon_resources/adult/adult_idle_2.png");
 		}
 	}
-	
+
 	//Animation for adult eating
 	public static void adultEat(int frameCounter) {
 		if (frameCounter > 0 && frameCounter < 14) {
@@ -152,6 +153,29 @@ public class DragonAnimation {
 		}
 		else if (frameCounter > 13 && frameCounter < 30 ) {
 			StdDraw.picture(200, 200 , "dragon_resources/adult/adult_pet_2.png");
+		}
+	}
+
+	public static void evolve(int frameCounter) {
+		StdDraw.clear();
+		StdDraw.setPenColor();
+		Font font = new Font("Arial", Font.BOLD, 12);
+		StdDraw.setFont(font);
+		StdDraw.text(200, 350, "Your dragon is evolving into a new form!");
+		if (frameCounter > 0 && frameCounter < 6) {
+			StdDraw.picture(200,200, "dragon_resources/sparkle-frame-1.png");
+		}
+		else if (frameCounter > 6 && frameCounter < 12) {
+			StdDraw.picture(200,200, "dragon_resources/sparkle-frame-2.png");
+		}
+		else if (frameCounter > 12 && frameCounter < 18) {
+			StdDraw.picture(200,200, "dragon_resources/sparkle-frame-3.png");
+		}
+		else if (frameCounter > 18 && frameCounter < 24) {
+			StdDraw.picture(200,200, "dragon_resources/sparkle-frame-4.png");
+		}
+		else if (frameCounter > 24 && frameCounter < 30) {
+			StdDraw.picture(200,200, "dragon_resources/sparkle-frame-5.png");
 		}
 	}
 	
