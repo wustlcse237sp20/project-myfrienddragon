@@ -2,7 +2,7 @@ package game;
 
 import animations.DragonAnimation;
 
-public class Egg implements Dragon {
+public class Egg implements Dragon, GameEntity {
 
 	public int foodLevel;
 	public int loveLevel;
@@ -65,6 +65,7 @@ public class Egg implements Dragon {
 	public void animateEvolve(int frame) {
 		DragonAnimation.evolve(frame);
 	}
+	
 
 	/**
 	 * returns an interaction based on where the user clicked
@@ -111,6 +112,10 @@ public class Egg implements Dragon {
 			 if (frame == 0) {
 				 this.pet();
 			 }
+		 }
+		 if (interactionValue == Interactions.game) {
+			 GameMenu gameMenu = new GameMenu();
+			 gameMenu.drawGameMenu(frame);
 		 }
 	 }
 
