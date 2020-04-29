@@ -32,6 +32,7 @@ public class Game {
 		}
 		if (interactionLevel == Interactions.back) {
 			StdDraw.clear();
+			frame = 30;
 			entity = (GameEntity) dragon;
 		}
 	}
