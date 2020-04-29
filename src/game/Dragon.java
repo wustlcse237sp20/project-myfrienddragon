@@ -17,4 +17,8 @@ public interface Dragon {
 	// functions that check the user interaction and manipulate the dragon appropriately
 	public boolean willAge();
 	
+	// getters for dragon status to update food and love meters
+	public int getFoodLevel();
+	public int getLoveLevel();
+	
 }

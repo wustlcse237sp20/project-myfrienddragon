@@ -13,33 +13,40 @@ public class Egg implements Dragon, GameEntity {
 		this.loveLevel = 0;
 	}
 
+	public int getFoodLevel() {
+		return this.foodLevel;
+	}
+
+	public int getLoveLevel() {
+		return this.loveLevel;
+	}
+
 	public int pet() {
-		if (this.loveLevel < 5) {
-			this.loveLevel++;
+		if (this.loveLevel < 100) {
+			this.loveLevel += 5;
 		}
 		return this.loveLevel;
 	}
 
 	public int feed() {
-		if (this.foodLevel < 5) {
-			this.foodLevel++;
+		if (this.foodLevel < 100) {
+			this.foodLevel += 5;
 		}
 		return this.foodLevel;
 	}
 
+	public Dragon ageUp() {
+		Baby dragon = new Baby();
+		return dragon;
+	}
+	
 	public boolean willAge() {
-		if (this.foodLevel == 5 && this.loveLevel == 5) {
+		if (this.foodLevel == 100 && this.loveLevel == 100) {
 			return true;
-		
 		}
 		return false;
 	}
-	
-	public Dragon ageUp() {
-			Baby dragon = new Baby();
-			return dragon;
-	}
-	
+
 	@Override
 	public void animatePet(int frame) {
 		DragonAnimation.eggPet(frame);
@@ -54,7 +61,7 @@ public class Egg implements Dragon, GameEntity {
 	public void animateIdle(int frame) {
 		DragonAnimation.eggIdle(frame);
 	}
-	
+
 	public void animateEvolve(int frame) {
 		DragonAnimation.evolve(frame);
 	}
@@ -88,7 +95,7 @@ public class Egg implements Dragon, GameEntity {
 	 */	@Override
 	 public void update(Interactions interactionValue, int frame) {
 		 if (interactionValue == Interactions.evolve) {
-			 
+
 			 this.animateEvolve(frame);
 		 }
 		 if (interactionValue ==  Interactions.idle) {
@@ -111,5 +118,5 @@ public class Egg implements Dragon, GameEntity {
 			 gameMenu.drawGameMenu(frame);
 		 }
 	 }
-	 
+
 }

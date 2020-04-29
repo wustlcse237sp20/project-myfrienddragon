@@ -10,6 +10,4 @@ public enum Interactions {
 		pong,
 		invaders,
 		back
-
-
 }

@@ -82,6 +82,8 @@ public class Game {
 			}
 			frame++;
 			interactionLevel = this.onClick();
+			DragonAnimation.drawLifeBars(dragon);
+			dragon.update(interactionLevel,frame);
 			UIAnimations.redrawUI();
 			entity.update(interactionLevel,frame);
 			StdDraw.show();
