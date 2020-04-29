@@ -6,11 +6,13 @@ import java.util.Iterator;
 public class Fleet {
 	private ArrayList<Invader> invaders;
 	private ArrayList<SpaceInvaderBullet> bullets;
+	private int numInvadersDestroyed;
 	private final static int numInvadersPerRow = 8; 
 
 	public Fleet() {
 		invaders = new ArrayList<Invader>();
 		bullets = new ArrayList<SpaceInvaderBullet>();
+		numInvadersDestroyed = 0;
 	}
 
 	public void setInvaders(ArrayList<Invader> invaders) {
@@ -39,18 +41,6 @@ public class Fleet {
 		}
 		spawnInvaders();
 	}
-
-	public int numInvadersDestroyed(DragonBulletCollection dragonBullets) {
-		int numDestoryed = 0;
-		Iterator<Invader> invaderIterator = invaders.iterator(); 
-		while (invaderIterator.hasNext()) {
-			Invader invader = invaderIterator.next();
-			if(invader.isHit(dragonBullets)) {
-				numDestoryed++;
-			}
-		}
-		return numDestoryed;
-	}
 	
 	public void update(DragonBulletCollection dragonBullets) {
 		Iterator<Invader> invaderIterator = invaders.iterator(); 
@@ -58,6 +48,7 @@ public class Fleet {
 			Invader invader = invaderIterator.next();
 			if(invader.isHit(dragonBullets)) {
 				invaderIterator.remove();
+				numInvadersDestroyed++;
 			}
 		}
 		Iterator<SpaceInvaderBullet> bulletIterator = bullets.iterator();
@@ -75,6 +66,10 @@ public class Fleet {
 	}
 	public ArrayList<SpaceInvaderBullet> getBullets() {
 		return bullets;
+	}
+	
+	public int getNumInvadersDestroyed() {
+		return numInvadersDestroyed;
 	}
 
 	public Invader getInvader(int i) {
