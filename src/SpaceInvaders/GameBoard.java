@@ -1,14 +1,9 @@
 package SpaceInvaders;
 
-import java.awt.Color;
 import java.awt.Font;
 
 import java.util.Iterator;
 
-import java.util.Timer;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.TimeUnit;
 
 import edu.princeton.cs.introcs.StdDraw;
 
@@ -44,15 +39,6 @@ public class GameBoard {
 		initFleet();
 	}
 
-	public void initPlayer() {
-		player = new Player();
-		dragonBullets = new DragonBulletCollection();
-	}
-	
-	public void initFleet() {
-		fleet = new Fleet();
-		fleet.addRowOfInvaders();
-	}
 
 	public void playGame() {
 		while (gameOver() == false){
@@ -109,20 +95,15 @@ public class GameBoard {
 	private void fieldUpdates() {
 		player.updatePlayer(dragonBullets, fleet);
 		dragonBullets.update();
-		updateScore();
 		fleet.update(dragonBullets, frameCounter);
+		updateScore();
 	}
 	
 	private void updateScore() {
 		int invadersDestroyed = fleet.getNumDestroyed();
+		System.out.println("Number of invaders destroyed" + fleet.getNumDestroyed());
 		score = invadersDestroyed * 20;
-		fleet.update(dragonBullets);
-		updateScore();
-	}
-	
-	private void updateScore() {
-		int invadersDestroyed = fleet.getNumInvadersDestroyed();
-		score = invadersDestroyed * 20;
+		System.out.println("Current score: " + score);
 	}
 	
 	public void drawSprites() {
@@ -178,17 +159,10 @@ public class GameBoard {
 		fleet.spawnInvaders();
 	}
 	
-	public void drawSprites() {
-		this.drawScoreBoard();
-		this.drawPlayer();
-		this.drawFleet();
-		this.drawDragonBullets();
-		this.drawSpaceInvaderBullets();
-	}
 	
-// 	public static void main (String[] args) {
-// 		GameBoard game = new GameBoard();
-// 		game.setUpGame();
-// 		game.playGame();
-// 	}
+ 	public static void main (String[] args) {
+ 		GameBoard game = new GameBoard();
+ 		game.setUpGame();
+ 		game.playGame();
+ 	}
 }
