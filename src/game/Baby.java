@@ -2,7 +2,7 @@ package game;
 
 import animations.DragonAnimation;
 
-public class Baby implements Dragon {
+public class Baby implements Dragon, GameEntity {
 
 	public int foodLevel;
 	public int loveLevel;

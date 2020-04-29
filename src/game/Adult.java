@@ -3,7 +3,7 @@ package game;
 import animations.DragonAnimation;
 import edu.princeton.cs.introcs.StdDraw;
 
-public class Adult implements Dragon {
+public class Adult implements Dragon, GameEntity {
 
 	public int foodLevel;
 	public int loveLevel;
