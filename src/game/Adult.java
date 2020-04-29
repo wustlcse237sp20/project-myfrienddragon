@@ -75,7 +75,7 @@ public class Adult implements Dragon, GameEntity {
 	 */
 	@Override
 	public Interactions checkInteraction(double mousex, double mousey) {
-		if ((mousex > 25 && mousex < 85) && (mousey > 20 && mousey < 100)) {
+		if ((mousex > 0 && mousex < 85) && (mousey > 20 && mousey < 100)) {
 			return Interactions.game;
 
 		}

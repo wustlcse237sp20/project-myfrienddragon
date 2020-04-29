@@ -28,8 +28,10 @@ public class Game {
 	public void checkEntity() {
 		if (interactionLevel == Interactions.game) {
 			entity = gameMenu;
+
 		}
 		if (interactionLevel == Interactions.back) {
+			StdDraw.clear();
 			entity = (GameEntity) dragon;
 		}
 	}
@@ -51,10 +53,11 @@ public class Game {
 			if (clicked == true && !StdDraw.isMousePressed()) {
 					clicked = false;
 					 interactionLevel = entity.checkInteraction(mouseX, mouseY);
-					if (interactionLevel != Interactions.idle || interactionLevel != Interactions.wait) {
+					if (interactionLevel != Interactions.idle && interactionLevel != Interactions.wait) {
 						frame = 0;
 					}
-					this.checkEntity();
+					 this.checkEntity();
+					
 				}
 			return interactionLevel;
 		}

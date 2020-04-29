@@ -72,7 +72,7 @@ public class Baby implements Dragon, GameEntity {
 	@Override
 	public Interactions checkInteraction(double mouseX, double mouseY) {
 		
-		if ((mouseX > 25 && mouseX < 85) && (mouseY > 20 && mouseY < 100)) {
+		if ((mouseX > 0 && mouseX < 85) && (mouseY > 20 && mouseY < 100)) {
 			return Interactions.game;
 
 		}
