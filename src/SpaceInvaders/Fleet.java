@@ -58,9 +58,10 @@ public class Fleet {
 			invader.update(dragonBullets);
 			if(!invader.isAlive()) {
 					invaderIterator.remove();
-					numDestroyed++;
+					this.numDestroyed++;
 				
 				}	
+		}
 			
 		Iterator<SpaceInvaderBullet> bulletIterator = bullets.iterator();
 		while (bulletIterator.hasNext()) {
