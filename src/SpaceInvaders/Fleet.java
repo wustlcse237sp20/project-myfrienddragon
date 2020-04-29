@@ -7,10 +7,15 @@ public class Fleet {
 	private ArrayList<Invader> invaders;
 	private ArrayList<SpaceInvaderBullet> bullets;
 	private final static int numInvadersPerRow = 8; 
+	int numDestroyed;
 
 	public Fleet() {
 		invaders = new ArrayList<Invader>();
 		bullets = new ArrayList<SpaceInvaderBullet>();
+		numDestroyed = 0;
+	}
+	public int getNumDestroyed() {
+		return this.numDestroyed;
 	}
 
 	public void setInvaders(ArrayList<Invader> invaders) {
@@ -27,6 +32,10 @@ public class Fleet {
 	public void shootBullets() {
 		int chosenShooterIndex = (int)(Math.random()*this.invaders.size());
 		Invader chosenShooter = this.invaders.get(chosenShooterIndex);
+		while (chosenShooter.getCollided()) {
+			chosenShooterIndex = (int)(Math.random()*this.invaders.size());
+			chosenShooter = this.invaders.get(chosenShooterIndex);
+		}
 		SpaceInvaderBullet bullet = new SpaceInvaderBullet(chosenShooter.getX(), chosenShooter.getY());
 		bullets.add(bullet);
 	}
@@ -40,26 +49,22 @@ public class Fleet {
 		spawnInvaders();
 	}
 
-	public int numInvadersDestroyed(DragonBulletCollection dragonBullets) {
-		int numDestoryed = 0;
-		Iterator<Invader> invaderIterator = invaders.iterator(); 
-		while (invaderIterator.hasNext()) {
-			Invader invader = invaderIterator.next();
-			if(invader.isHit(dragonBullets)) {
-				numDestoryed++;
-			}
-		}
-		return numDestoryed;
-	}
 	
-	public void update(DragonBulletCollection dragonBullets) {
+	public void update(DragonBulletCollection dragonBullets, int frame) {
 		Iterator<Invader> invaderIterator = invaders.iterator(); 
 		while (invaderIterator.hasNext()) {
 			Invader invader = invaderIterator.next();
-			if(invader.isHit(dragonBullets)) {
-				invaderIterator.remove();
+			invader.update(dragonBullets);
+			if(!invader.isAlive()) {
+				System.out.println("Invader " + invader.toString() +" is not alive");
+					invaderIterator.remove();
+					numDestroyed++;
+					System.out.println("Score " + numDestroyed);
+				}
 			}
-		}
+		
+		
+			
 		Iterator<SpaceInvaderBullet> bulletIterator = bullets.iterator();
 		while (bulletIterator.hasNext()) {
 			SpaceInvaderBullet bullet = bulletIterator.next();

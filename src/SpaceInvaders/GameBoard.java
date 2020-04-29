@@ -2,8 +2,13 @@ package SpaceInvaders;
 
 import java.awt.Color;
 import java.awt.Font;
-import java.util.ArrayList;
+
 import java.util.Iterator;
+
+import java.util.Timer;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 import edu.princeton.cs.introcs.StdDraw;
 
@@ -11,6 +16,7 @@ import edu.princeton.cs.introcs.StdDraw;
 public class GameBoard {
 	int score;
 	int frameCounter;
+	int spawnCounter;
 	Player player;
 	Fleet fleet;
 	DragonBulletCollection dragonBullets;
@@ -22,6 +28,7 @@ public class GameBoard {
 		StdDraw.setYscale(0,400);
 		score = 0;
 		frameCounter = 0;
+		spawnCounter = 0;
 		this.initPlayer();
 		this.initFleet();
 	}
@@ -38,6 +45,7 @@ public class GameBoard {
 				fleet.addRowOfInvaders();
 				frameCounter = 0;
 			}
+			//spawn new row of invaders every 10 seconds
 			frameCounter++;
 			this.fieldUpdates();
 			StdDraw.clear();
@@ -51,18 +59,17 @@ public class GameBoard {
 		player.updatePlayer(dragonBullets, fleet);
 		dragonBullets.update();
 		updateScore();
-		fleet.update(dragonBullets);
+		fleet.update(dragonBullets, frameCounter);
 	}
 	
 	private void updateScore() {
-		int invadersDestroyed = fleet.numInvadersDestroyed(dragonBullets);
-		score = score + invadersDestroyed * 20;
+		int invadersDestroyed = fleet.getNumDestroyed();
+		score = invadersDestroyed * 20;
 	}
 	
 	private void drawScoreBoard() {
 		StdDraw.setPenColor(Color.black);
 		StdDraw.rectangle(60, 80, 55, 15);
-		
 		Font font = new Font("Courier", Font.BOLD, 16);
 		StdDraw.setFont(font);
 		StdDraw.text(60.0, 80.0, "Score: " + score);
@@ -76,7 +83,7 @@ public class GameBoard {
 		Iterator<Invader> it = fleet.getInvaders().iterator(); 
 	    while (it.hasNext()) {
 	    	Invader element = it.next();
-	       	StdDraw.picture(element.getX(), element.getY(), "space_invaders_resources/space_invader_ship.png");
+	       	StdDraw.picture(element.getX(), element.getY(), element.getImage());
 	    }
 	}  
 	  
@@ -103,7 +110,7 @@ public class GameBoard {
 	
 	public void initFleet() {
 		fleet = new Fleet();
-		fleet.addRowOfInvaders();
+		fleet.spawnInvaders();
 	}
 	
 	public void drawSprites() {
@@ -112,6 +119,12 @@ public class GameBoard {
 		this.drawFleet();
 		this.drawDragonBullets();
 		this.drawSpaceInvaderBullets();
+	}
+	
+	public static void main (String[] args) {
+		GameBoard game = new GameBoard();
+		game.setUpGame();
+		game.playGame();
 	}
 	
 
