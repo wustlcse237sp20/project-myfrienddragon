@@ -17,13 +17,22 @@ public class Player implements Sprite {
 	final double playerWidth = 46;
 	final double playerHeight = 33;
 	private HitBoxTile dragonHitBox;
+	int animationTrackerFrame;
+	String image;
+	boolean collided;
+	boolean alive = true;
 
 	public Player() {
 		this.x = 200;
 		this.y = 20;
 		this.score = 0;
 		this.health = 100;
+		this.image = "space_invaders_resources/flying_dragon-red-RGB.png";
 		this.dragonHitBox = new HitBoxTile(this.x, this.y, hitBoxHeight, hitBoxWidth);
+		this.animationTrackerFrame=0;
+		this.collided =false;
+		this.alive = true;
+		
 	}
 
 	public double getX() {
@@ -37,9 +46,24 @@ public class Player implements Sprite {
 	public int getScore() {
 		return this.score;
 	}
+	public boolean getCollided() {
+		return this.collided;
+	}
+	public boolean getAlive() {
+		return this.alive;
+	}
 	
 	public int getHealth() {
 		return this.health;
+	}
+	public int getAnimationTrackerFrame() {
+		return this.animationTrackerFrame;
+	}
+	public String getImagePath() {
+		return this.image;
+	}
+	public void setPicture(String imagePath) {
+		this.image = imagePath;
 	}
 
 	public void isHit(int collisionNumber) {
@@ -113,14 +137,28 @@ public class Player implements Sprite {
 
 	@Override
 	public void hurt() {
-		// TODO Auto-generated method stub
-		
+		this.collided = true;
 	}
+	public void playHurtAnimation() {
+			GameAnimations setAnimation = new GameAnimations();
+			setAnimation.playerHurt(this);
+	}
+	public void checkDestroy() {
+		if (this.getHealth() ==0) {
+			this.alive = false;
+			}
+		}
+		
 	//checks if player has been hit by a space invader bullet(s). if so, the player is hurt, and the 
 	//space invader bullet is taken off screen.
 	public int invaderBulletCollisionChecker(Fleet fleet) {
 		Iterator<SpaceInvaderBullet> it = fleet.getBullets().iterator();
 		int returner = 0;
+		this.animationTrackerFrame+=1;
+		if (this.animationTrackerFrame==16) {
+			this.animationTrackerFrame=0;
+			this.collided = false;
+		}
         while (it.hasNext()) {
         	SpaceInvaderBullet element = it.next();
         HitBoxTile elementHitBox = element.getHitBox();
@@ -128,8 +166,14 @@ public class Player implements Sprite {
         		if (collided) {
 						element.hurt();
 						returner=returner+1;
+						this.hurt();
 			}
+        		
         }
+        if (this.collided) {
+    		this.playHurtAnimation();
+    		}
+    		this.checkDestroy();
 		return returner;
 }
 	
@@ -171,6 +215,8 @@ public class Player implements Sprite {
 		// TODO Auto-generated method stub
 		
 	}
+
+
 	
 	
 
