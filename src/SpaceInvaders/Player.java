@@ -20,7 +20,7 @@ public class Player implements Sprite {
 
 	public Player() {
 		this.x = 200;
-		this.y = 20;
+		this.y = 70;
 		this.score = 0;
 		this.health = 100;
 		this.dragonHitBox = new HitBoxTile(this.x, this.y, hitBoxHeight, hitBoxWidth);
@@ -43,7 +43,7 @@ public class Player implements Sprite {
 	}
 
 	public void isHit(int collisionNumber) {
-		this.health -= (10*collisionNumber);
+		this.health -= (20*collisionNumber);
 	}
 
 	public void didHitInvader() {
