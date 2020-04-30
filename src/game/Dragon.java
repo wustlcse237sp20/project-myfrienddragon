@@ -20,5 +20,6 @@ public interface Dragon {
 	// getters for dragon status to update food and love meters
 	public int getFoodLevel();
 	public int getLoveLevel();
+	public int getAge();
 	
 }

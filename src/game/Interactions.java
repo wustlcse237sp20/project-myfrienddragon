@@ -9,5 +9,7 @@ public enum Interactions {
 		wait, 
 		pong,
 		invaders,
-		back
+		back,
+		gameover,
+		restart
 }
