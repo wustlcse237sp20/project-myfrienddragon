@@ -29,5 +29,20 @@ public class GameAnimations {
 			
 		
 	}
+	public void playerHurt(Player player) {
+		int frame = player.getAnimationTrackerFrame();
+		if (frame > 0 && frame < 2) {
+			player.setPicture("space_invaders_resources/hurt-dragon.png");
+		}
+		if (frame > 2 && frame < 5) {
+			player.setPicture("space_invaders_resources/flying_dragon-red-RGB.png");
+		}
+		if (frame > 5 && frame < 8) {
+			player.setPicture("space_invaders_resources/hurt-dragon.png");
+		}
+		if (frame > 8 && frame < 11) {
+			player.setPicture("space_invaders_resources/flying_dragon-red-RGB.png");
+		}
+	}
 
 }

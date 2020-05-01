@@ -122,7 +122,7 @@ public class GameBoard {
 	}
 	
 	private void drawPlayer() {
-		StdDraw.picture(player.getX(), player.getY(), "space_invaders_resources/flying_dragon-red-RGB.png");
+		StdDraw.picture(player.getX(), player.getY(), player.getImagePath());
 	}
 	  
 	private void drawFleet() {
