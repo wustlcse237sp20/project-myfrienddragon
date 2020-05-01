@@ -7,11 +7,16 @@ public class Baby implements Dragon, GameEntity {
 	public int foodLevel;
 	public int loveLevel;
 	public int age;
+	public FoodInventory foodInventory;
 
-	public Baby() {
+	public Baby(FoodInventory foodInventory) {
 		this.foodLevel = 0;
 		this.loveLevel = 0;
 		this.age = 1;
+		this.foodInventory=foodInventory;
+	}
+	public int getAge() {
+		return this.age;
 	}
 	
 	public int getFoodLevel() {
@@ -24,20 +29,21 @@ public class Baby implements Dragon, GameEntity {
 
 	public int pet() {
 		if (this.loveLevel < 100) {
-			this.loveLevel += 5;
+			this.loveLevel += 20;
 		}
 		return this.loveLevel;
 	}
 
 	public int feed() {
-		if (this.foodLevel < 100) {
+		if (this.foodLevel < 100 && this.foodInventory.getFoodAmount() > 0) {
+			this.foodInventory.removeFood();
 			this.foodLevel += 5;
 		}
 		return this.foodLevel;
 	}
 
 	public Dragon ageUp() {
-		Adult dragon = new Adult();
+		Adult dragon = new Adult(this.foodInventory);
 		return dragon;
 	}
 	

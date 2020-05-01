@@ -8,13 +8,19 @@ public class Adult implements Dragon, GameEntity {
 	public int foodLevel;
 	public int loveLevel;
 	public int age;
+	public FoodInventory foodInventory;
 
-	public Adult() {
+	public Adult(FoodInventory foodInventory) {
 		this.foodLevel = 0;
 		this.loveLevel = 0;
 		this.age = 2;
+		this.foodInventory=foodInventory;
 	}
 
+	public int getAge() {
+		return this.age;
+	}
+	
 	public int getFoodLevel() {
 		return this.foodLevel;
 	}
@@ -25,14 +31,15 @@ public class Adult implements Dragon, GameEntity {
 
 	public int pet() {
 		if (this.loveLevel < 100) {
-			this.loveLevel += 5;
+			this.loveLevel += 20;
 		}
 		return this.loveLevel;
 	}
 
 	public int feed() {
-		if (this.foodLevel < 100) {
+		if (this.foodLevel < 100 && this.foodInventory.getFoodAmount() > 0) {
 			this.foodLevel += 5;
+			this.foodInventory.removeFood();
 		}
 		return this.foodLevel;
 	}
@@ -65,9 +72,7 @@ public class Adult implements Dragon, GameEntity {
 
 	@Override
 	public Dragon ageUp() {
-		StdDraw.clear();
-		StdDraw.text(200, 200, "Congratulations, you raised your dragon to an adult");
-		return this;
+		return null;
 	}
 
 	/**
