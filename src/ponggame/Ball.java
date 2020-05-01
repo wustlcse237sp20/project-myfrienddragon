@@ -135,6 +135,7 @@ public class Ball {
 	}
 	//updates x and y pos
 	public void updatePos(double newXPos, double newYPos) {
+		this.xPos += 
 		
 	}
 	public void updateDir(double newXDir, double newYDir) {

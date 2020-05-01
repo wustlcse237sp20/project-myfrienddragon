@@ -17,7 +17,7 @@ public class RealPlayer {
 		this.maxY= topYCoord-height/2;
 		this.minY = bottomYCoord+ height/2;
 	}
-	public double getScore() {
+	public int getScore() {
 		return score;
 	}
 	public void updateScore() {

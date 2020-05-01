@@ -4,12 +4,14 @@ public class ProjectPlayer {
 	
 	double xPos;
 	double yPos; 
+	double yDir;
 	int score;
 	double maxY;
 	double minY;
 	double height;
 	final double topYCoord = 400;
 	final double bottomYCoord = 0;
+	final double xWidth = 400;
 	double doublexPrediction;
 	double doubleyPrediction;
 	double error;
@@ -23,6 +25,7 @@ public class ProjectPlayer {
 		this.minY = bottomYCoord+ height/2;
 		this.error=0;
 		this.reactionSpeed = 0;
+		this.yDir = 0;
 		
 	}
 	public double getxPos() {
@@ -37,18 +40,20 @@ public class ProjectPlayer {
 	public void setyPos(double yPos) {
 		this.yPos = yPos;
 	}
-	public double getScore() {
+	public int getScore() {
 		return score;
 	}
 	public void setScore(int score) {
 		this.score = score;
 	}
-	public void makePrediction(Ball ball, RealPlayer player) {
+	public double makePrediction(Ball ball, RealPlayer player) {
 		Ball predictionBall = ball;
 		double[] errmatrix = determineErr(player);
-		double ballCloseness = (predictionBall.getxPos()-this.xPos)/topYCoord;
-		double err =errmatrix[1]*ballCloseness;
-		this.doubleyPrediction=this.yPos + err* Math.random()
+		double ballCloseness = Math.abs((predictionBall.getxPos()-this.xPos)/this.xWidth);
+		double err = errmatrix[1]*ballCloseness;
+		this.doubleyPrediction= this.yPos + (err* Math.random());
+		return this.doubleyPrediction;
+		
 		
 		
 	}
@@ -128,11 +133,16 @@ public class ProjectPlayer {
 		return AInoise;		
 		
 	}
-	public void redoPrediction(Ball ball) {
+	public void redoPrediction(Ball ball, RealPlayer player) {
 		//make prediction if ball is moving towards ai side of court
 		if (ball.getxDir() == 1 && ball.getxPos() < this.xPos) {
-			this.makePrediction(ball);
-			
+			this.makePrediction(ball, player);
+		}
+		if (this.doubleyPrediction < (this.maxY)) {
+			this.moveUp();
+		}
+		if (this.doubleyPrediction > this.minY) {
+			this.moveDown();
 		}
 		
 	}
@@ -145,8 +155,8 @@ public class ProjectPlayer {
 		this.yPos= this.yPos - this.doubleyPrediction/this.reactionSpeed;
 		
 	}
-	public move() {
-		
+	public void update(Ball ball, RealPlayer player) {
+		this.redoPrediction(ball, player);
 	}
 
 }
