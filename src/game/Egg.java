@@ -75,7 +75,7 @@ public class Egg implements Dragon, GameEntity {
 		if (this.willAge()) {
 			return Interactions.evolve;
 		}
-		if ((mouseX > 25 && mouseX < 85) && (mouseY > 20 && mouseY < 100)) {
+		if ((mouseX > 0 && mouseX < 85) && (mouseY > 20 && mouseY < 100)) {
 			return Interactions.game;
 
 		}

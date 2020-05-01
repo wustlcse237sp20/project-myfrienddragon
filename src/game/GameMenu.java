@@ -26,7 +26,7 @@ public class GameMenu implements GameEntity {
 		if (mouseY > 200 && mouseY< 250) {
 			return Interactions.pong;
 		}
-		if ((mouseX > 150 && mouseX < 250) && (mouseY > 0 && mouseY < 50)) {
+		if ((mouseX > 100 && mouseX < 250) && (mouseY > 0 && mouseY < 50)) {
 			return Interactions.back;
 		}
 		return Interactions.wait;
