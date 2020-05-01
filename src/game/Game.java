@@ -40,6 +40,7 @@ public class Game {
 	}
 		else if (interactionLevel == Interactions.game) {
 			entity = gameMenu;
+
 		}
 		else if (interactionLevel == Interactions.back) {
 			StdDraw.clear();
@@ -94,7 +95,6 @@ if (entity == dragon) {
 					if (interactionLevel != Interactions.idle && interactionLevel != Interactions.wait) {
 						frame = 0;
 					}
-						
 				}
 			System.out.println("Interaction level: " + interactionLevel);
 			System.out.println("Current entity in renewInteractions: " + entity.toString());
