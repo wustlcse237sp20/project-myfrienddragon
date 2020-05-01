@@ -64,7 +64,7 @@ public class GameBoard {
 	}
 	
 	private boolean gameOver() {
-		if(fleet.getInvaders().size() == 0) {
+		if(fleet.getInvaders().size() == 0 || player.getHealth()==0) {
 			return true;
 		}
 		else { 
@@ -97,6 +97,29 @@ public class GameBoard {
 		dragonBullets.update();
 		fleet.update(dragonBullets, frameCounter);
 		updateScore();
+		updateHealthDisplay();
+	}
+	private String updateHealthDisplay() {
+		String healthBarPath = " ";
+		if (player.getHealth() == 100) {
+			healthBarPath = "space_invaders_resources/health_bar/healthbarfull.png";	
+		}
+		if (player.getHealth()==80) {
+			healthBarPath = "space_invaders_resources/health_bar/healthbar80%.png";	
+		}
+		if (player.getHealth()==60) {
+			healthBarPath = "space_invaders_resources/health_bar/healthbar60%.png";	
+		}
+		if (player.getHealth()==40) {
+			healthBarPath = "space_invaders_resources/health_bar/healthbar40%.png";	
+		}
+		if (player.getHealth()==20) {
+			healthBarPath = "space_invaders_resources/health_bar/healthbar20%.png";	
+		}
+		if (player.getHealth()==0) {
+			healthBarPath = "space_invaders_resources/health_bar/healthbar0%.png";	
+		}
+		return healthBarPath;
 	}
 	
 	private void updateScore() {
@@ -108,6 +131,7 @@ public class GameBoard {
 	
 	public void drawSprites() {
 		this.drawScoreBoard();
+		this.drawHealthBar();
 		this.drawPlayer();
 		this.drawFleet();
 		this.drawDragonBullets();
@@ -115,10 +139,13 @@ public class GameBoard {
 	}
 	
 	private void drawScoreBoard() {
-		StdDraw.rectangle(60, 80, 55, 15);
+		StdDraw.rectangle(60, 30, 55, 15);
 		Font font = new Font("Courier", Font.BOLD, 16);
 		StdDraw.setFont(font);
-		StdDraw.text(60.0, 80.0, "Score: " + score);
+		StdDraw.text(60.0, 30.0, "Score: " + score);
+	}
+	private void drawHealthBar() {
+		StdDraw.picture(300, 30, updateHealthDisplay(), 128,79);
 	}
 	
 	private void drawPlayer() {
