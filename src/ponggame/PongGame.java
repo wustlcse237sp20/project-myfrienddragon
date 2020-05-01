@@ -14,7 +14,7 @@ public void setUpGameScreen() {
 	StdDraw.setYscale(0,400);
 	StdDraw.enableDoubleBuffering();
 }
-public void drawPaddle() {
+public void drawPlayerPaddle() {
 	StdDraw.filledRectangle(player.getxPos(), player.getyPos(), 10, 20);
 	
 }
@@ -25,7 +25,7 @@ public void update() {
 
 public void drawGame() {
 	StdDraw.clear();
-	this.drawPaddle();
+	this.drawPlayerPaddle();
 	StdDraw.show();
 	StdDraw.pause(66);
 	
