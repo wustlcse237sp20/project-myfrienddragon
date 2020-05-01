@@ -105,12 +105,12 @@ public class Baby implements Dragon, GameEntity {
 		if (interactionValue ==  Interactions.idle) {
 			this.animateIdle(frame);
 		}
-		if (interactionValue == Interactions.feed) {
-			this.animateFeed(frame);
-			if (frame == 0) {
-				this.feed();
-			}
-		}
+		if (foodInventory.getFoodAmount() > 0 && interactionValue == Interactions.feed) {
+			 this.animateFeed(frame);
+			 if (frame == 0) {
+				 this.feed();
+			 }
+		 }
 		if (interactionValue == Interactions.pet) {
 			this.animatePet(frame);
 			if (frame == 0) {
