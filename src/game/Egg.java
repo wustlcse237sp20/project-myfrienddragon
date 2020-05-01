@@ -48,7 +48,7 @@ public class Egg implements Dragon, GameEntity {
 	}
 	
 	public boolean willAge() {
-		if (this.foodLevel == 1 && this.loveLevel == 1) {
+		if (this.foodLevel == 100 && this.loveLevel == 100) {
 			return true;
 		}
 		return false;
