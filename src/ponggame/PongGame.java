@@ -6,7 +6,8 @@ import edu.princeton.cs.introcs.StdDraw;
 
 public class PongGame {
 	RealPlayer player;
-	//ProjectPlayer AIplayer;
+	ProjectPlayer AIplayer;
+	Ball ball;
 	
 public void setUpGameScreen() {
 	StdDraw.setCanvasSize(400, 400);
@@ -15,17 +16,28 @@ public void setUpGameScreen() {
 	StdDraw.enableDoubleBuffering();
 }
 public void drawPlayerPaddle() {
-	StdDraw.filledRectangle(player.getxPos(), player.getyPos(), 10, 20);
+	StdDraw.filledRectangle(player.getxPos(), player.getyPos(), player.getWidth(), player.getHeight());
 	
+}
+public void drawAIPaddle() {
+	StdDraw.filledRectangle(AIplayer.getxPos(), AIplayer.getyPos(), AIplayer.getWidth(), AIplayer.getHeight());
+	
+}
+public void drawBall() {
+	StdDraw.filledCircle(ball.getxPos(), ball.getyPos(), ball.radius);
 }
 
 public void update() {
 	this.takeMovement();
+	ball.update(player, AIplayer);
+	AIplayer.update(ball, player);
 }
 
 public void drawGame() {
 	StdDraw.clear();
 	this.drawPlayerPaddle();
+	this.drawBall();
+	this.drawAIPaddle();
 	StdDraw.show();
 	StdDraw.pause(66);
 	
@@ -44,6 +56,8 @@ public void takeMovement() {
 }
 public void playGame() {
 	player = new RealPlayer();
+	AIplayer = new ProjectPlayer();
+	ball = new Ball();
 	while (true) {
 		this.update();
 		this.drawGame();	
