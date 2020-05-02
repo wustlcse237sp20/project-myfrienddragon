@@ -1,6 +1,6 @@
 package ponggame;
 
-public class ProjectPlayer {
+public class ProjectPlayer implements Player{
 	
 	double xPos;
 	double yPos; 
@@ -11,7 +11,7 @@ public class ProjectPlayer {
 	double height;
 	double width;
 	final double topYCoord = 400;
-	final double bottomYCoord = 0;
+	final double bottomYCoord = 30;
 	final double xWidth = 400;
 	double doublexPrediction;
 	double doubleyPrediction;
@@ -52,28 +52,19 @@ public class ProjectPlayer {
 		this.score = score;
 	}
 	public double makePrediction(Ball ball, RealPlayer player) {
-		System.out.println("Currently making prediction");
 		double copyX = ball.getxPos();
 		double copyY = ball.getyPos();
 		double copySpeed = ball.getSpeed();
 		double distance = Math.abs((copyX-this.xPos));
-		System.out.println("Distance between ball and paddle: " + distance);
-		//double ballCloseness = distance/this.xWidth;
-		//System.out.println("Ball closeness: " + ballCloseness);
-		double predictionX = 0;
 		double predictionY = 0;
 	while (copyX < this.getxPos()) {
 		copyX = copyX + copySpeed;
-		System.out.println("Copy x" + copyX);
 		copyY = copyY + copySpeed;
-		System.out.println("Copy y" + copyY);
 		}
 		predictionY = copyY;
-		System.out.println("Prediction: " + predictionY);
 		double[] errmatrix = determineErr(player);
 		double err = errmatrix[1];
 		this.doubleyPrediction=  predictionY + ((err* Math.random())* this.yDir);
-		System.out.println("Imperfect prediction: " + this.doubleyPrediction);
 		return this.doubleyPrediction;
 		
 		
@@ -158,12 +149,12 @@ public class ProjectPlayer {
 	public void redoPrediction(Ball ball, RealPlayer player) {
 		//make prediction if ball is moving towards ai side of court
 	
-//		System.out.println("Noted that ball changed direction");
+
 		if (ball.getxDir() == 1 && ball.getxPos() < this.xPos && ball.getxPos() > 50) {
 			System.out.println("About to make prediction");
 		if (predictionCount == 0) {
 			this.makePrediction(ball, player);
-		//}
+		
 		}
 	}
 		if (this.doubleyPrediction < (this.maxY) && this.doubleyPrediction > (this.yPos)) {
@@ -178,24 +169,35 @@ public class ProjectPlayer {
 	public void moveUp() {
 		this.yDir = 1;
 		this.yPos = this.yPos + (this.yDir*this.reactionSpeed);
-		System.out.println("Prediction paddle yPos: " + this.yPos);
 		
 	}
 	public void moveDown() {
 		this.yDir = -1;
 		this.yPos= this.yPos + (this.yDir* this.reactionSpeed);
-		System.out.println("Prediction paddle yPos: " + this.yPos);
 		
 	}
-	public void update(Ball ball, RealPlayer player) {
+	public void checkScoreUpdate(Collisions collision) {
+		if (collision == Collisions.LEFT_WALL) {
+			System.out.println("Update project player score" + this.score);
+			this.updateScore();
+		}
+	}
+	public void update(Ball ball, RealPlayer player, Collisions collision) {
 		this.redoPrediction(ball, player);
+		this.checkScoreUpdate(collision);
+		
 	}
 	public double getWidth() {
-		// TODO Auto-generated method stub
 		return this.width;
 	}
 	public double getHeight() {
 		return this.height;
 	}
+	@Override
+	public void updateScore() {
+		this.score+=1;
+		
+	}
+
 
 }

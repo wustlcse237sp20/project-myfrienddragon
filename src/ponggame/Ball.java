@@ -29,12 +29,7 @@ public class Ball {
 		this.maxXLimit= screenWidth-radius-speed;
 		this.maxYLimit=screenHeight-radius-speed;
 		this.bounceNumber=0;
-		//initialize initial ball coordinates at center of screen, but at random y pos and direction
-		//initialize random speed
-		//initialize radius in pixels
 	}
-	//note: collision functions only move ball and return collision enum, do not check conditions of
-	//collision...that is done in checkCollision
 
 	public double getxPos() {
 		return xPos;
@@ -242,34 +237,13 @@ public class Ball {
 	
 		
 	}
-
-	//accelerates and decelerates ball to give challenge based on collision
-	public void changeSpeed(Collisions collision) {
-		if (collision==Collisions.RIGHT_WALL || collision == Collisions.LEFT_WALL ) {
-			this.speed=this.speed*1.2;
-		}
-		else if (collision == Collisions.PLAYER_ONE_PADDLE || collision == Collisions.PLAYER_TWO_PADDLE) {
-			this.speed=this.speed*1.2;
-			
-		}
-		else if (collision == Collisions.NONE && this.speed > 5) {
-			this.speed=this.speed*0.98;
-		}
-		
-	}
-	//calls 
 	public void move() {
 		this.xPos = (this.xPos)+(this.speed*this.xDir);
-		this.yPos = (this.yPos)+(this.speed*this.yDir);
-	
-		
-		
+		this.yPos = (this.yPos)+(this.speed*this.yDir);	
 	}
 	public Collisions update(RealPlayer playerOne, Player playerTwo) {
 		Collisions collision = this.checkCollisions(playerOne, playerTwo);
-		//this.changeSpeed(collision);
 		this.move();
-		//this.changeSpeed(collision);
 		System.out.println("Collision enum: " + collision);
 		return collision;
 		
