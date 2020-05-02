@@ -9,6 +9,7 @@ public class ProjectPlayer {
 	double maxY;
 	double minY;
 	double height;
+	double width;
 	final double topYCoord = 400;
 	final double bottomYCoord = 0;
 	final double xWidth = 400;
@@ -16,15 +17,19 @@ public class ProjectPlayer {
 	double doubleyPrediction;
 	double error;
 	double reactionSpeed;
+	int predictionCount = 0;
 	public ProjectPlayer() {
 		xPos = 350;
 		yPos = 200;
+		this.doublexPrediction=0;
+		this.doubleyPrediction=0;
 		this.score = 0;
-		this.height = 10;
+		this.height = 20;
+		this.width = 2;
 		this.maxY= topYCoord-height/2;
 		this.minY = bottomYCoord+ height/2;
 		this.error=0;
-		this.reactionSpeed = 0;
+		this.reactionSpeed = 25;
 		this.yDir = 0;
 		
 	}
@@ -47,11 +52,28 @@ public class ProjectPlayer {
 		this.score = score;
 	}
 	public double makePrediction(Ball ball, RealPlayer player) {
-		Ball predictionBall = ball;
+		System.out.println("Currently making prediction");
+		double copyX = ball.getxPos();
+		double copyY = ball.getyPos();
+		double copySpeed = ball.getSpeed();
+		double distance = Math.abs((copyX-this.xPos));
+		System.out.println("Distance between ball and paddle: " + distance);
+		//double ballCloseness = distance/this.xWidth;
+		//System.out.println("Ball closeness: " + ballCloseness);
+		double predictionX = 0;
+		double predictionY = 0;
+	while (copyX < this.getxPos()) {
+		copyX = copyX + copySpeed;
+		System.out.println("Copy x" + copyX);
+		copyY = copyY + copySpeed;
+		System.out.println("Copy y" + copyY);
+		}
+		predictionY = copyY;
+		System.out.println("Prediction: " + predictionY);
 		double[] errmatrix = determineErr(player);
-		double ballCloseness = Math.abs((predictionBall.getxPos()-this.xPos)/this.xWidth);
-		double err = errmatrix[1]*ballCloseness;
-		this.doubleyPrediction= this.yPos + (err* Math.random());
+		double err = errmatrix[1];
+		this.doubleyPrediction=  predictionY + ((err* Math.random())* this.yDir);
+		System.out.println("Imperfect prediction: " + this.doubleyPrediction);
 		return this.doubleyPrediction;
 		
 		
@@ -135,28 +157,45 @@ public class ProjectPlayer {
 	}
 	public void redoPrediction(Ball ball, RealPlayer player) {
 		//make prediction if ball is moving towards ai side of court
-		if (ball.getxDir() == 1 && ball.getxPos() < this.xPos) {
+	
+//		System.out.println("Noted that ball changed direction");
+		if (ball.getxDir() == 1 && ball.getxPos() < this.xPos && ball.getxPos() > 50) {
+			System.out.println("About to make prediction");
+		if (predictionCount == 0) {
 			this.makePrediction(ball, player);
+		//}
 		}
-		if (this.doubleyPrediction < (this.maxY)) {
+	}
+		if (this.doubleyPrediction < (this.maxY) && this.doubleyPrediction > (this.yPos)) {
 			this.moveUp();
 		}
-		if (this.doubleyPrediction > this.minY) {
+		if (this.doubleyPrediction > this.minY && this.doubleyPrediction < (this.yPos)) {
 			this.moveDown();
 		}
 		
 	}
 	
 	public void moveUp() {
-		this.yPos += this.doubleyPrediction/this.reactionSpeed;
+		this.yDir = 1;
+		this.yPos = this.yPos + (this.yDir*this.reactionSpeed);
+		System.out.println("Prediction paddle yPos: " + this.yPos);
 		
 	}
 	public void moveDown() {
-		this.yPos= this.yPos - this.doubleyPrediction/this.reactionSpeed;
+		this.yDir = -1;
+		this.yPos= this.yPos + (this.yDir* this.reactionSpeed);
+		System.out.println("Prediction paddle yPos: " + this.yPos);
 		
 	}
 	public void update(Ball ball, RealPlayer player) {
 		this.redoPrediction(ball, player);
+	}
+	public double getWidth() {
+		// TODO Auto-generated method stub
+		return this.width;
+	}
+	public double getHeight() {
+		return this.height;
 	}
 
 }

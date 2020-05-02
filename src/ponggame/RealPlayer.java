@@ -9,13 +9,21 @@ public class RealPlayer {
 	double minY;
 	final double topYCoord = 400;
 	final double bottomYCoord = 0;
+	double width;
 	public RealPlayer() {
 		this.xPos = 50;
 		this.yPos = 200;
-		this.score=0;
-		this.height = 10;
+		this.score= 0;
+		this.height = 20;
+		this.width = 2;
 		this.maxY= topYCoord-height/2;
 		this.minY = bottomYCoord+ height/2;
+	}
+	public double getWidth() {
+		return this.width;
+	}
+	public double getHeight() {
+		return this.height;
 	}
 	public int getScore() {
 		return score;
