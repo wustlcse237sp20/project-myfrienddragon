@@ -1,12 +1,12 @@
 package ponggame;
 
 public enum Collisions {
-	playerpaddle,
-	aipaddle,
-	leftwall,
-	rightwall,
-	bottomwall,
-	topwall,
-	none
+	PLAYER_ONE_PADDLE,
+	PLAYER_TWO_PADDLE,
+	LEFT_WALL,
+	RIGHT_WALL,
+	BOTTOM_WALL,
+	TOP_WALL,
+	NONE
 
 }
