@@ -14,22 +14,39 @@ public class Ball {
 	double minXLimit;
 	double maxYLimit;
 	double maxXLimit;
+	double angle;
 	final double screenWidth = 395;
 	final double screenHeight= 395;
-	int bounceNumber;
+	boolean changedDir;
 	public Ball() {
 		this.xPos = 200;
 		this.yPos = 350*Math.random();
-		this.speed = Math.random()*(6)+5;
+		this.speed = 10;
 		this.radius = 5;
-		this.minYLimit=radius+speed;
+		this.angle = 0;
+		this.minYLimit=this.screenHeight*(1/10)+radius*2;
 		this.minXLimit=radius+speed;
-		this.xDir=Math.signum(3*Math.random()+1);
-		this.yDir=Math.signum(3*Math.random()+1);
+		this.xDir=1;
+		this.yDir=1;
 		this.maxXLimit= screenWidth-radius-speed;
 		this.maxYLimit=screenHeight-radius-speed;
-		this.bounceNumber=0;
+		this.maxYLimit= this.screenHeight-radius-speed;
+
 	}
+	Ball(Ball ballA) {
+		this.xPos = ballA.getxPos();
+		this.yPos = ballA.getyPos();
+		this.speed = ballA.getSpeed()*2;
+		this.xDir = ballA.getxDir();
+		this.yDir = ballA.getyDir();
+		this.radius = 5;
+		this.minYLimit=this.screenHeight*(1/10)+radius+speed;
+		this.minXLimit=radius+speed;
+		this.maxXLimit= screenWidth-radius-speed;
+		this.maxYLimit= this.screenHeight-radius-speed;
+		
+	}
+
 
 	public double getxPos() {
 		return xPos;
@@ -114,60 +131,60 @@ public class Ball {
 	
 
 	public Collisions reboundBallOffMinY() {
-			this.yPos = radius;
+			this.yPos = this.minYLimit+radius;
 			this.yDir=-1*this.yDir;
-			return Collisions.BOTTOM_WALL;
+			return Collisions.bottomwall;
 			
 		}
 	
 		
 	
 	public Collisions reboundBallOffMaxY() {
-		this.yPos = this.screenHeight-radius;
+		this.yPos = this.maxYLimit-radius;
 		this.yDir=-1*this.yDir;
-		this.bounceNumber=1;
-		return Collisions.TOP_WALL;
+		return Collisions.topwall;
 	}
 	public Collisions reboundBallOffMinX() {
-			this.xPos = radius;
+			this.xPos = this.minXLimit+radius;
 			this.xDir=-1*this.xDir;
 			this.yDir=-1*this.yDir;
-			this.bounceNumber=1;
-			return Collisions.LEFT_WALL;	
+			changedDir = true;
+			return Collisions.leftwall;	
 		//update ball pos/speed
 		//return collision enum based on collision with left wall	
 	}
 	public Collisions reboundBallOffMaxX() {
-		this.xPos = this.screenWidth - radius;
+		this.xPos = this.maxXLimit - radius;
 		this.xDir=-1*this.xDir;
 		this.yDir=-1*this.yDir;
-		this.bounceNumber=1;
-		return Collisions.RIGHT_WALL;
+		changedDir = true;
+		return Collisions.rightwall;
 		//update ball pos/speed
 		//return collision enum based on collision with right wall
 		
 	}
-	public Collisions PlayerOnePaddleCollision(RealPlayer player) {
+	public Collisions PaddleCollision(RealPlayer player, ProjectPlayer ai) {
 		double playerPaddleBottomY = player.getyPos() - player.getHeight();
 		double playerPaddleTopY = player.getyPos() + player.getHeight();
 		double playerOneBallXPrediction = this.xPos-radius-speed;
 		double playerOneBallYPrediction = (this.yPos)+((speed + radius)*this.yDir);
-		if ((playerOneBallXPrediction <= player.getxPos() + player.getWidth()) && this.xDir==-1) {
-			if ((playerOneBallYPrediction< playerPaddleTopY) && (playerOneBallYPrediction > playerPaddleBottomY)) {
-			if ((this.yPos-radius > playerPaddleBottomY) && this.yPos-radius < playerPaddleBottomY*0.33 ) {
-				this.xDir=-1*this.xDir;
-				this.yDir = -1*this.yDir;
-				System.out.println("Bottom third player paddle");
-			}
-			if ((this.yPos - radius >= playerPaddleBottomY*0.33) && (this.yPos-radius < playerPaddleTopY * 0.66)) {
-				this.xDir = -1*this.xDir;
-				System.out.println("Middle third player paddle");
-			}
-			if ((this.yPos-radius >= playerPaddleTopY*0.66) && (this.yPos-radius < playerPaddleTopY)) {
-				this.yDir = -1*this.xDir;
-				this.xDir = -1*this.xDir;
-				System.out.println("Top third player paddle");
-			}
+		if ((playerOneBallXPrediction < player.getxPos() + player.getWidth()) && this.getxDir()==-1) {
+			if ((playerOneBallYPrediction <= playerPaddleTopY) && (playerOneBallYPrediction >= playerPaddleBottomY)) {
+//			if ((this.yPos-radius > playerPaddleBottomY) && this.yPos-radius < playerPaddleBottomY*0.33 ) {
+//				this.xDir=-1*this.xDir;
+//				this.yDir = -1*this.yDir;
+//				System.out.println("Bottom third player paddle");
+//			}
+//			if ((this.yPos - radius >= playerPaddleBottomY*0.33) && (this.yPos-radius < playerPaddleTopY * 0.66)) {
+//				this.xDir = -1*this.xDir;
+//				System.out.println("Middle third player paddle");
+//			}
+//			if ((this.yPos-radius >= playerPaddleTopY*0.66) && (this.yPos-radius < playerPaddleTopY)) {
+//				this.yDir = -1*this.xDir;
+//				this.xDir = -1*this.xDir;
+//				System.out.println("Top third player paddle");
+//			}
+			this.xDir=this.xDir*-1;
 			this.bounceNumber=1;
 			return Collisions.PLAYER_ONE_PADDLE;
 		}
@@ -180,56 +197,50 @@ public class Ball {
 	public Collisions PlayerTwoPaddleCollision(Player playerTwo) {
 		double playerPaddleBottomY = playerTwo.getyPos() - playerTwo.getHeight();
 		double playerPaddleTopY = playerTwo.getyPos() + playerTwo.getHeight();
-		double ballPosWithPadding = this.yPos + radius;
 		double playerOneBallXPrediction = this.xPos+radius+speed;
 		double playerOneBallYPrediction = (this.yPos)+((speed + radius)*this.yDir);
-		if ((playerOneBallXPrediction >= (playerTwo.getxPos() + playerTwo.getWidth())) && this.xDir==1) {
-		if ((playerOneBallYPrediction < playerPaddleTopY) && (playerOneBallYPrediction > playerPaddleBottomY)) {
+		if ((playerOneBallXPrediction > (playerTwo.getxPos() - playerTwo.getWidth())) && this.xDir==1) {
+		if ((playerOneBallYPrediction <= playerPaddleTopY) && (playerOneBallYPrediction >= playerPaddleBottomY)) {
 //			if ((ballPosWithPadding > playerPaddleBottomY) && ballPosWithPadding < playerPaddleBottomY*0.33 ) {
 //				this.xDir=-1*this.xDir;
 //				this.yDir = -1*this.yDir;
-//				System.out.println("Bottom third player paddle");
 //			}
-//			if ((ballPosWithPadding >= playerPaddleBottomY*0.33) && (ballPosWithPadding < playerPaddleTopY * 0.66)) {
+//			if ((this.yPos - radius >= playerPaddleBottomY*0.33) && (this.yPos-radius < playerPaddleTopY * 0.66)) {
 //				this.xDir = -1*this.xDir;
-//				System.out.println("Middle third player paddle");
 //			}
-//			if ((ballPosWithPadding >= playerPaddleTopY*0.66) && (ballPosWithPadding< playerPaddleTopY)) {
+//			if ((this.yPos-radius >= playerPaddleTopY*0.66) && (this.yPos-radius < playerPaddleTopY)) {
 //				this.yDir = -1*this.xDir;
 //				this.xDir = -1*this.xDir;
-//				System.out.println("Top third player paddle");
 //			}
-			this.xDir=this.xDir*-1;
-			this.bounceNumber=1;
-			return Collisions.PLAYER_TWO_PADDLE;
+			this.xDir = -1*xDir;
+			//ai.predictionCount=1;
+			return Collisions.playerpaddle;
 		}
-		
-			
 	}
-		return Collisions.NONE;
+		return Collisions.none;
+		//update ball pos/speed
+		//return collision enum based on collision with right wall
 		
-}
-	public Collisions checkCollisions(RealPlayer playerOne, Player playerTwo) {
-		Collisions collision = this.PlayerOnePaddleCollision(playerOne);
-		collision = this.PlayerTwoPaddleCollision(playerTwo);
+	}
+	
+	public Collisions checkCollisions(RealPlayer player, ProjectPlayer ai) {
+		Collisions collision = this.PaddleCollision(player, ai);
 		//aggregate checker function that checks collision conditions and calls rebound functions accordingly
-	if (collision == Collisions.NONE) {
-		if (this.yPos < this.minYLimit ) {
+	if (collision == Collisions.none) {
+		if (this.yPos < this.minYLimit) {
 			collision = this.reboundBallOffMinY();
 		}
-		else if (this.yPos > this.maxYLimit ) {
+		else if (this.yPos > this.maxYLimit) {
 			collision = this.reboundBallOffMaxY();
        	}
 		else if (this.xPos < this.minXLimit || (this.yPos < this.minYLimit && this.xPos < this.minXLimit)) {
-			System.out.println("Hit left wall");
 			collision = this.reboundBallOffMinX();
 		}
 		else if(this.xPos > this.maxXLimit|| (this.yPos > this.maxYLimit && this.xPos > this.maxXLimit)) {
-			System.out.println("Hit right wall");
 			collision = this.reboundBallOffMaxX();
 		}
 		else {
-			collision = Collisions.NONE;
+			collision = Collisions.none;
 		}
 	
 	}
@@ -237,14 +248,20 @@ public class Ball {
 	
 		
 	}
+
+
+	//calls 
 	public void move() {
 		this.xPos = (this.xPos)+(this.speed*this.xDir);
-		this.yPos = (this.yPos)+(this.speed*this.yDir);	
+		this.yPos = (this.yPos)+(this.speed*this.yDir);
+	
+		
+		
 	}
+
 	public Collisions update(RealPlayer playerOne, Player playerTwo) {
-		Collisions collision = this.checkCollisions(playerOne, playerTwo);
 		this.move();
-		System.out.println("Collision enum: " + collision);
+		Collisions collision = this.checkCollisions(playerOne, playerTwo);
 		return collision;
 		
 	}
