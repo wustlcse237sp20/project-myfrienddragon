@@ -207,6 +207,7 @@ public class ProjectPlayer implements Player {
 	}
 	public void update(Ball ball, RealPlayer player, Collisions collision) {
 		this.redoPrediction(ball, player);
+		this.checkScoreUpdate(collision);
 	}
 	public double getWidth() {
 		// TODO Auto-generated method stub

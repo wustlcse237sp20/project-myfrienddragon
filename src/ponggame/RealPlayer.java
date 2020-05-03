@@ -23,7 +23,7 @@ public class RealPlayer implements Player {
 		this.playerNumber = playerNumber;
 		this.score= 0;
 		this.height = 20;
-		this.width = 2;
+		this.width = 10;
 		this.upKeyCode=0;
 		this.downKeyCode=0;
 		this.setKeyCodes();

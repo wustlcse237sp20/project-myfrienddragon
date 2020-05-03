@@ -8,7 +8,7 @@ import edu.princeton.cs.introcs.StdDraw;
 
 public class PongGame {
 	RealPlayer playerOne;
-	ProjectPlayer playerTwo;
+	Player playerTwo;
 	Ball ball;
 	boolean gameInProgress;
 	boolean playerWins;
@@ -48,15 +48,21 @@ public void setUpGameScreen() {
 	StdDraw.enableDoubleBuffering();
 }
 public void drawPlayerPaddle() {
-	StdDraw.filledRectangle(player.getxPos(), player.getyPos(), player.getWidth(), player.getHeight());
+	StdDraw.filledRectangle(playerOne.getxPos(), playerOne.getyPos(), playerOne.getWidth(), playerOne.getHeight());
 	
 }
 public void drawAIPaddle() {
-	StdDraw.filledRectangle(AIplayer.getxPos(), AIplayer.getyPos(), AIplayer.getWidth(), AIplayer.getHeight());
+	StdDraw.filledRectangle(playerTwo.getxPos(), playerTwo.getyPos(), playerTwo.getWidth(), playerTwo.getHeight());
 	
 }
 public void drawBall() {
 	StdDraw.filledCircle(ball.getxPos(), ball.getyPos(), ball.radius);
+}
+public void drawScoreBoard() {
+	StdDraw.rectangle(50, 15, 50, 15);
+	StdDraw.rectangle(350, 15, 50, 15);
+	StdDraw.text(50, 15, "Score: " + playerOne.getScore());
+	StdDraw.text(350, 15, "Score: " + playerTwo.getScore());
 }
 
 public void update() {
@@ -138,13 +144,14 @@ public void drawGame() {
 	this.drawPlayerPaddle();
 	this.drawBall();
 	this.drawAIPaddle();
+	this.drawScoreBoard();
 	StdDraw.show();
-	StdDraw.pause(66);
+	StdDraw.pause(33);
 	
 }
 
 public void playGame() {
-	playerOne = new RealPlayer();
+	playerOne = new RealPlayer(50,200,1);
 	ball = new Ball();
 	playerWins= false;
 	gameInProgress=true;
@@ -160,6 +167,7 @@ public void playGame() {
 public int resetGame() {
 	PongGame game = new PongGame();
 	game.setUpGameScreen();
+	game.setUpOneorTwoPlayer();
 	game.playGame();
 	if (returnToMenu) {
 		return foodEarned;
