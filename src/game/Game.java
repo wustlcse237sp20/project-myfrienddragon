@@ -19,6 +19,7 @@ public class Game {
 	GameOverScreen gameOverScreen;
 	Interactions interactionLevel;
 	int iterCount;
+	int gameCount;
 	GameMenuInteractions menuInteractionLevel;
 	
 	public void setUpScreen() {
@@ -29,7 +30,10 @@ public class Game {
 	}
 
 		
-	
+	public void resetInteraction() {
+		interactionLevel = Interactions.wait;
+		
+	}
 	public void switchEntity() {
 	if (interactionLevel == Interactions.evolve && entity == dragon) {
 		if (frame == 1) {
@@ -40,7 +44,9 @@ public class Game {
 	}
 		else if (interactionLevel == Interactions.game) {
 			entity = gameMenu;
-
+		}
+		else if(interactionLevel==Interactions.pong && gameCount ==1) {
+			this.checkBaseInteraction();
 		}
 		else if (interactionLevel == Interactions.back) {
 			StdDraw.clear();
@@ -92,9 +98,13 @@ if (entity == dragon) {
 			if (clicked == true && !StdDraw.isMousePressed()) {
 					clicked = false;
 					 interactionLevel = entity.checkInteraction(mouseX, mouseY);
-					if (interactionLevel != Interactions.idle && interactionLevel != Interactions.wait) {
+					if (interactionLevel != Interactions.idle || interactionLevel != Interactions.wait) {
 						frame = 0;
 					}
+					if (interactionLevel == Interactions.pong || interactionLevel == Interactions.invaders) {
+						gameCount = 0;
+					}
+					
 				}
 			System.out.println("Interaction level: " + interactionLevel);
 			System.out.println("Current entity in renewInteractions: " + entity.toString());
@@ -115,6 +125,7 @@ if (entity == dragon) {
 		interactionLevel = Interactions.idle;
 		iterCount = 0;
 		gameInProgress = true;
+		gameCount = 0;
 		while (gameInProgress){
 			if (frame == 30) {
 				this.checkBaseInteraction();

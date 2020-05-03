@@ -11,5 +11,6 @@ public enum Interactions {
 		invaders,
 		back,
 		gameover,
-		restart
+		restart,
+		none
 }

@@ -43,8 +43,8 @@ public class GameMenu implements GameEntity {
 		}
 		if (interactionLevel == Interactions.pong) {
 			PongGame game = new PongGame();
-			game.resetGame();
-	
+			int food = game.playGame();
+			interactionLevel = Interactions.wait;
 		}
 		if (interactionLevel == Interactions.back) {
 			
