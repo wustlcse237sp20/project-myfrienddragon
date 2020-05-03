@@ -1,5 +1,6 @@
 package SpaceInvaders;
 
+import java.awt.Color;
 import java.awt.Font;
 
 import java.util.Iterator;
@@ -64,7 +65,7 @@ public class GameBoard {
 	}
 	
 	private boolean gameOver() {
-		if(fleet.getInvaders().size() == 0 || player.getHealth()==0) {
+		if(fleet.getInvaders().size() == 0 ) {
 			return true;
 		}
 		else { 
@@ -73,23 +74,25 @@ public class GameBoard {
 	}
 	
 	private void endGame() {
-		displayCongratsMessage();
 		displayButtons();
+		displayCongratsMessage();
 	}
 	
 	private void displayButtons() {
-		Font font = new Font("Courier", Font.PLAIN, 14);
-		StdDraw.setFont(font);
-		StdDraw.rectangle(120, 190, 45, 25);
-		StdDraw.text(120, 190, "Play again");
-		StdDraw.rectangle(280, 190, 45, 25);
-		StdDraw.text(280, 190, "Main game");
+		Color pinkColor = new Color(255, 204, 250);
+		StdDraw.setPenColor(pinkColor);
+		StdDraw.filledRectangle(200, 225, 200, 25);
+		StdDraw.filledRectangle(200, 300, 200, 25);
+		StdDraw.setPenColor(Color.black);
+		StdDraw.setFont();
+		StdDraw.text(200, 225, "Play again");
+		StdDraw.text(200, 300, "Main game");
 	}
 	
 	private void displayCongratsMessage() {
-		Font font = new Font("Courier", Font.BOLD, 24);
+		Font font = new Font("Arial", Font.BOLD, 24);
 		StdDraw.setFont(font);
-		StdDraw.text(200, 275, "Congrats you won!");
+		StdDraw.text(200, 350, "Congrats you won!");
 	}
 	
 	private void fieldUpdates() {
@@ -99,6 +102,7 @@ public class GameBoard {
 		updateScore();
 		updateHealthDisplay();
 	}
+	
 	private String updateHealthDisplay() {
 		String healthBarPath = " ";
 		if (player.getHealth() == 100) {

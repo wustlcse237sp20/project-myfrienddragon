@@ -6,9 +6,8 @@ import java.util.Iterator;
 public class Fleet {
 	private ArrayList<Invader> invaders;
 	private ArrayList<SpaceInvaderBullet> bullets;
-	private int numInvadersDestroyed;
 	private final static int numInvadersPerRow = 8; 
-	int numDestroyed;
+	private int numDestroyed;
 
 	public Fleet() {
 		invaders = new ArrayList<Invader>();
@@ -55,14 +54,12 @@ public class Fleet {
 		Iterator<Invader> invaderIterator = invaders.iterator(); 
 		while (invaderIterator.hasNext()) {
 			Invader invader = invaderIterator.next();
-			invader.update(dragonBullets);
-			if(!invader.isAlive()) {
+			if(invader.isHit(dragonBullets)) {
 					invaderIterator.remove();
 					this.numDestroyed++;
 				
 				}	
 		}
-			
 		Iterator<SpaceInvaderBullet> bulletIterator = bullets.iterator();
 		while (bulletIterator.hasNext()) {
 			SpaceInvaderBullet bullet = bulletIterator.next();
@@ -76,12 +73,9 @@ public class Fleet {
 	public ArrayList<Invader> getInvaders() {
 		return invaders;
 	}
+	
 	public ArrayList<SpaceInvaderBullet> getBullets() {
 		return bullets;
-	}
-	
-	public int getNumInvadersDestroyed() {
-		return numInvadersDestroyed;
 	}
 
 	public Invader getInvader(int i) {

@@ -90,12 +90,12 @@ if (entity == dragon) {
 				 mouseY = StdDraw.mouseY();
 			}
 			if (clicked == true && !StdDraw.isMousePressed()) {
-					clicked = false;
-					 interactionLevel = entity.checkInteraction(mouseX, mouseY);
-					if (interactionLevel != Interactions.idle && interactionLevel != Interactions.wait) {
-						frame = 0;
-					}
+				clicked = false;
+				interactionLevel = entity.checkInteraction(mouseX, mouseY);
+				if (interactionLevel != Interactions.idle && interactionLevel != Interactions.wait) {
+					frame = 0;
 				}
+			}
 			System.out.println("Interaction level: " + interactionLevel);
 			System.out.println("Current entity in renewInteractions: " + entity.toString());
 			return interactionLevel;

@@ -83,23 +83,18 @@ public class Invader implements Sprite {
 		return this.SpaceInvaderTile;
 	}
 	
-	public void update(DragonBulletCollection dragonBullets) {
+	public boolean isHit(DragonBulletCollection dragonBullets) {
 		Iterator<DragonBullet> bulletIterator = dragonBullets.getBullets().iterator();
-		this.animationTrackerFrame+=1;
-		if (this.animationTrackerFrame==16) {
-			this.animationTrackerFrame=0;
-		}
         while (bulletIterator.hasNext()) {
         	DragonBullet bullet = bulletIterator.next();
         	HitBoxTile bulletHitBox = bullet.getHitBox();
         	boolean collided = bulletHitBox.isColliding(this.getHitBox());
         		if (collided) {
         			bullet.hurt();
-        			this.hurt();
-        			animationTrackerFrame = 0;
-        		}		
+        			return true;	
+        		}
         }
-        this.destroy();
+        return false;
 	}
 
 	@Override
