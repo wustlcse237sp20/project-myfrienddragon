@@ -3,6 +3,7 @@ package game;
 import SpaceInvaders.GameBoard;
 import animations.UIAnimations;
 import edu.princeton.cs.introcs.StdDraw;
+import ponggame.PongGame;
 
 public class GameMenu implements GameEntity {
 	
@@ -11,7 +12,7 @@ public class GameMenu implements GameEntity {
 		
 	}
 	
-	public void drawGameMenu(int frame) {
+	public void drawGameMenu() {
 		UIAnimations.drawGameMenu();	
 	}
 	
@@ -34,25 +35,28 @@ public class GameMenu implements GameEntity {
 
 	@Override
 	public void update(Interactions interactionLevel, int frame) {
+		this.drawGameMenu();
 		if (interactionLevel == Interactions.invaders) {
 			GameBoard game = new GameBoard();
 			game.setUpGame();
 			game.playGame();
 			
 		}
+		if (interactionLevel == Interactions.pong) {
+			PongGame game = new PongGame();
+			int foodReturned = game.resetGame();
+			System.out.println("Returned food to menu ");
+		}
 		if (interactionLevel == Interactions.back) {
 			
 			
 		}
-		if (interactionLevel == Interactions.wait)
-		this.drawGameMenu(frame);
+		if (interactionLevel == Interactions.wait) {
+			this.drawGameMenu();
+		}
 		
-	}
+}
 	
 
-	
-	
-	
-	
 
 }

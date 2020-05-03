@@ -96,8 +96,6 @@ if (entity == dragon) {
 						frame = 0;
 					}
 				}
-			System.out.println("Interaction level: " + interactionLevel);
-			System.out.println("Current entity in renewInteractions: " + entity.toString());
 			return interactionLevel;
 		}
 	
@@ -118,13 +116,11 @@ if (entity == dragon) {
 		while (gameInProgress){
 			if (frame == 30) {
 				this.checkBaseInteraction();
-				System.out.println("Current entity: " + this.entity.toString());
 				frame = 0;
 				iterCount+=1;
 				StdDraw.clear();
 			}
 			frame++;
-			System.out.println("current dragon: " + dragon.toString());
 			interactionLevel = this.renewInteraction();
 		    if (entity == dragon) {
 			DragonAnimation.drawLifeBars(dragon);

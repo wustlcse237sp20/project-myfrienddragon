@@ -119,10 +119,6 @@ public class Egg implements Dragon, GameEntity {
 				 this.pet();
 			 }
 		 }
-		 if (interactionValue == Interactions.game) {
-			 GameMenu gameMenu = new GameMenu();
-			 gameMenu.drawGameMenu(frame);
-		 }
 	 }
 }
 

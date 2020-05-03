@@ -116,7 +116,7 @@ public class Baby implements Dragon, GameEntity {
 			if (frame == 0) {
 				this.pet();
 			}
-		}	
+		}
 	}
 	
 }
