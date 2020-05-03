@@ -7,15 +7,18 @@ import java.util.Iterator;
 
 
 import edu.princeton.cs.introcs.StdDraw;
+import game.Interactions;
 
 //main game class. aggregates functions from other classes to create game
 public class GameBoard {
 	int score;
 	int frameCounter;
 	int spawnCounter;
+	boolean exitGame;
 	Player player;
 	Fleet fleet;
 	DragonBulletCollection dragonBullets;
+	
 	
 	public void setUpGame() {
 		setUpBoard();
@@ -42,26 +45,30 @@ public class GameBoard {
 
 
 	public void playGame() {
-		while (gameOver() == false){
-			//randomly shoot bullets every couple seconds
-			if (frameCounter % 20 == 0) {
-				fleet.shootBullets();	
-			}
-			//spawn new row of invaders every 10 seconds
-			if (frameCounter == 300) {
-				fleet.addRowOfInvaders();
-				frameCounter = 0;
-			}
-			//spawn new row of invaders every 10 seconds
-			frameCounter++;
-			this.fieldUpdates();
+		while (InvaderMenu.exit == false){
+			while (gameOver() == false) {
+				//randomly shoot bullets every couple seconds
+				if (frameCounter % 20 == 0) {
+					fleet.shootBullets();	
+				}
+				//spawn new row of invaders every 10 seconds
+				if (frameCounter == 300) {
+					fleet.addRowOfInvaders();
+					frameCounter = 0;
+				}
+				//spawn new row of invaders every 10 seconds
+				frameCounter++;
+				this.fieldUpdates();
+				StdDraw.clear();
+				this.drawSprites();
+				StdDraw.show();
+				StdDraw.pause(66);
+			}	
 			StdDraw.clear();
-			this.drawSprites();
+			InvaderMenu.endGame();
 			StdDraw.show();
-			StdDraw.pause(66);
+			InvaderMenu.checkInteraction();
 		}
-		endGame();
-		StdDraw.show();
 	}
 	
 	private boolean gameOver() {
@@ -73,27 +80,6 @@ public class GameBoard {
 		}
 	}
 	
-	private void endGame() {
-		displayButtons();
-		displayCongratsMessage();
-	}
-	
-	private void displayButtons() {
-		Color pinkColor = new Color(255, 204, 250);
-		StdDraw.setPenColor(pinkColor);
-		StdDraw.filledRectangle(200, 225, 200, 25);
-		StdDraw.filledRectangle(200, 300, 200, 25);
-		StdDraw.setPenColor(Color.black);
-		StdDraw.setFont();
-		StdDraw.text(200, 225, "Play again");
-		StdDraw.text(200, 300, "Main game");
-	}
-	
-	private void displayCongratsMessage() {
-		Font font = new Font("Arial", Font.BOLD, 24);
-		StdDraw.setFont(font);
-		StdDraw.text(200, 350, "Congrats you won!");
-	}
 	
 	private void fieldUpdates() {
 		player.updatePlayer(dragonBullets, fleet);
