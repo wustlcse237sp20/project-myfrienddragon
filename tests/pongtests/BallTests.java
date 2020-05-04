@@ -33,27 +33,24 @@ public class BallTests {
 	@Test
 	void testReboundBallOfMinY() {
 		ball.setyPos(ball.getMinYLimit());
-		assertEquals(ball.reboundBallOffMinY(), Collisions.BOTTOM_WALL);
+		assertEquals(ball.checkWallCollison(), Collisions.BOTTOM_WALL);
 	}
 	
 	@Test
 	void testReboundBallOfMaxY() {
 		ball.setyPos(ball.getMaxYLimit());
-		
-		assertEquals(ball.reboundBallOffMaxY(), Collisions.TOP_WALL);
+		assertEquals(ball.checkWallCollison(), Collisions.TOP_WALL);
 	}
 	
 	@Test
 	void testReboundBallOfMinX() {
 		ball.setxPos(ball.getMinXLimit());
-		
-		assertEquals(ball.reboundBallOffMinX(), Collisions.LEFT_WALL);
+		assertEquals(ball.checkWallCollison(), Collisions.LEFT_WALL);
 	}
 	
 	@Test
 	void testReboundBallOfMaxX() {
 		ball.setxPos(ball.getMaxXLimit());
-		
 		assertEquals(ball.checkWallCollison(), Collisions.RIGHT_WALL);
 	}
 }
