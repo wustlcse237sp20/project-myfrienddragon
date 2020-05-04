@@ -1,5 +1,5 @@
 # CSE237 - My Friend Dragon#
-By: Julia Smith, Katrina Ragbeer, Matthew Alexander, and Shahd Alyasiry
+By: Julia Smith, Katrina Ragbeer, Matthew Alexander
 
 # How to Run From Command Line#
 From the project repository directory, type the following into the command line:
@@ -56,7 +56,7 @@ the UI is redrawing every few milliseconds, and will look into making the shots 
 
 5) One test player reported that the game intermittently stopped taking keyboard input for seemingly no common circumstance. While none of us experienced this issue ourselves, you may experience it. We will be fixing it next iteration.
 
-### Next Iteration
+### Next Iteration ###
 
 For the next iteration, in addition to correcting the preidentified bugs, 
 1) We plan to integrate the Space Invaders game with our full game. To do this, we will create a menu that is visible from the main screen. From there, the user can select the game they would like to play. 
@@ -70,4 +70,92 @@ For the next iteration, in addition to correcting the preidentified bugs,
 5) We plan to implement minor UI improvements to the base game, including a food and love bar and an intermediate animation when the dragon evolves to the next state of life.
 
 6) We plan to implement continuous keyboard input so that the player does not have to keep tapping keys over and over again in Space Invaders.
+
+## Iteration 3 ##
+
+### Implemented stories: ###
+--Implemented menu manager so game now follows a design pattern and can exchange between screens. Dragon now has food tracking and established food and love state.
+
+--Implemented QOL improvements, so space invader now takes continuous input and dragon has health and love bars. Space Invaders game now has shoot debouncer.
+
+--Implemented pong (more similar to table tennis, frankly) minigame.
+
+### Dragon Main Section How To Play ###
+Pet your dragon and play minigames with it to earn food. Feed it and love it and watch it grow!
+
+#### Outstanding GameManager Bugs ####
+
+--If you play a minigame and go back to the main menu, and then go to another minigame and play, the game may crash.
+
+#### Dragon Main Section Known Bugs ####
+
+--Upon clicking the minigame menu, the egg/dragon will disappear for a second before rendering the new menu. We like to think of it as the dragon leaving with you to play.
+
+--Upon feeding your dragon your last piece of food, only half of the eating animation may only play.
+
+--Upon reaching the game over state, the dragon will disappear for a moment before rendering the game over menu.
+
+--If you try to feed your dragon a piece of food without having any, the animation may take a few seconds to restart. It's no good to taunt your dragon.
+
+
+
+
+### Invaders How To Play ###
+
+Press the left and right arrow keys to move. Press spacebar to shoot bullets.
+
+#### Invaders Known Bugs ####
+
+-The animation for the player being damaged may fail to play. No one can figure out what causes this.
+
+-The player (might?) be able to score double points while hitting the space invader during its explosion animation, causing the explosion to play twice, as well.
+
+-The game may crash under unknown conditions after the user ends the game.
+
+-The game takes a moment to switch from the end of game state to the game menu, creating a blank scene for a second or so.
+
+### Pong (more like table tennis) How To Play ###
+You can choose between one and two player:
+
+One player: Press the w and s keys to move your racket up or down.
+
+Two Player: Player One presses w and s keys, while Player Two uses p and l keys.
+
+#### Pong Known Bugs ####
+
+-Some test players have reported a rare bug in which the ball used to make the AI prediction oscillates forever between two values, crashing the game.
+
+-Some test players have reported a bug in which the ball gets stuck between the backside of the racket and the wall, causing the unforunate other player to lose.
+
+-Some test players have reported the ball going through the paddle.
+
+-Like the other games, the game over screen takes a second to load, causing a blank screen for a second or so.
+
+
+### Where To Go From Here ###
+
+-Fix minor animation issues with switching in between menus.
+
+-Add tetris-like or candy-crush like game.
+
+-Switch minigames to dedicated Java game library/framework to improve performance and physics.
+
+-Add more advanced physics to the pong game.
+
+-Improve animations to be more expressive and respond more lively-like.
+
+-Adding clothes and accessories to the game.
+
+-Adding drag-and-drop food and pet hand.
+
+--Implementing dragon tracker function that tracks food or pet hand around screen.
+
+--Implementing different dragon colors, genders, and personalities.
+
+--Implementing different levels and higher difficulties in space invaders.
+
+
+
+
+
 
