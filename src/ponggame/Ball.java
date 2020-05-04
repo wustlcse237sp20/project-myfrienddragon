@@ -133,9 +133,7 @@ public class Ball {
 			this.yPos = this.minYLimit+radius;
 			this.yDir=-1*this.yDir;
 			return Collisions.BOTTOM_WALL;
-			
 		}
-	
 		
 	
 	public Collisions reboundBallOffMaxY() {
@@ -224,27 +222,30 @@ public class Ball {
 		Collisions collision = this.PlayerOnePaddleCollision(playerOne);
 		collision = this.PlayerTwoPaddleCollision(playerTwo);
 		//aggregate checker function that checks collision conditions and calls rebound functions accordingly
-	if (collision == Collisions.NONE) {
-		if (this.yPos <= this.minYLimit) {
-			collision = this.reboundBallOffMinY();
+		if (collision == Collisions.NONE) {
+			collision = checkWallCollison();
 		}
-		else if (this.yPos >= this.maxYLimit) {
-			collision = this.reboundBallOffMaxY();
-       	}
-		else if (this.xPos < this.minXLimit || (this.yPos < this.minYLimit && this.xPos < this.minXLimit)) {
-			collision = this.reboundBallOffMinX();
-		}
-		else if(this.xPos > this.maxXLimit|| (this.yPos > this.maxYLimit && this.xPos > this.maxXLimit)) {
-			collision = this.reboundBallOffMaxX();
-		}
-		else {
-			collision = Collisions.NONE;
-		}
-	
-	}
 	return collision;
 	
 		
+	}
+	
+	public Collisions checkWallCollison() {
+			if (this.yPos <= this.minYLimit) {
+				return this.reboundBallOffMinY();
+			}
+			else if (this.yPos >= this.maxYLimit) {
+				return this.reboundBallOffMaxY();
+	       	}
+			else if (this.xPos <= this.minXLimit) {
+				return this.reboundBallOffMinX();
+			}
+			else if(this.xPos >= this.maxXLimit) {
+				return this.reboundBallOffMaxX();
+			}
+			else {
+				return Collisions.NONE;
+			}
 	}
 
 
