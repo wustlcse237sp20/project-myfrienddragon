@@ -55,18 +55,20 @@ class FleetTests {
 	@Test
 	void testInvaderUpdateRemoval() {
 		fleet.spawnInvaders();
+		int frame = 0;
 		Invader invader = fleet.getInvader(0);
 		DragonBulletCollection collection = new DragonBulletCollection();
 		invader.hurt();
-		fleet.update(collection);
+		fleet.update(collection,frame);
 		assertEquals(invaders.size(), 8); 
 	}
 	
 	@Test
 	void testLivingInvaderUpdate() {
 		fleet.spawnInvaders();
+		int frame = 0;
 		DragonBulletCollection collection = new DragonBulletCollection();
-		fleet.update(collection);
+		fleet.update(collection, frame);
 		assertEquals(invaders.size(), 9); 
 	}
 	
@@ -79,7 +81,8 @@ class FleetTests {
 		SpaceInvaderBullet bullet = bullets.get(0);
 		DragonBulletCollection collection = new DragonBulletCollection();
 		bullet.hurt();
-		fleet.update(collection);
+		int frame = 0;
+		fleet.update(collection, frame);
 		assertEquals(bullets.size(), 0); 
 	
 		
@@ -91,7 +94,8 @@ class FleetTests {
 		fleet.addRowOfInvaders();
 		fleet.shootBullets();
 		DragonBulletCollection collection = new DragonBulletCollection();
-		fleet.update(collection);
+		int frame = 0;
+		fleet.update(collection,frame);
 		assertEquals(bullets.size(), 1); 
 	}
 	
