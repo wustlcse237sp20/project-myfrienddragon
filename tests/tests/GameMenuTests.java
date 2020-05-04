@@ -1,28 +1,49 @@
-package game;
+package tests;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+import org.junit.jupiter.api.Test;
 
 import SpaceInvaders.GameBoard;
-import animations.DragonAnimation;
 import animations.UIAnimations;
 import edu.princeton.cs.introcs.StdDraw;
+import game.GameMenu;
+import game.GameMenuInteractions;
+import game.Interactions;
 import game_abstractions.GameManager;
 import game_abstractions.GameScene;
 import ponggame.PongGame;
+import tests.GameTest.DummyGame;
+import tests.GameTest.dummyManager;
 
-public class GameMenu extends GameScene {
+class GameMenuTests {
+class DummyGameMenu extends GameMenu {
 	double mouseX;
 	double mouseY;
 	boolean clicked;
 	GameMenuInteractions interactionLevel;
 	int frame;
 	
+	@Test
+	void onClickIdleTest() {
+		GameManager manager = new GameManager();
+		DummyGameMenu game = new DummyGameMenu(manager, null);
+		game.clicked = true;
+		game.mouseX = 395;
+		game.mouseY = 395;
+		GameMenuInteractions result = game.renewInteraction();
+		GameMenuInteractions tester = GameMenuInteractions.wait;
+		assertEquals(result, tester);
+	}
+
 	
-	public GameMenu(GameManager manager, GameScene parent) {
+	
+	public DummyGameMenu(GameManager manager, GameScene parent) {
 		super(manager, parent);
 		this.mouseX=0;
 		this.mouseY=0;
 		clicked = false;
 		frame = 0;
-		
 	}
 
 	public void drawGameMenu() {
@@ -43,6 +64,7 @@ public class GameMenu extends GameScene {
 				}
 				
 			}
+		System.out.println("Interaction level: " + interactionLevel);
 		return interactionLevel;
 	}
 
@@ -89,9 +111,11 @@ public class GameMenu extends GameScene {
 			StdDraw.clear();
 		}
 		frame++;
+		System.out.println(frame);
 		interactionLevel = this.renewInteraction();
 		this.respondToInteraction(interactionLevel, frame);
 		}
 	}
-	
+}
+
 

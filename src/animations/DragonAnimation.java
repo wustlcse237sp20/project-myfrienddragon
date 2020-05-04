@@ -6,10 +6,7 @@ import edu.princeton.cs.introcs.StdDraw;
 import game.Dragon;
 
 //class puts resources into animation functions for the dragon
-
-
 public class DragonAnimation {
-
 
 	public static void drawLifeBars(Dragon d) {
 		drawFoodBar(d);
@@ -58,7 +55,7 @@ public class DragonAnimation {
 		}
 	}
 
-	//Animation for egg idling (default egg animation)
+	// EGG ANIMATIONS
 	public static void eggIdle(int frameCounter) {
 		if (frameCounter > 0 && frameCounter < 14 ) {
 			StdDraw.picture(200,  200, "dragon_resources/egg/egg_idle_1.png");
@@ -66,10 +63,8 @@ public class DragonAnimation {
 		else if (frameCounter > 13 && frameCounter < 30 ) {
 			StdDraw.picture(200, 200 , "dragon_resources/egg/egg_idle_2.png");
 		}
-
 	}
 
-	//Animation for egg eating
 	public static void eggEat(int frameCounter) {
 		if (frameCounter > 0 && frameCounter < 14) {
 			StdDraw.picture(200,  200, "dragon_resources/egg/egg_eat_1.png");
@@ -79,7 +74,6 @@ public class DragonAnimation {
 		}
 	}
 
-	//Animation for egg being pet
 	public static void eggPet(int frameCounter) {
 		if (frameCounter > 0 && frameCounter < 14) {
 			StdDraw.picture(200,  200, "dragon_resources/egg/egg_pet_1.png");
@@ -89,7 +83,7 @@ public class DragonAnimation {
 		}
 	}
 
-	//Animation for baby idling (default baby animation)
+	// BABY ANIMATIONS
 	public static void babyIdle(int frameCounter) {
 		if (frameCounter > 0 && frameCounter < 14) {
 			StdDraw.picture(200,  200, "dragon_resources/infant/baby_idle_1.png");
@@ -99,7 +93,6 @@ public class DragonAnimation {
 		}
 	}
 
-	//Animation for baby eating
 	public static void babyEat(int frameCounter) {
 		if (frameCounter > 0 && frameCounter < 14) {
 			StdDraw.picture(200,  200, "dragon_resources/infant/baby_eating_1.png");
@@ -118,7 +111,7 @@ public class DragonAnimation {
 		}
 	}
 
-	//Animation for adult idling (default adult animation)
+	// ADULT ANIMATIONS
 	public static void adultIdle(int frameCounter) {
 		if (frameCounter > 0 && frameCounter < 14) {
 			StdDraw.picture(200,  200, "dragon_resources/adult/adult_idle_1.png");
@@ -128,7 +121,6 @@ public class DragonAnimation {
 		}
 	}
 
-	//Animation for adult eating
 	public static void adultEat(int frameCounter) {
 		if (frameCounter > 0 && frameCounter < 14) {
 			StdDraw.picture(200,  200, "dragon_resources/adult/adult_eating_1.png");
@@ -138,7 +130,6 @@ public class DragonAnimation {
 		}
 	}
 
-	//Animation for adult being pet
 	public static void adultPet(int frameCounter) {
 		if (frameCounter > 0 && frameCounter < 14) {
 			StdDraw.picture(200,  200, "dragon_resources/adult/adult_pet_1.png");
@@ -156,20 +147,25 @@ public class DragonAnimation {
 		StdDraw.text(200, 350, "Your dragon is evolving into a new form!");
 		if (frameCounter > 0 && frameCounter < 6) {
 			StdDraw.picture(200,200, "dragon_resources/sparkle-frame-1.png");
+			System.out.println("Playing 1st frame of evolve anim");
 		}
 		else if (frameCounter > 6 && frameCounter < 12) {
 			StdDraw.picture(200,200, "dragon_resources/sparkle-frame-2.png");
+			System.out.println("Playing 2nd frame of evolve anim");
 		}
 		else if (frameCounter > 12 && frameCounter < 18) {
 			StdDraw.picture(200,200, "dragon_resources/sparkle-frame-3.png");
+			System.out.println("Playing 3rd frame of evolve anim");
 		}
 		else if (frameCounter > 18 && frameCounter < 24) {
 			StdDraw.picture(200,200, "dragon_resources/sparkle-frame-4.png");
+			System.out.println("Playing 4th frame of evolve anim");
 		}
 		else if (frameCounter > 24 && frameCounter < 30) {
 			StdDraw.picture(200,200, "dragon_resources/sparkle-frame-5.png");
+			System.out.println("Playing 5th frame of evolve anim");
 		}
 	}
-	
+
 }
 

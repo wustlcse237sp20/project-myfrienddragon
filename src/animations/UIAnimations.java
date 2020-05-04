@@ -7,9 +7,8 @@ import edu.princeton.cs.introcs.StdDraw;
 import game.Dragon;
 
 public class UIAnimations {
-	
-	public static void redrawUI(int amountOfFood) {
 
+	public static void redrawUI(int amountOfFood) {
 		Color pinkColor = new Color(255, 204, 250);
 		StdDraw.setPenColor(pinkColor);
 		StdDraw.filledRectangle(0, 0, 400, 75);
@@ -22,7 +21,7 @@ public class UIAnimations {
 		StdDraw.setFont();
 		StdDraw.picture(370, 40, "interface_resources/cursor_hand.png",60, 60);
 	}
-	
+
 	public static void drawGameMenu() {
 		StdDraw.clear();
 		Color pinkColor = new Color(255, 204, 250);
@@ -38,10 +37,8 @@ public class UIAnimations {
 		StdDraw.text(200, 300, "Play Space Invaders");
 		StdDraw.text(200, 225, "Play Pong");
 		StdDraw.text(200, 50, "Back to game");
-		
-		
 	}
-	
+
 	public static void drawGameOverScreen() {
 		StdDraw.clear();
 		StdDraw.text(200, 200, "Congratulations!");

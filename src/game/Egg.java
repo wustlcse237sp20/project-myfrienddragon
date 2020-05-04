@@ -2,17 +2,22 @@ package game;
 
 import animations.DragonAnimation;
 
-public class Egg implements Dragon, GameEntity {
+
+public class Egg implements Dragon{
 
 	public int foodLevel;
 	public int loveLevel;
 	public int age;
+	int fullFood;
+	int fullHealth;
 	public FoodInventory foodInventory;
 
 	public Egg(FoodInventory foodInventory) {
 		this.foodLevel = 0;
 		this.loveLevel = 0;
 		this.age = 0;
+		this.fullFood = 20;
+		this.fullHealth=20;
 		this.foodInventory=foodInventory;
 	}
 	public int getAge() {
@@ -36,7 +41,7 @@ public class Egg implements Dragon, GameEntity {
 
 	public int feed() {
 		if (this.foodLevel < 100 && this.foodInventory.getFoodAmount() > 0) {
-			this.foodLevel += 5;
+			this.foodLevel += 20;
 			this.foodInventory.removeFood();
 		}
 		return this.foodLevel;
@@ -48,7 +53,7 @@ public class Egg implements Dragon, GameEntity {
 	}
 	
 	public boolean willAge() {
-		if (this.foodLevel == 100 && this.loveLevel == 100) {
+		if (this.foodLevel == fullFood && this.loveLevel == fullHealth ) {
 			return true;
 		}
 		return false;
@@ -72,42 +77,24 @@ public class Egg implements Dragon, GameEntity {
 	public void animateEvolve(int frame) {
 		DragonAnimation.evolve(frame);
 	}
-	
+	public void updateFoodStore(int foodToAdd) {
+		this.foodInventory.addFood(foodToAdd);
+	}
 
 	/**
 	 * returns an interaction based on where the user clicked
 	 */
-	@Override
-	public Interactions checkInteraction(double mouseX, double mouseY) {
-		if (this.willAge()) {
-			return Interactions.evolve;
-		}
-		if ((mouseX > 0 && mouseX < 85) && (mouseY > 20 && mouseY < 100)) {
-			return Interactions.game;
-
-		}
-		if ((mouseX > 175 && mouseX< 250) && (mouseY > 20 && mouseY<100)) {
-			return Interactions.feed;
-		}
-		if ((mouseX >350 && mouseX < 410 ) && (mouseY > 20 && mouseY < 100)) {
-			return Interactions.pet;
-		}
-		else {
-			return Interactions.idle;
-		}
-	}
+	
 
 	/**
 	 * displays the proper animation updates the dragon based on user interaction
-	 */	@Override
+	 */	
+
 	 public void update(Interactions interactionValue, int frame) {
-		 if (interactionValue == Interactions.evolve) {
-			 this.animateEvolve(frame);
-		 }
 		 if (interactionValue ==  Interactions.idle) {
 			 this.animateIdle(frame);
 		 }
-		 if (interactionValue == Interactions.feed) {
+		 if (interactionValue == Interactions.feed && this.foodInventory.getFoodAmount() > 0) {
 			 this.animateFeed(frame);
 			 if (frame == 0) {
 				 this.feed();
@@ -119,11 +106,12 @@ public class Egg implements Dragon, GameEntity {
 				 this.pet();
 			 }
 		 }
-		 if (interactionValue == Interactions.game) {
-			 GameMenu gameMenu = new GameMenu();
-			 gameMenu.drawGameMenu(frame);
-		 }
 	 }
+
+	@Override
+	public FoodInventory getFoodStore() {
+		return this.foodInventory;
+	}
 }
 
 

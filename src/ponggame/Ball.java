@@ -14,7 +14,6 @@ public class Ball {
 	double minXLimit;
 	double maxYLimit;
 	double maxXLimit;
-	double angle;
 	final double screenWidth = 395;
 	final double screenHeight= 395;
 	boolean changedDir;
@@ -23,13 +22,12 @@ public class Ball {
 		this.yPos = 350*Math.random();
 		this.speed = (6)*Math.random()+5;
 		this.radius = 5;
-		this.angle = 0;
 		this.minYLimit=this.screenHeight*(1/5)+speed;
 		this.minXLimit=radius+speed;
-		this.xDir=1;
-		this.yDir=1;
+		this.xDir=Math.signum(3*Math.random()-1);
+		this.yDir=Math.signum(3*Math.random()-1);
 		this.maxXLimit= screenWidth-radius-speed;
-		this.maxYLimit=screenHeight-radius-speed;
+		this.maxYLimit= screenHeight-radius-speed;
 
 	}
 	Ball(Ball ballA) {
@@ -129,6 +127,7 @@ public class Ball {
 
 	public Collisions reboundBallOffMinY() {
 			this.yPos = this.minYLimit+radius;
+			System.out.println("New y position: " +this.yPos);
 			this.yDir=-1*this.yDir;
 			return Collisions.BOTTOM_WALL;
 	}
@@ -166,21 +165,8 @@ public class Ball {
 		double playerOneBallYPrediction = (this.yPos)+((speed + radius)*this.yDir);
 		if ((playerOneBallXPrediction < player.getxPos() + player.getWidth()) && this.getxDir()==-1) {
 			if ((playerOneBallYPrediction <= playerPaddleTopY) && (playerOneBallYPrediction >= playerPaddleBottomY)) {
-//			if ((this.yPos-radius > playerPaddleBottomY) && this.yPos-radius < playerPaddleBottomY*0.33 ) {
-//				this.xDir=-1*this.xDir;
-//				this.yDir = -1*this.yDir;
-//				System.out.println("Bottom third player paddle");
-//			}
-//			if ((this.yPos - radius >= playerPaddleBottomY*0.33) && (this.yPos-radius < playerPaddleTopY * 0.66)) {
-//				this.xDir = -1*this.xDir;
-//				System.out.println("Middle third player paddle");
-//			}
-//			if ((this.yPos-radius >= playerPaddleTopY*0.66) && (this.yPos-radius < playerPaddleTopY)) {
-//				this.yDir = -1*this.xDir;
-//				this.xDir = -1*this.xDir;
-//				System.out.println("Top third player paddle");
-//			}
 			this.xDir=this.xDir*-1;
+			this.xPos += radius/2;
 			return Collisions.PLAYER_ONE_PADDLE;
 			}		
 		}
@@ -194,19 +180,8 @@ public class Ball {
 		double playerTwoBallYPrediction = (this.yPos)+((speed + radius)*this.yDir);
 		if ((playerTwoBallXPrediction > (playerTwo.getxPos() - playerTwo.getWidth())) && this.xDir==1) {
 		if ((playerTwoBallYPrediction <= playerPaddleTopY) && (playerTwoBallYPrediction >= playerPaddleBottomY)) {
-//			if ((ballPosWithPadding > playerPaddleBottomY) && ballPosWithPadding < playerPaddleBottomY*0.33 ) {
-//				this.xDir=-1*this.xDir;
-//				this.yDir = -1*this.yDir;
-//			}
-//			if ((this.yPos - radius >= playerPaddleBottomY*0.33) && (this.yPos-radius < playerPaddleTopY * 0.66)) {
-//				this.xDir = -1*this.xDir;
-//			}
-//			if ((this.yPos-radius >= playerPaddleTopY*0.66) && (this.yPos-radius < playerPaddleTopY)) {
-//				this.yDir = -1*this.xDir;
-//				this.xDir = -1*this.xDir;
-//			}
 			this.xDir = -1*xDir;
-			//ai.predictionCount=1;
+			this.xPos = this.xPos - radius/2;
 			return Collisions.PLAYER_TWO_PADDLE;
 		}
 	}
@@ -218,7 +193,6 @@ public class Ball {
 	public Collisions checkCollisions(RealPlayer playerOne, Player playerTwo) {
 		Collisions collision = this.PlayerOnePaddleCollision(playerOne);
 		collision = this.PlayerTwoPaddleCollision(playerTwo);
-		//aggregate checker function that checks collision conditions and calls rebound functions accordingly
 		if (collision == Collisions.NONE) {
 			collision = checkWallCollison();
 		}
@@ -228,36 +202,37 @@ public class Ball {
 	}
 	
 	public Collisions checkWallCollison() {
-			if (this.yPos <= this.minYLimit) {
-				return this.reboundBallOffMinY();
-			}
-			else if (this.yPos >= this.maxYLimit) {
-				return this.reboundBallOffMaxY();
-	       	}
-			else if (this.xPos <= this.minXLimit) {
-				return this.reboundBallOffMinX();
-			}
-			else if(this.xPos >= this.maxXLimit) {
-				return this.reboundBallOffMaxX();
-			}
-			else {
-				return Collisions.NONE;
-			}
+	if (collision == Collisions.NONE) {
+		if (this.yPos-radius<= this.minYLimit) {
+			collision = this.reboundBallOffMinY();
+		}
+		else if (this.yPos+radius >= this.maxYLimit) {
+			collision = this.reboundBallOffMaxY();
+       	}
+		else if (this.xPos-radius < this.minXLimit || (this.yPos < this.minYLimit && this.xPos < this.minXLimit)) {
+			collision = this.reboundBallOffMinX();
+		}
+		else if(this.xPos + radius > this.maxXLimit|| (this.yPos > this.maxYLimit && this.xPos > this.maxXLimit)) {
+			collision = this.reboundBallOffMaxX();
+		}
+		else {
+			collision = Collisions.NONE;
+		}
+	
 	}
+	return collision;
+}
 
 
 	//calls 
 	public void move() {
 		this.xPos = (this.xPos)+(this.speed*this.xDir);
 		this.yPos = (this.yPos)+(this.speed*this.yDir);
-	
-		
-		
 	}
 
 	public Collisions update(RealPlayer playerOne, Player playerTwo) {
-		this.move();
 		Collisions collision = this.checkCollisions(playerOne, playerTwo);
+		this.move();
 		return collision;
 		
 	}

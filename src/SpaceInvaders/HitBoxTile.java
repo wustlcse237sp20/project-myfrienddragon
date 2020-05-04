@@ -1,6 +1,8 @@
 package SpaceInvaders;
+
 //class that defines invisible set of points. overlapping hitboxes will cause collision
 public class HitBoxTile {
+
 	double bottomLeftX;
 	double bottomLeftY;
 	double bottomRightX;
@@ -11,7 +13,6 @@ public class HitBoxTile {
 		bottomLeftY = yCoord - height / 2;
 		bottomRightX = xCoord + width / 2;
 		topLeftY = yCoord + height / 2;
-
 	}
 
 	public double getBottomLeftX() {
@@ -30,7 +31,7 @@ public class HitBoxTile {
 		return topLeftY;
 	}
 
-//checks if hitbox is colliding with another hitbox
+	//checks if hitbox is colliding with another hitbox
 	public boolean isColliding(HitBoxTile comparator) {
 		if ((this.getTopLeftY() >= comparator.getBottomLeftY())
 				&& (this.getBottomLeftY() <= comparator.getTopLeftY())
@@ -44,4 +45,4 @@ public class HitBoxTile {
 
 }
 
-	
+
