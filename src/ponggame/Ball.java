@@ -193,15 +193,7 @@ public class Ball {
 	public Collisions checkCollisions(RealPlayer playerOne, Player playerTwo) {
 		Collisions collision = this.PlayerOnePaddleCollision(playerOne);
 		collision = this.PlayerTwoPaddleCollision(playerTwo);
-		if (collision == Collisions.NONE) {
-			collision = checkWallCollison();
-		}
-	return collision;
-	
-		
-	}
-	
-	public Collisions checkWallCollison() {
+		//aggregate checker function that checks collision conditions and calls rebound functions accordingly
 	if (collision == Collisions.NONE) {
 		if (this.yPos-radius<= this.minYLimit) {
 			collision = this.reboundBallOffMinY();
@@ -222,7 +214,6 @@ public class Ball {
 	}
 	return collision;
 }
-
 
 	//calls 
 	public void move() {
