@@ -125,23 +125,19 @@ public class Ball {
 		this.maxXLimit = maxXLimit;
 	}
 
-	
-
 	public Collisions reboundBallOffMinY() {
 			this.yPos = this.minYLimit+radius;
 			System.out.println("New y position: " +this.yPos);
 			this.yDir=-1*this.yDir;
 			return Collisions.BOTTOM_WALL;
-			
-		}
-	
+	}
 		
-	
 	public Collisions reboundBallOffMaxY() {
 		this.yPos = this.maxYLimit-radius;
 		this.yDir=-1*this.yDir;
 		return Collisions.TOP_WALL;
 	}
+	
 	public Collisions reboundBallOffMinX() {
 			this.xPos = this.minXLimit+radius;
 			this.xDir=-1*this.xDir;
@@ -151,6 +147,7 @@ public class Ball {
 		//update ball pos/speed
 		//return collision enum based on collision with left wall	
 	}
+	
 	public Collisions reboundBallOffMaxX() {
 		this.xPos = this.maxXLimit - radius;
 		this.xDir=-1*this.xDir;
@@ -158,9 +155,9 @@ public class Ball {
 		changedDir = true;
 		return Collisions.RIGHT_WALL;
 		//update ball pos/speed
-		//return collision enum based on collision with right wall
-		
+		//return collision enum based on collision with right wall	
 	}
+	
 	public Collisions PlayerOnePaddleCollision(RealPlayer player) {
 		double playerPaddleBottomY = player.getyPos() - player.getHeight();
 		double playerPaddleTopY = player.getyPos() + player.getHeight();
@@ -171,13 +168,11 @@ public class Ball {
 			this.xDir=this.xDir*-1;
 			this.xPos += radius/2;
 			return Collisions.PLAYER_ONE_PADDLE;
+			}		
 		}
-		
-			
-	}
 		return Collisions.NONE;
-		
-}
+	}
+	
 	public Collisions PlayerTwoPaddleCollision(Player playerTwo) {
 		double playerPaddleBottomY = playerTwo.getyPos() - playerTwo.getHeight();
 		double playerPaddleTopY = playerTwo.getyPos() + playerTwo.getHeight();
@@ -198,7 +193,15 @@ public class Ball {
 	public Collisions checkCollisions(RealPlayer playerOne, Player playerTwo) {
 		Collisions collision = this.PlayerOnePaddleCollision(playerOne);
 		collision = this.PlayerTwoPaddleCollision(playerTwo);
-		//aggregate checker function that checks collision conditions and calls rebound functions accordingly
+		if (collision == Collisions.NONE) {
+			collision = checkWallCollison();
+		}
+	return collision;
+	
+		
+	}
+	
+	public Collisions checkWallCollison() {
 	if (collision == Collisions.NONE) {
 		if (this.yPos-radius<= this.minYLimit) {
 			collision = this.reboundBallOffMinY();
