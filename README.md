@@ -86,35 +86,48 @@ Pet your dragon and play minigames with it to earn food. Feed it and love it and
 #### Dragon Main Section Known Bugs ####
 
 --Upon clicking the minigame menu, the egg/dragon will disappear for a second before rendering the new menu. We like to think of it as the dragon leaving with you to play.
+
 --Upon feeding your dragon your last piece of food, only half of the eating animation may only play.
+
 --Upon reaching the game over state, the dragon will disappear for a moment before rendering the game over menu.
 
 
 ### Invaders How To Play ###
+
 Press the left and right arrow keys to move. Press x to shoot bullets.
 
 #### Invaders Known Bugs ####
 
 -The animation for the player being damaged may fail to play. No one can figure out what causes this.
+
 -The player (might?) be able to score double points while hitting the space invader during its explosion animation.
+
 -The game takes a moment to switch from the end of game state to the game menu, creating a blank scene for a second or so.
 
 ### Pong (more like table tennis) How To Play ###
 You can choose between one and two player:
+
 One player: Press the w and s keys to move your racket up or down.
+
 Two Player: Player One presses w and s keys, while Player Two uses p and l keys.
 
 #### Pong Known Bugs ####
+
 -Some test players have reported a rare bug in which the ball used to make the AI prediction oscillates forever between two values, crashing the game.
+
 -Some test players have reported a bug in which the ball gets stuck between the backside of the racket and the wall, causing the unforunate other player to lose.
 
 
 ### Where To Go From Here ###
 
 -Fix minor animation issues with switching in between menus.
+
 -Add tetris-like or candy-crush like game.
+
 -Switch minigames to dedicated Java game library/framework to improve performance and physics.
+
 -Add more advanced physics to the pong game.
+
 -Improve animations to be more expressive and respond more lively-like.
 
 
