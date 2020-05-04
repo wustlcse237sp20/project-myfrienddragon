@@ -1,6 +1,7 @@
 package ponggame;
 
 public interface Player {
+	
 	public double getxPos();
 	public double getyPos();
 	public void moveUp();

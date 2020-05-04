@@ -3,6 +3,7 @@ package game;
 import animations.UIAnimations;
 
 public class GameOverScreen implements GameEntity{
+	
 	public void drawGameOverScreen() {
 		UIAnimations.drawGameOverScreen();	
 	}
@@ -12,8 +13,6 @@ public class GameOverScreen implements GameEntity{
 		this.drawGameOverScreen();
 	}
 
-		
-
 	@Override
 	public Interactions checkInteraction(double mouseX, double mouseY) {
 		if ((mouseX > 150 && mouseX < 250) && (mouseY> 0 && mouseY <100)) {
@@ -21,6 +20,5 @@ public class GameOverScreen implements GameEntity{
 		}
 		return Interactions.wait;
 	}
-	
 
 }

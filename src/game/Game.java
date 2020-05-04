@@ -8,6 +8,7 @@ import animations.UIAnimations;
 import edu.princeton.cs.introcs.StdDraw;
 
 public class Game {
+	
 	int frame;
 	boolean clicked;
 	static boolean gameInProgress;
@@ -20,7 +21,7 @@ public class Game {
 	Interactions interactionLevel;
 	int iterCount;
 	GameMenuInteractions menuInteractionLevel;
-	
+
 	public void setUpScreen() {
 		StdDraw.setCanvasSize(400, 400);
 		StdDraw.setXscale(0,400);
@@ -28,16 +29,14 @@ public class Game {
 		StdDraw.enableDoubleBuffering();
 	}
 
-		
-	
 	public void switchEntity() {
-	if (interactionLevel == Interactions.evolve && entity == dragon) {
-		if (frame == 1) {
-			dragon = dragon.ageUp();
-			entity = (GameEntity) dragon;
-			System.out.println("Current dragon: " + dragon);
+		if (interactionLevel == Interactions.evolve && entity == dragon) {
+			if (frame == 1) {
+				dragon = dragon.ageUp();
+				entity = (GameEntity) dragon;
+				System.out.println("Current dragon: " + dragon);
+			}
 		}
-	}
 		else if (interactionLevel == Interactions.game) {
 			entity = gameMenu;
 
@@ -55,55 +54,54 @@ public class Game {
 			resetGame();	
 		}
 	}
-	
+
 	public void checkBaseInteraction() {
 		if (entity == dragon) {// resetting the frame counter each time it reaches 30 and idling the dragon
 			interactionLevel = Interactions.idle;
 		}
 		else {
 			interactionLevel = Interactions.wait;
+		}
 	}
-}
-	
-	public Interactions checkAge() {
-if (entity == dragon) {
-	if (dragon.willAge() && dragon.getAge()!=2) {
-			interactionLevel = Interactions.evolve;
-	}
-	if (dragon.willAge() && dragon.getAge() == 2) {
-		interactionLevel = Interactions.gameover;	
-	}
-}
-	System.out.println("Interaction in check age: " +  interactionLevel.toString());
-		return interactionLevel;
-}
-	
 
-	
+	public Interactions checkAge() {
+		if (entity == dragon) {
+			if (dragon.willAge() && dragon.getAge()!=2) {
+				interactionLevel = Interactions.evolve;
+			}
+			if (dragon.willAge() && dragon.getAge() == 2) {
+				interactionLevel = Interactions.gameover;	
+			}
+		}
+		System.out.println("Interaction in check age: " +  interactionLevel.toString());
+		return interactionLevel;
+	}
+
 	//checks possible click interactions every frame
 	public Interactions renewInteraction() {
-		    this.checkAge();
-		    this.switchEntity();
-			if (StdDraw.isMousePressed()) {
-				 clicked = true;
-				 mouseX = StdDraw.mouseX();
-				 mouseY = StdDraw.mouseY();
-			}
-			if (clicked == true && !StdDraw.isMousePressed()) {
-					clicked = false;
-					 interactionLevel = entity.checkInteraction(mouseX, mouseY);
-					if (interactionLevel != Interactions.idle && interactionLevel != Interactions.wait) {
-						frame = 0;
-					}
-				}
-			System.out.println("Interaction level: " + interactionLevel);
-			System.out.println("Current entity in renewInteractions: " + entity.toString());
-			return interactionLevel;
+		this.checkAge();
+		this.switchEntity();
+		if (StdDraw.isMousePressed()) {
+			clicked = true;
+			mouseX = StdDraw.mouseX();
+			mouseY = StdDraw.mouseY();
 		}
-	
+		if (clicked == true && !StdDraw.isMousePressed()) {
+			clicked = false;
+			interactionLevel = entity.checkInteraction(mouseX, mouseY);
+			if (interactionLevel != Interactions.idle && interactionLevel != Interactions.wait) {
+				frame = 0;
+			}
+		}
+		System.out.println("Interaction level: " + interactionLevel);
+		System.out.println("Current entity in renewInteractions: " + entity.toString());
+		return interactionLevel;
+	}
+
 	public boolean isMousePressed() {
 		return StdDraw.isMousePressed();
 	}
+	
 	//updates frames, checks interactions
 	public void playGame() {
 		clicked = false;
@@ -126,17 +124,16 @@ if (entity == dragon) {
 			frame++;
 			System.out.println("current dragon: " + dragon.toString());
 			interactionLevel = this.renewInteraction();
-		    if (entity == dragon) {
-			DragonAnimation.drawLifeBars(dragon);
-			UIAnimations.redrawUI(foodInventory.getFoodAmount());
+			if (entity == dragon) {
+				DragonAnimation.drawLifeBars(dragon);
+				UIAnimations.redrawUI(foodInventory.getFoodAmount());
 			}
 			entity.update(interactionLevel,frame);
 			StdDraw.show();
 			StdDraw.pause(66);
 		}
 	}
-	
-	
+
 	public static void resetGame() {
 		System.out.println("In reset game");
 		Game game = new Game();
@@ -147,6 +144,6 @@ if (entity == dragon) {
 	public static void main(String[] args) { 
 		resetGame();
 	}
+	
 }	
-
 

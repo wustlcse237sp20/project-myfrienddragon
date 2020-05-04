@@ -15,6 +15,7 @@ public class Egg implements Dragon, GameEntity {
 		this.age = 0;
 		this.foodInventory=foodInventory;
 	}
+	
 	public int getAge() {
 		return this.age;
 	}
@@ -46,7 +47,7 @@ public class Egg implements Dragon, GameEntity {
 		Baby dragon = new Baby(this.foodInventory);
 		return dragon;
 	}
-	
+
 	public boolean willAge() {
 		if (this.foodLevel == 100 && this.loveLevel == 100) {
 			return true;
@@ -72,7 +73,6 @@ public class Egg implements Dragon, GameEntity {
 	public void animateEvolve(int frame) {
 		DragonAnimation.evolve(frame);
 	}
-	
 
 	/**
 	 * returns an interaction based on where the user clicked
@@ -124,6 +124,7 @@ public class Egg implements Dragon, GameEntity {
 			 gameMenu.drawGameMenu(frame);
 		 }
 	 }
+	 
 }
 
 

@@ -15,14 +15,15 @@ public class Baby implements Dragon, GameEntity {
 		this.age = 1;
 		this.foodInventory=foodInventory;
 	}
+	
 	public int getAge() {
 		return this.age;
 	}
-	
+
 	public int getFoodLevel() {
 		return this.foodLevel;
 	}
-	
+
 	public int getLoveLevel() {
 		return this.loveLevel;
 	}
@@ -46,7 +47,7 @@ public class Baby implements Dragon, GameEntity {
 		Adult dragon = new Adult(this.foodInventory);
 		return dragon;
 	}
-	
+
 	@Override
 	public boolean willAge() {
 		if (this.foodLevel == 100 && this.loveLevel == 100) {
@@ -67,7 +68,7 @@ public class Baby implements Dragon, GameEntity {
 	public void animateIdle(int frame) {
 		DragonAnimation.babyIdle(frame);
 	}
-	
+
 	public void animateEvolve(int frame) {
 		DragonAnimation.evolve(frame);
 	}
@@ -77,7 +78,7 @@ public class Baby implements Dragon, GameEntity {
 	 */
 	@Override
 	public Interactions checkInteraction(double mouseX, double mouseY) {
-		
+
 		if ((mouseX > 0 && mouseX < 85) && (mouseY > 20 && mouseY < 100)) {
 			return Interactions.game;
 
@@ -118,7 +119,7 @@ public class Baby implements Dragon, GameEntity {
 			}
 		}	
 	}
-	
+
 }
 
 

@@ -2,10 +2,9 @@ package SpaceInvaders;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.Iterator;
-
 import edu.princeton.cs.introcs.StdDraw;
-//player class for space invaders
 
+//player class for space invaders
 public class Player implements Sprite {
 
 	private double x;
@@ -33,7 +32,6 @@ public class Player implements Sprite {
 		this.animationTrackerFrame=0;
 		this.collided =false;
 		this.alive = true;
-		
 	}
 
 	public double getX() {
@@ -47,22 +45,27 @@ public class Player implements Sprite {
 	public int getScore() {
 		return this.score;
 	}
+	
 	public boolean getCollided() {
 		return this.collided;
 	}
+	
 	public boolean getAlive() {
 		return this.alive;
 	}
-	
+
 	public int getHealth() {
 		return this.health;
 	}
+	
 	public int getAnimationTrackerFrame() {
 		return this.animationTrackerFrame;
 	}
+	
 	public String getImagePath() {
 		return this.image;
 	}
+	
 	public void setPicture(String imagePath) {
 		this.image = imagePath;
 	}
@@ -74,7 +77,7 @@ public class Player implements Sprite {
 	public void didHitInvader() {
 		this.score += 20;
 	}
-	
+
 	public HitBoxTile getHitBox() {
 		return this.dragonHitBox;
 	}
@@ -115,7 +118,6 @@ public class Player implements Sprite {
 	@Override
 	public void move() {
 		// TODO Auto-generated method stub
-
 	}
 
 	@Override
@@ -123,21 +125,22 @@ public class Player implements Sprite {
 		this.dragonHitBox= new HitBoxTile(x, y, hitBoxHeight, hitBoxWidth);
 	}
 
-
 	@Override
 	public void hurt() {
 		this.collided = true;
 	}
+	
 	public void playHurtAnimation() {
-			GameAnimations setAnimation = new GameAnimations();
-			setAnimation.playerHurt(this);
+		GameAnimations setAnimation = new GameAnimations();
+		setAnimation.playerHurt(this);
 	}
+	
 	public void checkDestroy() {
 		if (this.getHealth() ==0) {
 			this.alive = false;
-			}
 		}
-		
+	}
+
 	//checks if player has been hit by a space invader bullet(s). if so, the player is hurt, and the 
 	//space invader bullet is taken off screen.
 	public int invaderBulletCollisionChecker(Fleet fleet) {
@@ -148,21 +151,20 @@ public class Player implements Sprite {
 			this.animationTrackerFrame=0;
 			this.collided = false;
 		}
-        while (it.hasNext()) {
-        	SpaceInvaderBullet element = it.next();
-        HitBoxTile elementHitBox = element.getHitBox();
-        	boolean collided = elementHitBox.isColliding(this.dragonHitBox);
-        		if (collided) {
-						element.hurt();
-						returner=returner+1;
-						this.hurt();
+		while (it.hasNext()) {
+			SpaceInvaderBullet element = it.next();
+			HitBoxTile elementHitBox = element.getHitBox();
+			boolean collided = elementHitBox.isColliding(this.dragonHitBox);
+			if (collided) {
+				element.hurt();
+				returner=returner+1;
+				this.hurt();
 			}
-        		
-        }
-        if (this.collided) {
-    		this.playHurtAnimation();
-    		}
-    		this.checkDestroy();
+		}
+		if (this.collided) {
+			this.playHurtAnimation();
+		}
+		this.checkDestroy();
 		return returner;
 	}
 
@@ -174,7 +176,6 @@ public class Player implements Sprite {
 		this.interpretMovement(bullets);
 		this.updateHitBoxPos();
 	}
-
 
 	@Override
 	public double getHitBoxBottomLeftX() {
@@ -199,7 +200,6 @@ public class Player implements Sprite {
 	@Override
 	public void destroy() {
 		// TODO Auto-generated method stub
-
 	}
 
 }

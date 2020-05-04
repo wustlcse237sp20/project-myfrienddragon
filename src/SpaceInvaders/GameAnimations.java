@@ -3,6 +3,7 @@ package SpaceInvaders;
 import edu.princeton.cs.introcs.StdDraw;
 
 public class GameAnimations {
+	
 	public void spaceInvaderExplode(Invader invader) {
 		int frame = invader.animationTrackerFrame;
 		if (frame > 0 && frame < 2) {
@@ -26,9 +27,8 @@ public class GameAnimations {
 		if (frame > 12 && frame < 15) {
 			invader.setPicture("space_invaders_resources/explosion-frame-7.jpg");
 		}
-			
-		
 	}
+	
 	public void playerHurt(Player player) {
 		int frame = player.getAnimationTrackerFrame();
 		if (frame > 0 && frame < 2) {

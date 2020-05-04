@@ -6,18 +6,16 @@ import edu.princeton.cs.introcs.StdDraw;
 import ponggame.PongGame;
 
 public class GameMenu implements GameEntity {
-	
+
 	public GameMenu() {
-	
-		
 	}
-	
+
 	public void drawGameMenu(int frame) {
 		UIAnimations.drawGameMenu();	
 	}
-	
+
 	public void getGame() {
-		
+
 	}
 
 	public Interactions checkInteraction(double mouseX, double mouseY) {
@@ -39,26 +37,19 @@ public class GameMenu implements GameEntity {
 			GameBoard game = new GameBoard();
 			game.setUpGame();
 			game.playGame();
-			
+
 		}
 		if (interactionLevel == Interactions.pong) {
 			PongGame game = new PongGame();
 			game.resetGame();
-	
+
 		}
 		if (interactionLevel == Interactions.back) {
-			
-			
+
+
 		}
 		if (interactionLevel == Interactions.wait)
-		this.drawGameMenu(frame);
-		
+			this.drawGameMenu(frame);
 	}
-	
-
-	
-	
-	
-	
 
 }

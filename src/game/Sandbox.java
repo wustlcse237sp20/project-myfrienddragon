@@ -4,6 +4,7 @@ import animations.UIAnimations;
 import edu.princeton.cs.introcs.StdDraw;
 
 public class Sandbox {
+	
 	public static void main(String[] args) {
 		StdDraw.setCanvasSize(400, 400);
 		StdDraw.setXscale(0,400);
@@ -12,6 +13,5 @@ public class Sandbox {
 		UIAnimations.drawGameMenu();
 		StdDraw.show();
 	}
-	
 
 }
