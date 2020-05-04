@@ -9,7 +9,7 @@ import edu.princeton.cs.introcs.StdDraw;
 import game_abstractions.GameEntity;
 import game_abstractions.GameManager;
 import game_abstractions.GameScene;
-import game_abstractions.MenuInteractions;
+
 
 public class Game extends GameScene {
 	int frame;
@@ -22,9 +22,6 @@ public class Game extends GameScene {
 	Interactions interactionLevel;
 	int iterCount;
 	int gameCount;
-
-
-
 
 	public Game(GameManager manager, GameScene parent) {
 		super(manager, parent);
@@ -43,12 +40,22 @@ public class Game extends GameScene {
 				dragon = dragon.ageUp();
 				System.out.println("Current dragon: " + dragon);
 			}
+			if (frame > 1 && frame < 30) {
+				dragon.animateEvolve(frame);
+			}
 		}
+	}
+	public void goToGameOver() {
+		GameScene gameOverMenu = new GameOverScreen(this.getGameManager(), this);
+		this.getGameManager().setScene(gameOverMenu);
 	}
 
 	public Interactions checkAge() {
 		if (dragon.willAge() && dragon.getAge() != 2) {
 			interactionLevel = Interactions.evolve;
+		}
+		if (dragon.willAge() && dragon.getAge()==2) {
+			interactionLevel = Interactions.gameover;
 		}
 	
 		return interactionLevel;
@@ -60,14 +67,9 @@ public class Game extends GameScene {
 			this.getGameManager().setScene(minigameMenu);
 			frame = 0;
 		}
-		if (dragon.willAge() && dragon.getAge()==2) {
-			GameScene gameOverMenu = new GameOverScreen(this.getGameManager(), this);
-			this.getGameManager().setScene(gameOverMenu);
-		}
-		
+	
 	}
 	public Interactions checkSceneInteraction(double mouseX, double mouseY) {
-		this.checkAge();
 		if ((mouseX > 175 && mouseX< 250) && (mouseY > 20 && mouseY<100)) {
 			return Interactions.feed;
 		}
@@ -81,7 +83,14 @@ public class Game extends GameScene {
 
 	// checks possible click interactions every frame
 	public Interactions renewInteraction() {
-		    this.checkAge();
+		    interactionLevel = this.checkAge();
+		    if (interactionLevel == Interactions.evolve) {
+		    this.ageDragonAutomatically();
+		    return interactionLevel;  
+		    }
+		    if (interactionLevel == Interactions.gameover) {
+		    		this.goToGameOver();
+		    }
 			if (StdDraw.isMousePressed()) {
 				 clicked = true;
 				 mouseX = StdDraw.mouseX();
@@ -96,6 +105,7 @@ public class Game extends GameScene {
 					}
 					
 				}
+			System.out.println("Interaction level : " + interactionLevel);
 			return interactionLevel;
 		}
 
@@ -114,8 +124,10 @@ public class Game extends GameScene {
 		frame++;
 		System.out.println(frame);
 		interactionLevel = this.renewInteraction();
+		if (interactionLevel != Interactions.evolve) {
 		DragonAnimation.drawLifeBars(dragon);
 		UIAnimations.redrawUI(dragon.getFoodStore().getFoodAmount());
+		}
 		dragon.update(interactionLevel, frame);
 	}
 }

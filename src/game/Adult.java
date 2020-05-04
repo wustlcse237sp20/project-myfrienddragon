@@ -10,11 +10,15 @@ public class Adult implements Dragon {
 	public int loveLevel;
 	public int age;
 	public FoodInventory foodInventory;
+	public int fullFood;
+	public int fullHealth;
 
 	public Adult(FoodInventory foodInventory) {
 		this.foodLevel = 0;
 		this.loveLevel = 0;
 		this.age = 2;
+		this.fullFood = 100;
+		this.fullHealth = 100;
 		this.foodInventory=foodInventory;
 	}
 
@@ -65,7 +69,7 @@ public class Adult implements Dragon {
 	}
 
 	public boolean willAge() {
-		if (this.foodLevel == 100 && this.loveLevel == 100) {
+		if (this.foodLevel == fullFood && this.loveLevel == fullHealth) {
 			return true;
 		}
 		return false;
@@ -89,9 +93,6 @@ public class Adult implements Dragon {
 	 * displays the proper animation updates the dragon based on user interaction
 	 */
 	public void update(Interactions interactionValue, int frame) {
-		if (interactionValue == Interactions.evolve) {
-			this.animateEvolve(frame);
-		}
 		if (interactionValue ==  Interactions.idle) {
 			this.animateIdle(frame);
 		}

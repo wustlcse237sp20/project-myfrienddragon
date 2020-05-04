@@ -8,12 +8,16 @@ public class Egg implements Dragon{
 	public int foodLevel;
 	public int loveLevel;
 	public int age;
+	int fullFood;
+	int fullHealth;
 	public FoodInventory foodInventory;
 
 	public Egg(FoodInventory foodInventory) {
 		this.foodLevel = 0;
 		this.loveLevel = 0;
 		this.age = 0;
+		this.fullFood = 20;
+		this.fullHealth=20;
 		this.foodInventory=foodInventory;
 	}
 	public int getAge() {
@@ -49,7 +53,7 @@ public class Egg implements Dragon{
 	}
 	
 	public boolean willAge() {
-		if (this.foodLevel == 100 && this.loveLevel == 100) {
+		if (this.foodLevel == fullFood && this.loveLevel == fullHealth ) {
 			return true;
 		}
 		return false;
@@ -87,9 +91,6 @@ public class Egg implements Dragon{
 	 */	
 
 	 public void update(Interactions interactionValue, int frame) {
-		 if (interactionValue == Interactions.evolve) {
-			 this.animateEvolve(frame);
-		 }
 		 if (interactionValue ==  Interactions.idle) {
 			 this.animateIdle(frame);
 		 }

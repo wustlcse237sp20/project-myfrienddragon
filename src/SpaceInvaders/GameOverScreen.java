@@ -38,7 +38,7 @@ public class GameOverScreen extends GameScene {
 	private void displayCongratsMessage() {
 		Font font = new Font("Courier", Font.BOLD, 24);
 		StdDraw.setFont(font);
-		StdDraw.text(200, 275, "Congrats you won!");
+		StdDraw.text(200, 275, "Game Over");
 	}
 	
 	private void drawScreen() {

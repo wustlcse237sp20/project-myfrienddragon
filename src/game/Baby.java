@@ -8,12 +8,16 @@ public class Baby implements Dragon {
 	public int foodLevel;
 	public int loveLevel;
 	public int age;
+	public int fullFood;
+	public int fullHealth;
 	public FoodInventory foodInventory;
 
 	public Baby(FoodInventory foodInventory) {
 		this.foodLevel = 0;
 		this.loveLevel = 0;
 		this.age = 1;
+		this.fullFood = 100;
+		this.fullHealth= 100;
 		this.foodInventory=foodInventory;
 	}
 	public int getAge() {
@@ -50,7 +54,7 @@ public class Baby implements Dragon {
 	
 	@Override
 	public boolean willAge() {
-		if (this.foodLevel == 100 && this.loveLevel == 100) {
+		if (this.foodLevel == fullFood && this.loveLevel == fullHealth) {
 			return true;
 		}
 		return false;
@@ -88,9 +92,6 @@ public class Baby implements Dragon {
 	 */
 	@Override
 	public void update(Interactions interactionValue, int frame) {
-		if (interactionValue == Interactions.evolve) {
-			this.animateEvolve(frame);
-		}
 		if (interactionValue ==  Interactions.idle) {
 			this.animateIdle(frame);
 		}

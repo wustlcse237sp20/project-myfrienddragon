@@ -6,5 +6,6 @@ public enum Interactions {
 		pet,
 		game,
 		evolve,
+		gameover,
 		restart, 
 }
