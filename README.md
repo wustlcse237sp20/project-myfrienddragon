@@ -132,6 +132,12 @@ Two Player: Player One presses w and s keys, while Player Two uses p and l keys.
 
 -Improve animations to be more expressive and respond more lively-like.
 
+-Adding clothes and accessories to the game.
+
+-Adding drag-and-drop food and pet hand.
+
+--Implementing dragon tracker function that tracks food or pet hand around screen.
+
 
 
 
