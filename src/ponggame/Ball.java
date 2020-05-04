@@ -213,10 +213,10 @@ public class Ball {
 	
 	}
 	if (collision!= Collisions.NONE) {
-	return collision;
-	}
-	else if (collision!= collision2) {
 		return collision;
+	}
+	else if (collision2!= Collisions.NONE) {
+		return collision2;
 	}
 	return Collisions.NONE;
 }
