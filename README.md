@@ -97,6 +97,8 @@ Pet your dragon and play minigames with it to earn food. Feed it and love it and
 
 --If you try to feed your dragon a piece of food without having any, the animation may take a few seconds to restart. It's no good to taunt your dragon.
 
+--If you click really fast on feed/pet, the animations will likely fail to play.
+
 
 
 
