@@ -104,7 +104,6 @@ public class Game extends GameScene {
 					}
 					
 				}
-			System.out.println("Interaction level : " + interactionLevel);
 			return interactionLevel;
 		}
 
@@ -121,7 +120,6 @@ public class Game extends GameScene {
 			StdDraw.clear();
 		}
 		frame++;
-		System.out.println(frame);
 		interactionLevel = this.renewInteraction();
 		if (interactionLevel != Interactions.evolve) {
 		DragonAnimation.drawLifeBars(dragon);

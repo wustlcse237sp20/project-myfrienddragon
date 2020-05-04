@@ -4,7 +4,6 @@ import SpaceInvaders.GameBoard;
 import animations.DragonAnimation;
 import animations.UIAnimations;
 import edu.princeton.cs.introcs.StdDraw;
-import game_abstractions.GameEntity;
 import game_abstractions.GameManager;
 import game_abstractions.GameScene;
 import ponggame.PongGame;

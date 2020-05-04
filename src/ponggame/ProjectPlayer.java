@@ -65,9 +65,7 @@ public class ProjectPlayer implements Player {
 		this.predictionBall = new Ball(ball);
 
 		while (predictionBall.getxPos() + predictionBall.getRadius() + predictionBall.getSpeed() < this.xPos) {
-			System.out.println("Updating prediction ball");
 			predictionBall.update(player, this);
-			System.out.println("Prediction ball update: " + predictionBall.getxPos() + " " + predictionBall.yPos);
 		}
 		double predictionY = predictionBall.getyPos();
 		double err = determineErr(player);
@@ -184,7 +182,6 @@ public class ProjectPlayer implements Player {
 	public void checkScoreUpdate(Collisions collision) {
 		if (collision == Collisions.LEFT_WALL) {
 			this.updateScore();
-			System.out.println("Update project player score" + this.score);
 		}
 	}
 	
