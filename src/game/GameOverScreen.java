@@ -40,7 +40,6 @@ public class GameOverScreen extends GameScene{
 			}
 
 		}
-		System.out.println("Interaction level: " + interactionLevel);
 		return interactionLevel;
 	}
 
@@ -73,7 +72,6 @@ public class GameOverScreen extends GameScene{
 			StdDraw.clear();
 		}
 		frame++;
-		System.out.println(frame);
 		interactionLevel = this.renewInteraction();
 		this.respondToInteraction(interactionLevel, frame);
 	}

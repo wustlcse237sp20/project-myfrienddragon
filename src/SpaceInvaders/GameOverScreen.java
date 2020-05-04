@@ -102,7 +102,6 @@ public class GameOverScreen extends GameScene {
 			frame = 0;
 		}
 		frame++;
-		System.out.println(frame);
 		interactionLevel = this.renewInteraction();
 		this.respondToInteraction(interactionLevel, frame);
 		}

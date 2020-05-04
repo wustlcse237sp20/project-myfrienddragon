@@ -147,7 +147,7 @@ public class Player implements Sprite {
 		Iterator<SpaceInvaderBullet> it = fleet.getBullets().iterator();
 		int returner = 0;
 		this.animationTrackerFrame+=1;
-		if (this.animationTrackerFrame==16 || this.collided == true) {
+		if (this.animationTrackerFrame==16) {
 			this.animationTrackerFrame=0;
 			this.collided = false;
 		}

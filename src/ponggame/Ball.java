@@ -14,7 +14,6 @@ public class Ball {
 	double minXLimit;
 	double maxYLimit;
 	double maxXLimit;
-	double angle;
 	final double screenWidth = 395;
 	final double screenHeight= 395;
 	boolean changedDir;
@@ -23,7 +22,6 @@ public class Ball {
 		this.yPos = 350*Math.random();
 		this.speed = (6)*Math.random()+5;
 		this.radius = 5;
-		this.angle = Math.random()*2*Math.PI;
 		this.minYLimit=this.screenHeight*(1/5)+speed;
 		this.minXLimit=radius+speed;
 		this.xDir=Math.signum(3*Math.random()-1);
