@@ -16,8 +16,8 @@ public class Egg implements Dragon{
 		this.foodLevel = 0;
 		this.loveLevel = 0;
 		this.age = 0;
-		this.fullFood = 20;
-		this.fullHealth=20;
+		this.fullFood = 100;
+		this.fullHealth=100;
 		this.foodInventory=foodInventory;
 	}
 	public int getAge() {
