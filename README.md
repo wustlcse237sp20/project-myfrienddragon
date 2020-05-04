@@ -119,6 +119,10 @@ Two Player: Player One presses w and s keys, while Player Two uses p and l keys.
 
 -Some test players have reported a bug in which the ball gets stuck between the backside of the racket and the wall, causing the unforunate other player to lose.
 
+-Some test players have reported the ball going through the paddle.
+
+-Like the other games, the game over screen takes a second to load, causing a blank screen for a second or so.
+
 
 ### Where To Go From Here ###
 
