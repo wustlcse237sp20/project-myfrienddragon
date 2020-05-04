@@ -110,6 +110,8 @@ Press the left and right arrow keys to move. Press spacebar to shoot bullets.
 
 -The player (might?) be able to score double points while hitting the space invader during its explosion animation, causing the explosion to play twice, as well.
 
+-The game may crash under unknown conditions after the user ends the game.
+
 -The game takes a moment to switch from the end of game state to the game menu, creating a blank scene for a second or so.
 
 ### Pong (more like table tennis) How To Play ###
