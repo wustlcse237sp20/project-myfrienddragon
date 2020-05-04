@@ -2,7 +2,7 @@ package game;
 
 import animations.DragonAnimation;
 import edu.princeton.cs.introcs.StdDraw;
-import game_abstractions.GameEntity;
+
 
 public class Adult implements Dragon {
 
