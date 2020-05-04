@@ -142,6 +142,10 @@ Two Player: Player One presses w and s keys, while Player Two uses p and l keys.
 
 --Implementing dragon tracker function that tracks food or pet hand around screen.
 
+--Implementing different dragon colors, genders, and personalities.
+
+--Implementing different levels and higher difficulties in space invaders.
+
 
 
 
