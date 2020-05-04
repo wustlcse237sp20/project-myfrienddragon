@@ -43,7 +43,6 @@ public class GameMenu extends GameScene {
 				}
 				
 			}
-		System.out.println("Interaction level: " + interactionLevel);
 		return interactionLevel;
 	}
 
@@ -90,7 +89,6 @@ public class GameMenu extends GameScene {
 			StdDraw.clear();
 		}
 		frame++;
-		System.out.println(frame);
 		interactionLevel = this.renewInteraction();
 		this.respondToInteraction(interactionLevel, frame);
 		}
