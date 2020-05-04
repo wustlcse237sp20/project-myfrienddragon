@@ -1,8 +1,9 @@
 package game;
 
 import animations.DragonAnimation;
+import game_abstractions.GameEntity;
 
-public class Baby implements Dragon, GameEntity {
+public class Baby implements Dragon {
 
 	public int foodLevel;
 	public int loveLevel;
@@ -37,7 +38,7 @@ public class Baby implements Dragon, GameEntity {
 	public int feed() {
 		if (this.foodLevel < 100 && this.foodInventory.getFoodAmount() > 0) {
 			this.foodInventory.removeFood();
-			this.foodLevel += 5;
+			this.foodLevel += 20;
 		}
 		return this.foodLevel;
 	}
@@ -71,28 +72,16 @@ public class Baby implements Dragon, GameEntity {
 	public void animateEvolve(int frame) {
 		DragonAnimation.evolve(frame);
 	}
+	public void updateFoodStore(int foodToAdd) {
+		this.foodInventory.addFood(foodToAdd);
+	}
+	
+
 
 	/**
 	 * returns an interaction based on where the user clicked
 	 */
-	@Override
-	public Interactions checkInteraction(double mouseX, double mouseY) {
-		
-		if ((mouseX > 0 && mouseX < 85) && (mouseY > 20 && mouseY < 100)) {
-			return Interactions.game;
 
-		}
-		if ((mouseX > 175 && mouseX< 250) && (mouseY > 20 && mouseY<100)) {
-			return Interactions.feed;
-		}
-		if ((mouseX >350 && mouseX < 410 ) && (mouseY > 20 && mouseY < 100)) {
-			return Interactions.pet;
-		}
-		else {
-			return Interactions.idle;
-		}
-
-	}
 
 	/**
 	 * displays the proper animation updates the dragon based on user interaction
@@ -105,7 +94,7 @@ public class Baby implements Dragon, GameEntity {
 		if (interactionValue ==  Interactions.idle) {
 			this.animateIdle(frame);
 		}
-		if (interactionValue == Interactions.feed) {
+		if (interactionValue == Interactions.feed && this.foodInventory.getFoodAmount()>0) {
 			this.animateFeed(frame);
 			if (frame == 0) {
 				this.feed();
@@ -117,6 +106,10 @@ public class Baby implements Dragon, GameEntity {
 				this.pet();
 			}
 		}	
+	}
+	@Override
+	public FoodInventory getFoodStore() {
+		return this.foodInventory;
 	}
 	
 }

@@ -5,15 +5,27 @@ import java.awt.Font;
 import java.awt.event.KeyEvent;
 
 import edu.princeton.cs.introcs.StdDraw;
+import game.Game;
+import game_abstractions.GameManager;
+import game_abstractions.GameScene;
 
-public class PongGame {
+public class PongGame extends GameScene {
 	RealPlayer playerOne;
 	Player playerTwo;
 	Ball ball;
 	boolean gameInProgress;
 	boolean playerWins;
 	int foodEarned;
-	boolean returnToMenu;
+	
+	public PongGame(GameManager manager, GameScene parent) {
+		super(manager, parent);
+		this.setUpOneorTwoPlayer();
+		this.playerOne = new RealPlayer(50, 200, 1);
+		this.ball = new Ball();
+		this.playerWins = false;
+		this.gameInProgress = true;
+		this.foodEarned = 0;
+	}
 
 	public void drawSetupMessage() {
 		StdDraw.clear();
@@ -38,14 +50,6 @@ public class PongGame {
 			}
 		}
 	}
-
-	public void setUpGameScreen() {
-		StdDraw.setCanvasSize(400, 400);
-		StdDraw.setXscale(0, 400);
-		StdDraw.setYscale(0, 400);
-		StdDraw.enableDoubleBuffering();
-	}
-
 	public void drawPlayerPaddle() {
 		StdDraw.filledRectangle(playerOne.getxPos(), playerOne.getyPos(), playerOne.getWidth(), playerOne.getHeight());
 
@@ -67,7 +71,7 @@ public class PongGame {
 		StdDraw.text(350, 15, "Score: " + playerTwo.getScore());
 	}
 
-	public void update() {
+	public void gameUpdate() {
 		Collisions collision = ball.update(playerOne, playerTwo);
 		playerOne.update(collision);
 		if (playerTwo instanceof ProjectPlayer) {
@@ -93,50 +97,12 @@ public class PongGame {
 		} else {
 			foodEarned += 1;
 		}
+		Game.dragon.updateFoodStore(foodEarned);
 
 	}
 
-	public void drawGameOverScreen() {
-		StdDraw.clear();
-		System.out.println("Going to draw end of game input screen");
-		if (playerWins) {
-			System.out.println("Player wins");
-			Font font = new Font("Sans Serif", Font.PLAIN, 24);
-			StdDraw.setPenColor(3, 252, 227);
-			StdDraw.setFont(font);
-			StdDraw.text(200, 300, "You won!!");
-		}
-		if (!playerWins) {
-			System.out.println("Player does not win");
-			Font font = new Font("Sans Serif", Font.PLAIN, 24);
-			StdDraw.setPenColor(252, 169, 3);
-			StdDraw.setFont(font);
-			StdDraw.text(200, 300, "You lost...");
-		}
-		StdDraw.setPenColor();
-		StdDraw.setFont();
-		StdDraw.text(200, 100, "Press 1 to play again");
-		StdDraw.text(200, 80, "Press 2 to return to minigame menu");
-		StdDraw.show();
-	}
 
-	public void gameOverInputTaker() {
-		System.out.println("In end-of-game input function");
-		int keyPress = 0;
-		boolean goodInput = false;
-		while (!goodInput && keyPress != 1) {
-			this.drawGameOverScreen();
-			if (StdDraw.isKeyPressed(KeyEvent.VK_2)) {
-				keyPress = 1;
-				this.checkFoodEarned();
-				returnToMenu = true;
-			} else if (StdDraw.isKeyPressed(KeyEvent.VK_1)) {
-				keyPress = 1;
-				this.checkFoodEarned();
-				returnToMenu = false;
-			}
-		}
-	}
+
 
 	public void drawGame() {
 		StdDraw.clear();
@@ -144,27 +110,20 @@ public class PongGame {
 		this.drawBall();
 		this.drawAIPaddle();
 		this.drawScoreBoard();
-		StdDraw.show();
-		StdDraw.pause(33);
-
 	}
+	
 
-	public int playGame() {
-		this.setUpGameScreen();
-		this.setUpOneorTwoPlayer();
-		playerOne = new RealPlayer(50, 200, 1);
-		ball = new Ball();
-		playerWins = false;
-		gameInProgress = true;
-		returnToMenu = false;
-		while (!returnToMenu) {
-			while (gameInProgress) {
-				this.update();
-				this.checkGameOver();
+	public void update() {
+		if (this.gameInProgress) {
+				this.gameUpdate();
 				this.drawGame();
+				this.checkGameOver();
 			}
-			this.gameOverInputTaker();
+		else {
+			this.checkFoodEarned();
+			GameScene pongGameOver = new PongGameOver(this.getGameManager(), this, this.playerWins);
+			this.getGameManager().setScene(pongGameOver);
 		}
-		return foodEarned;
+			
 	}
 }

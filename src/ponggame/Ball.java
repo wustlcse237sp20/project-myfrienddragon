@@ -23,13 +23,13 @@ public class Ball {
 		this.yPos = 350*Math.random();
 		this.speed = (6)*Math.random()+5;
 		this.radius = 5;
-		this.angle = 0;
+		this.angle = Math.random()*2*Math.PI;
 		this.minYLimit=this.screenHeight*(1/5)+speed;
 		this.minXLimit=radius+speed;
 		this.xDir=Math.signum(3*Math.random()-1);
 		this.yDir=Math.signum(3*Math.random()-1);
 		this.maxXLimit= screenWidth-radius-speed;
-		this.maxYLimit=screenHeight-radius-speed;
+		this.maxYLimit= screenHeight-radius-speed;
 
 	}
 	Ball(Ball ballA) {
@@ -220,18 +220,13 @@ public class Ball {
 	
 	}
 	return collision;
-	
-		
-	}
+}
 
 
 	//calls 
 	public void move() {
 		this.xPos = (this.xPos)+(this.speed*this.xDir);
 		this.yPos = (this.yPos)+(this.speed*this.yDir);
-	
-		
-		
 	}
 
 	public Collisions update(RealPlayer playerOne, Player playerTwo) {

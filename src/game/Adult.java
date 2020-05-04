@@ -2,8 +2,9 @@ package game;
 
 import animations.DragonAnimation;
 import edu.princeton.cs.introcs.StdDraw;
+import game_abstractions.GameEntity;
 
-public class Adult implements Dragon, GameEntity {
+public class Adult implements Dragon {
 
 	public int foodLevel;
 	public int loveLevel;
@@ -38,7 +39,7 @@ public class Adult implements Dragon, GameEntity {
 
 	public int feed() {
 		if (this.foodLevel < 100 && this.foodInventory.getFoodAmount() > 0) {
-			this.foodLevel += 5;
+			this.foodLevel += 20;
 			this.foodInventory.removeFood();
 		}
 		return this.foodLevel;
@@ -74,27 +75,16 @@ public class Adult implements Dragon, GameEntity {
 	public Dragon ageUp() {
 		return null;
 	}
+	
+	public void updateFoodStore(int foodToAdd) {
+		this.foodInventory.addFood(foodToAdd);
+	}
+
+		
 
 	/**
 	 * returns an interaction based on where the user clicked
 	 */
-	@Override
-	public Interactions checkInteraction(double mousex, double mousey) {
-		if ((mousex > 0 && mousex < 85) && (mousey > 20 && mousey < 100)) {
-			return Interactions.game;
-
-		}
-		if ((mousex > 175 && mousex< 250) && (mousey > 20 && mousey<100)) {
-			return Interactions.feed;
-		}
-		if ((mousex >350 && mousex < 410 ) && (mousey > 20 && mousey < 100)) {
-			return Interactions.pet;
-		}
-		else {
-			return Interactions.idle;
-		}
-	}
-
 	/**
 	 * displays the proper animation updates the dragon based on user interaction
 	 */
@@ -105,7 +95,7 @@ public class Adult implements Dragon, GameEntity {
 		if (interactionValue ==  Interactions.idle) {
 			this.animateIdle(frame);
 		}
-		if (interactionValue == Interactions.feed) {
+		if (interactionValue == Interactions.feed && this.foodInventory.getFoodAmount() > 0) {
 			this.animateFeed(frame);
 			if (frame == 0) {
 				this.feed();
@@ -117,6 +107,11 @@ public class Adult implements Dragon, GameEntity {
 				this.pet();
 			}
 		}
+	}
+
+	@Override
+	public FoodInventory getFoodStore() {
+		return this.foodInventory;
 	}
 
 }

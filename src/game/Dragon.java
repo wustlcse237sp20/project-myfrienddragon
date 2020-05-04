@@ -6,7 +6,6 @@ public interface Dragon {
 	public int pet();
 	public int feed();
 	public Dragon ageUp();
-	public Interactions checkInteraction(double mouseX, double mouseY);
 
 	// functions that animate the dragon based on the frame rate
 	public void animatePet(int frame);
@@ -21,5 +20,8 @@ public interface Dragon {
 	public int getFoodLevel();
 	public int getLoveLevel();
 	public int getAge();
+	public void updateFoodStore(int foodToAdd);
+	public FoodInventory getFoodStore();
+	public void update(Interactions interactionLevel, int frame);
 	
 }

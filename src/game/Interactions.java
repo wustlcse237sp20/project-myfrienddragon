@@ -6,11 +6,5 @@ public enum Interactions {
 		pet,
 		game,
 		evolve,
-		wait, 
-		pong,
-		invaders,
-		back,
-		gameover,
-		restart,
-		none
+		restart, 
 }
