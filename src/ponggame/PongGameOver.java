@@ -22,8 +22,6 @@ public class PongGameOver extends GameScene {
 		this.playerWins = playerWins;
 	}
 	public void drawGameOverScreen() {
-		StdDraw.clear();
-		System.out.println("Going to draw end of game input screen");
 		if (playerWins) {
 			System.out.println("Player wins");
 			Font font = new Font("Sans Serif", Font.PLAIN, 24);
@@ -46,7 +44,6 @@ public class PongGameOver extends GameScene {
 	}
 
 	public void gameOverInputTaker() {
-		System.out.println("In end-of-game input function");
 		int keyPress = 0;
 		boolean goodInput = false;
 		while (!goodInput && keyPress != 1) {

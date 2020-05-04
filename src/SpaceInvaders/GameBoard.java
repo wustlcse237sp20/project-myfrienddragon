@@ -38,7 +38,6 @@ public class GameBoard extends GameScene {
 
 	@Override
 	public void update() {
-		System.out.println("Printing gameOver: " + this.gameOver);
 			//randomly shoot bullets every couple seconds
 			if (frame % 20 == 0) {
 				fleet.shootBullets();	
@@ -108,9 +107,7 @@ public class GameBoard extends GameScene {
 	
 	private void updateScore() {
 		int invadersDestroyed = fleet.getNumDestroyed();
-		System.out.println("Number of invaders destroyed" + fleet.getNumDestroyed());
 		score = invadersDestroyed * 20;
-		System.out.println("Current score: " + score);
 	}
 	
 	public void drawSprites() {
