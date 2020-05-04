@@ -10,15 +10,11 @@ public class Adult implements Dragon {
 	public int loveLevel;
 	public int age;
 	public FoodInventory foodInventory;
-	public int fullFood;
-	public int fullHealth;
 
 	public Adult(FoodInventory foodInventory) {
 		this.foodLevel = 0;
 		this.loveLevel = 0;
 		this.age = 2;
-		this.fullFood = 100;
-		this.fullHealth = 100;
 		this.foodInventory=foodInventory;
 	}
 
@@ -69,7 +65,7 @@ public class Adult implements Dragon {
 	}
 
 	public boolean willAge() {
-		if (this.foodLevel == fullFood && this.loveLevel == fullHealth) {
+		if (this.foodLevel == 100 && this.loveLevel == 100) {
 			return true;
 		}
 		return false;

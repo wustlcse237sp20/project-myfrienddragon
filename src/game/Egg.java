@@ -8,16 +8,12 @@ public class Egg implements Dragon{
 	public int foodLevel;
 	public int loveLevel;
 	public int age;
-	int fullFood;
-	int fullHealth;
 	public FoodInventory foodInventory;
 
 	public Egg(FoodInventory foodInventory) {
 		this.foodLevel = 0;
 		this.loveLevel = 0;
 		this.age = 0;
-		this.fullFood = 100;
-		this.fullHealth=100;
 		this.foodInventory=foodInventory;
 	}
 	public int getAge() {
@@ -53,7 +49,7 @@ public class Egg implements Dragon{
 	}
 	
 	public boolean willAge() {
-		if (this.foodLevel == fullFood && this.loveLevel == fullHealth ) {
+		if (this.foodLevel == 100 && this.loveLevel == 100) {
 			return true;
 		}
 		return false;
