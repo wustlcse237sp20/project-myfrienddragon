@@ -1,5 +1,5 @@
 # CSE237 - My Friend Dragon#
-By: Julia Smith, Katrina Ragbeer, Matthew Alexander, and Shahd Alyasiry
+By: Julia Smith, Katrina Ragbeer, Matthew Alexander
 
 # How to Run From Command Line#
 From the project repository directory, type the following into the command line:
@@ -96,13 +96,13 @@ Pet your dragon and play minigames with it to earn food. Feed it and love it and
 
 ### Invaders How To Play ###
 
-Press the left and right arrow keys to move. Press x to shoot bullets.
+Press the left and right arrow keys to move. Press spacebar to shoot bullets.
 
 #### Invaders Known Bugs ####
 
 -The animation for the player being damaged may fail to play. No one can figure out what causes this.
 
--The player (might?) be able to score double points while hitting the space invader during its explosion animation.
+-The player (might?) be able to score double points while hitting the space invader during its explosion animation, causing the explosion to play twice, as well.
 
 -The game takes a moment to switch from the end of game state to the game menu, creating a blank scene for a second or so.
 
