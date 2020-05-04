@@ -1,129 +1,241 @@
 package ponggame;
+//some ideas on ball class--feel free to alter if you want
 
-import java.awt.Color;
-import java.awt.Font;
-import java.awt.event.KeyEvent;
 
-import edu.princeton.cs.introcs.StdDraw;
-import game.Game;
-import game_abstractions.GameManager;
-import game_abstractions.GameScene;
+public class Ball {
+	double xPos;
+	double yPos;
+	double xDir;
+	double yDir;
+	double radius;
+	double speed;
+	//min or max x or y (screen boundaries)
+	double minYLimit;
+	double minXLimit;
+	double maxYLimit;
+	double maxXLimit;
+	double angle;
+	final double screenWidth = 395;
+	final double screenHeight= 395;
+	boolean changedDir;
+	public Ball() {
+		this.xPos = 200;
+		this.yPos = 350*Math.random();
+		this.speed = (6)*Math.random()+5;
+		this.radius = 5;
+		this.angle = Math.random()*2*Math.PI;
+		this.minYLimit=this.screenHeight*(1/5)+speed;
+		this.minXLimit=radius+speed;
+		this.xDir=Math.signum(3*Math.random()-1);
+		this.yDir=Math.signum(3*Math.random()-1);
+		this.maxXLimit= screenWidth-radius-speed;
+		this.maxYLimit= screenHeight-radius-speed;
 
-public class PongGame extends GameScene {
-	RealPlayer playerOne;
-	Player playerTwo;
-	Ball ball;
-	boolean gameInProgress;
-	boolean playerWins;
-	int foodEarned;
+	}
+	Ball(Ball ballA) {
+		this.xPos = ballA.getxPos();
+		this.yPos = ballA.getyPos();
+		this.speed = ballA.getSpeed()*2;
+		this.xDir = ballA.getxDir();
+		this.yDir = ballA.getyDir();
+		this.radius = 5;
+		this.minYLimit= ballA.minYLimit;
+		this.minXLimit=ballA.minXLimit;
+		this.maxXLimit= ballA.maxXLimit;
+		this.maxYLimit= ballA.maxYLimit;
+		
+	}
+
+
+	public double getxPos() {
+		return xPos;
+	}
+
+	public void setxPos(double xPos) {
+		this.xPos = xPos;
+	}
+
+	public double getyPos() {
+		return yPos;
+	}
+
+	public void setyPos(double yPos) {
+		this.yPos = yPos;
+	}
+
+	public double getxDir() {
+		return xDir;
+	}
+
+	public void setxDir(double xDir) {
+		this.xDir = xDir;
+	}
+
+	public double getyDir() {
+		return yDir;
+	}
+
+	public void setyDir(double yDir) {
+		this.yDir = yDir;
+	}
+
+	public double getRadius() {
+		return radius;
+	}
+
+	public void setRadius(double radius) {
+		this.radius = radius;
+	}
+
+	public double getSpeed() {
+		return speed;
+	}
+
+	public void setSpeed(double speed) {
+		this.speed = speed;
+	}
+
+	public double getMinYLimit() {
+		return minYLimit;
+	}
+
+	public void setMinYLimit(double minYLimit) {
+		this.minYLimit = minYLimit;
+	}
+
+	public double getMinXLimit() {
+		return minXLimit;
+	}
+
+	public void setMinXLimit(double minXLimit) {
+		this.minXLimit = minXLimit;
+	}
+
+	public double getMaxYLimit() {
+		return maxYLimit;
+	}
+
+	public void setMaxYLimit(double maxYLimit) {
+		this.maxYLimit = maxYLimit;
+	}
+
+	public double getMaxXLimit() {
+		return maxXLimit;
+	}
+
+	public void setMaxXLimit(double maxXLimit) {
+		this.maxXLimit = maxXLimit;
+	}
+
 	
-	public PongGame(GameManager manager, GameScene parent) {
-		super(manager, parent);
-		this.setUpOneorTwoPlayer();
-		this.playerOne = new RealPlayer(50, 200, 1);
-		this.ball = new Ball();
-		this.playerWins = false;
-		this.gameInProgress = true;
-		this.foodEarned = 0;
-	}
 
-	public void drawSetupMessage() {
-		StdDraw.clear();
-		StdDraw.text(200, 200, "Press 1 for single-player pong");
-		StdDraw.text(200, 180, "Press 2 for classic two-player pong");
-		StdDraw.show();
-	}
-
-	public void setUpOneorTwoPlayer() {
-		boolean goodInput = false;
-		int keyInput = 0;
-		while (!goodInput && keyInput != 1) {
-			this.drawSetupMessage();
-			if (StdDraw.isKeyPressed(KeyEvent.VK_2)) {
-				keyInput += 1;
-				playerTwo = new RealPlayer(350, 200, 2);
-				goodInput = true;
-			} else if (StdDraw.isKeyPressed(KeyEvent.VK_1)) {
-				keyInput += 1;
-				playerTwo = new ProjectPlayer();
-				goodInput = true;
-			}
+	public Collisions reboundBallOffMinY() {
+			this.yPos = this.minYLimit+radius;
+			System.out.println("New y position: " +this.yPos);
+			this.yDir=-1*this.yDir;
+			return Collisions.BOTTOM_WALL;
+			
 		}
-	}
-	public void drawPlayerPaddle() {
-		StdDraw.filledRectangle(playerOne.getxPos(), playerOne.getyPos(), playerOne.getWidth(), playerOne.getHeight());
-
-	}
-
-	public void drawAIPaddle() {
-		StdDraw.filledRectangle(playerTwo.getxPos(), playerTwo.getyPos(), playerTwo.getWidth(), playerTwo.getHeight());
-
-	}
-
-	public void drawBall() {
-		StdDraw.filledCircle(ball.getxPos(), ball.getyPos(), ball.radius);
-	}
-
-	public void drawScoreBoard() {
-		StdDraw.rectangle(50, 15, 50, 15);
-		StdDraw.rectangle(350, 15, 50, 15);
-		StdDraw.text(50, 15, "Score: " + playerOne.getScore());
-		StdDraw.text(350, 15, "Score: " + playerTwo.getScore());
-	}
-
-	public void gameUpdate() {
-		Collisions collision = ball.update(playerOne, playerTwo);
-		playerOne.update(collision);
-		if (playerTwo instanceof ProjectPlayer) {
-			((ProjectPlayer) playerTwo).update(ball, playerOne, collision);
-		} else {
-			((RealPlayer) playerTwo).update(collision);
-		}
-	}
-
-	public void checkGameOver() {
-		if (playerOne.getScore() == 8) {
-			playerWins = true;
-			gameInProgress = false;
-		} else if (playerTwo.getScore() == 8) {
-			playerWins = false;
-			gameInProgress = false;
-		}
-	}
-
-	public void checkFoodEarned() {
-		if (playerWins) {
-			foodEarned += 2;
-		} else {
-			foodEarned += 1;
-		}
-		Game.dragon.updateFoodStore(foodEarned);
-
-	}
-
-
-
-
-	public void drawGame() {
-		StdDraw.clear();
-		this.drawPlayerPaddle();
-		this.drawBall();
-		this.drawAIPaddle();
-		this.drawScoreBoard();
-	}
 	
-
-	public void update() {
-		if (this.gameInProgress) {
-				this.gameUpdate();
-				this.drawGame();
-				this.checkGameOver();
-			}
-		else {
-			this.checkFoodEarned();
-			GameScene pongGameOver = new PongGameOver(this.getGameManager(), this, this.playerWins);
-			this.getGameManager().setScene(pongGameOver);
+		
+	
+	public Collisions reboundBallOffMaxY() {
+		this.yPos = this.maxYLimit-radius;
+		this.yDir=-1*this.yDir;
+		return Collisions.TOP_WALL;
+	}
+	public Collisions reboundBallOffMinX() {
+			this.xPos = this.minXLimit+radius;
+			this.xDir=-1*this.xDir;
+			this.yDir=-1*this.yDir;
+			changedDir = true;
+			return Collisions.LEFT_WALL;	
+		//update ball pos/speed
+		//return collision enum based on collision with left wall	
+	}
+	public Collisions reboundBallOffMaxX() {
+		this.xPos = this.maxXLimit - radius;
+		this.xDir=-1*this.xDir;
+		this.yDir=-1*this.yDir;
+		changedDir = true;
+		return Collisions.RIGHT_WALL;
+		//update ball pos/speed
+		//return collision enum based on collision with right wall
+		
+	}
+	public Collisions PlayerOnePaddleCollision(RealPlayer player) {
+		double playerPaddleBottomY = player.getyPos() - player.getHeight();
+		double playerPaddleTopY = player.getyPos() + player.getHeight();
+		double playerOneBallXPrediction = this.xPos-radius-speed;
+		double playerOneBallYPrediction = (this.yPos)+((speed + radius)*this.yDir);
+		if ((playerOneBallXPrediction < player.getxPos() + player.getWidth()) && this.getxDir()==-1) {
+			if ((playerOneBallYPrediction <= playerPaddleTopY) && (playerOneBallYPrediction >= playerPaddleBottomY)) {
+			this.xDir=this.xDir*-1;
+			this.xPos += radius/2;
+			return Collisions.PLAYER_ONE_PADDLE;
 		}
+		
 			
 	}
+		return Collisions.NONE;
+		
+}
+	public Collisions PlayerTwoPaddleCollision(Player playerTwo) {
+		double playerPaddleBottomY = playerTwo.getyPos() - playerTwo.getHeight();
+		double playerPaddleTopY = playerTwo.getyPos() + playerTwo.getHeight();
+		double playerTwoBallXPrediction = this.xPos+radius+speed;
+		double playerTwoBallYPrediction = (this.yPos)+((speed + radius)*this.yDir);
+		if ((playerTwoBallXPrediction > (playerTwo.getxPos() - playerTwo.getWidth())) && this.xDir==1) {
+		if ((playerTwoBallYPrediction <= playerPaddleTopY) && (playerTwoBallYPrediction >= playerPaddleBottomY)) {
+			this.xDir = -1*xDir;
+			this.xPos = this.xPos - radius/2;
+			return Collisions.PLAYER_TWO_PADDLE;
+		}
+	}
+		return Collisions.NONE;
+		//update ball pos/speed
+		//return collision enum based on collision with right wall
+		}
+	
+	public Collisions checkCollisions(RealPlayer playerOne, Player playerTwo) {
+		Collisions collision = this.PlayerOnePaddleCollision(playerOne);
+		collision = this.PlayerTwoPaddleCollision(playerTwo);
+		//aggregate checker function that checks collision conditions and calls rebound functions accordingly
+	if (collision == Collisions.NONE) {
+		if (this.yPos-radius<= this.minYLimit) {
+			collision = this.reboundBallOffMinY();
+		}
+		else if (this.yPos+radius >= this.maxYLimit) {
+			collision = this.reboundBallOffMaxY();
+       	}
+		else if (this.xPos-radius < this.minXLimit || (this.yPos < this.minYLimit && this.xPos < this.minXLimit)) {
+			collision = this.reboundBallOffMinX();
+		}
+		else if(this.xPos + radius > this.maxXLimit|| (this.yPos > this.maxYLimit && this.xPos > this.maxXLimit)) {
+			collision = this.reboundBallOffMaxX();
+		}
+		else {
+			collision = Collisions.NONE;
+		}
+	
+	}
+	return collision;
+}
+
+
+	//calls 
+	public void move() {
+		this.xPos = (this.xPos)+(this.speed*this.xDir);
+		this.yPos = (this.yPos)+(this.speed*this.yDir);
+	}
+
+	public Collisions update(RealPlayer playerOne, Player playerTwo) {
+		Collisions collision = this.checkCollisions(playerOne, playerTwo);
+		this.move();
+		return collision;
+		
+	}
+	
+	
+
 }
