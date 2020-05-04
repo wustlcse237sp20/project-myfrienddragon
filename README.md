@@ -83,6 +83,10 @@ For the next iteration, in addition to correcting the preidentified bugs,
 ### Dragon Main Section How To Play ###
 Pet your dragon and play minigames with it to earn food. Feed it and love it and watch it grow!
 
+#### Outstanding GameManager Bugs ####
+
+--If you play a minigame and go back to the main menu, and then go to another minigame and play, the game may crash.
+
 #### Dragon Main Section Known Bugs ####
 
 --Upon clicking the minigame menu, the egg/dragon will disappear for a second before rendering the new menu. We like to think of it as the dragon leaving with you to play.
@@ -92,6 +96,8 @@ Pet your dragon and play minigames with it to earn food. Feed it and love it and
 --Upon reaching the game over state, the dragon will disappear for a moment before rendering the game over menu.
 
 --If you try to feed your dragon a piece of food without having any, the animation may take a few seconds to restart. It's no good to taunt your dragon.
+
+
 
 
 ### Invaders How To Play ###
