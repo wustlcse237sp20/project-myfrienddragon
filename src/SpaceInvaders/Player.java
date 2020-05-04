@@ -7,7 +7,7 @@ import edu.princeton.cs.introcs.StdDraw;
 //player class for space invaders
 
 public class Player implements Sprite {
-	
+
 	private double x;
 	private double y;
 	private int score;
@@ -17,6 +17,7 @@ public class Player implements Sprite {
 	final double playerWidth = 46;
 	final double playerHeight = 33;
 	private HitBoxTile dragonHitBox;
+	long prevTime = 0;
 	int animationTrackerFrame;
 	String image;
 	boolean collided;
@@ -78,45 +79,34 @@ public class Player implements Sprite {
 		return this.dragonHitBox;
 	}
 
-	public void interpretKeyPressed(char keyPressed, DragonBulletCollection bullets) {
-		if (keyPressed == 'a' || keyPressed == 'd') {
-			if (keyPressed == 'a') {
-				this.movePlayer('x', -10);
+	public void interpretMovement(DragonBulletCollection bullets) {
+		if (StdDraw.isKeyPressed(KeyEvent.VK_LEFT)) {
+			this.movePlayer(-10);
+		}
+		if (StdDraw.isKeyPressed(KeyEvent.VK_RIGHT)) {
+			this.movePlayer(10);
+		}
+		if (StdDraw.isKeyPressed(KeyEvent.VK_SPACE)) {
+			long curr = System.currentTimeMillis();
+			if (curr >= (prevTime + 700)) {
+				this.shootBullet(bullets);
+				prevTime = curr;
 			}
-			else {
-				this.movePlayer('x', 10);
-			}
+		}
+	}
 
-	}
-		if (keyPressed == 'x') {
-			this.shootBullet(bullets);
-			
-		}
-}
-	
 	//moves player based on input
-	private void movePlayer(char axis, int dist) {
-		if (checkInBounds(axis, dist)) {
-			if (axis == 'y') {
-				this.y += dist;
-			}
-			else {
-				this.x += dist;
-			}
+	private void movePlayer(int dist) {
+		if (checkInBounds(dist)) {
+			this.x += dist;
 		}
 	}
-	
+
 	//ensures player cannot move off screen
-	private boolean checkInBounds(char axis, int difference) {
-		if (axis == 'y') {
-			return (this.y + difference) <= 400 && (this.y + difference) >= 0;
-		}
-		if (axis == 'x') {
-			return (this.x + difference) <= 400 && (this.x + difference) >= 0;
-		}
-		return false;
+	private boolean checkInBounds(int difference) {
+		return (this.x + difference) <= 400 && (this.x + difference) >= 0;
 	}
-	
+
 	public void shootBullet(DragonBulletCollection bullets) {
 		DragonBullet dragonBullet = new DragonBullet(this.x, this.y);
 		bullets.addBullet(dragonBullet);
@@ -125,13 +115,12 @@ public class Player implements Sprite {
 	@Override
 	public void move() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void updateHitBoxPos() {
 		this.dragonHitBox= new HitBoxTile(x, y, hitBoxHeight, hitBoxWidth);
-		
 	}
 
 
@@ -175,20 +164,17 @@ public class Player implements Sprite {
     		}
     		this.checkDestroy();
 		return returner;
-}
-	
+	}
+
 	//update function aggregates function for checks for collision, new keyboard input, and updating box.
 	//allows single function call in gameboard class.
 	public void updatePlayer(DragonBulletCollection bullets, Fleet fleet) {
 		int returner = this.invaderBulletCollisionChecker(fleet);
 		this.isHit(returner);
-		if (StdDraw.hasNextKeyTyped()){
-			this.interpretKeyPressed(StdDraw.nextKeyTyped(), bullets );
-			this.updateHitBoxPos();
-		
-		}
+		this.interpretMovement(bullets);
+		this.updateHitBoxPos();
 	}
-		
+
 
 	@Override
 	public double getHitBoxBottomLeftX() {
@@ -202,7 +188,7 @@ public class Player implements Sprite {
 
 	@Override
 	public double getHitBoxBottomRightX() {
-	return this.dragonHitBox.getBottomRightX();
+		return this.dragonHitBox.getBottomRightX();
 	}
 
 	@Override
@@ -213,12 +199,8 @@ public class Player implements Sprite {
 	@Override
 	public void destroy() {
 		// TODO Auto-generated method stub
-		
+
 	}
-
-
-	
-	
 
 }
 
