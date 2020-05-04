@@ -91,6 +91,8 @@ Pet your dragon and play minigames with it to earn food. Feed it and love it and
 
 --Upon reaching the game over state, the dragon will disappear for a moment before rendering the game over menu.
 
+--If you try to feed your dragon a piece of food without having any, the animation may take a few seconds to restart. It's no good to taunt your dragon.
+
 
 ### Invaders How To Play ###
 
