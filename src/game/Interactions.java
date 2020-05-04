@@ -1,6 +1,15 @@
 package game;
 
 public enum Interactions {
+<<<<<<< HEAD
+		idle,
+		feed,
+		pet,
+		game,
+		evolve,
+		gameover,
+		restart, 
+=======
 	idle,
 	feed,
 	pet,
@@ -12,4 +21,5 @@ public enum Interactions {
 	back,
 	gameover,
 	restart
+>>>>>>> develop
 }

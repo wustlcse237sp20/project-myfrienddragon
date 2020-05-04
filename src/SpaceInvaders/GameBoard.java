@@ -6,16 +6,46 @@ import java.util.Iterator;
 
 
 import edu.princeton.cs.introcs.StdDraw;
+import game.Dragon;
+import game.Game;
+import game_abstractions.GameManager;
+import game_abstractions.GameScene;
 
 //main game class. aggregates functions from other classes to create game
+<<<<<<< HEAD
+public class GameBoard extends GameScene {
+=======
 public class GameBoard {
 	
+>>>>>>> develop
 	int score;
-	int frameCounter;
+	int frame;
 	int spawnCounter;
 	Player player;
 	Fleet fleet;
 	DragonBulletCollection dragonBullets;
+<<<<<<< HEAD
+	boolean gameOver;
+	
+	public GameBoard(GameManager manager, GameScene parent) {
+		super(manager, parent);
+		this.frame = 0;
+		this.score = 0;
+		this.spawnCounter=0;
+		this.player = new Player();
+		this.fleet = new Fleet();
+		this.dragonBullets=new DragonBulletCollection();
+		this.gameOver = false;
+		this.setUpSprites();	
+		
+	}
+
+
+
+	@Override
+	public void update() {
+		System.out.println("Printing gameOver: " + this.gameOver);
+=======
 
 	public void setUpGame() {
 		setUpBoard();
@@ -41,37 +71,49 @@ public class GameBoard {
 
 	public void playGame() {
 		while (gameOver() == false){
+>>>>>>> develop
 			//randomly shoot bullets every couple seconds
-			if (frameCounter % 20 == 0) {
+			if (frame % 20 == 0) {
 				fleet.shootBullets();	
 			}
 			//spawn new row of invaders every 10 seconds
-			if (frameCounter == 300) {
+			if (frame== 300) {
 				fleet.addRowOfInvaders();
-				frameCounter = 0;
+				frame = 0;
 			}
 			//spawn new row of invaders every 10 seconds
-			frameCounter++;
+			frame++;
 			this.fieldUpdates();
 			StdDraw.clear();
 			this.drawSprites();
-			StdDraw.show();
-			StdDraw.pause(66);
+			this.gameOver();
+			if (this.gameOver) {
+			endGame();
+			}
 		}
-		endGame();
-		StdDraw.show();
+	
+	
+	private void setUpSprites() {
+		this.fleet.spawnInvaders();
 	}
+<<<<<<< HEAD
+	
+	private void gameOver() {
+=======
 
 	private boolean gameOver() {
+>>>>>>> develop
 		if(fleet.getInvaders().size() == 0 || player.getHealth()==0) {
-			return true;
-		}
-		else { 
-			return false;
+			this.gameOver=true;
 		}
 	}
 
 	private void endGame() {
+<<<<<<< HEAD
+		Game.dragon.updateFoodStore((int)this.score/50);
+		GameScene GameOverScreen = new GameOverScreen(this.getGameManager(), this);
+		this.getGameManager().setScene(GameOverScreen);
+=======
 		displayCongratsMessage();
 		displayButtons();
 	}
@@ -89,12 +131,13 @@ public class GameBoard {
 		Font font = new Font("Courier", Font.BOLD, 24);
 		StdDraw.setFont(font);
 		StdDraw.text(200, 275, "Congrats you won!");
+>>>>>>> develop
 	}
 
 	private void fieldUpdates() {
 		player.updatePlayer(dragonBullets, fleet);
 		dragonBullets.update();
-		fleet.update(dragonBullets, frameCounter);
+		fleet.update(dragonBullets, frame);
 		updateScore();
 		updateHealthDisplay();
 	}
@@ -176,6 +219,8 @@ public class GameBoard {
 		}
 	}
 
+<<<<<<< HEAD
+=======
 	public void initPlayer() {
 		player = new Player();
 		dragonBullets = new DragonBulletCollection();
@@ -192,4 +237,5 @@ public class GameBoard {
 		game.playGame();
 	}
 	
+>>>>>>> develop
 }

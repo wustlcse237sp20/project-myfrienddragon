@@ -23,13 +23,18 @@ public class Ball {
 		this.yPos = 350*Math.random();
 		this.speed = (6)*Math.random()+5;
 		this.radius = 5;
-		this.angle = 0;
+		this.angle = Math.random()*2*Math.PI;
 		this.minYLimit=this.screenHeight*(1/5)+speed;
 		this.minXLimit=radius+speed;
-		this.xDir=1;
-		this.yDir=1;
+		this.xDir=Math.signum(3*Math.random()-1);
+		this.yDir=Math.signum(3*Math.random()-1);
 		this.maxXLimit= screenWidth-radius-speed;
+<<<<<<< HEAD
+		this.maxYLimit= screenHeight-radius-speed;
+
+=======
 		this.maxYLimit=screenHeight-radius-speed;
+>>>>>>> develop
 	}
 	
 	Ball(Ball ballA) {
@@ -126,11 +131,23 @@ public class Ball {
 	}
 
 	public Collisions reboundBallOffMinY() {
+<<<<<<< HEAD
+			this.yPos = this.minYLimit+radius;
+			System.out.println("New y position: " +this.yPos);
+			this.yDir=-1*this.yDir;
+			return Collisions.BOTTOM_WALL;
+			
+		}
+	
+		
+	
+=======
 		this.yPos = this.minYLimit+radius;
 		this.yDir=-1*this.yDir;
 		return Collisions.BOTTOM_WALL;
 	}
 
+>>>>>>> develop
 	public Collisions reboundBallOffMaxY() {
 		this.yPos = this.maxYLimit-radius;
 		this.yDir=-1*this.yDir;
@@ -164,6 +181,11 @@ public class Ball {
 		double playerOneBallYPrediction = (this.yPos)+((speed + radius)*this.yDir);
 		if ((playerOneBallXPrediction < player.getxPos() + player.getWidth()) && this.getxDir()==-1) {
 			if ((playerOneBallYPrediction <= playerPaddleTopY) && (playerOneBallYPrediction >= playerPaddleBottomY)) {
+<<<<<<< HEAD
+			this.xDir=this.xDir*-1;
+			this.xPos += radius/2;
+			return Collisions.PLAYER_ONE_PADDLE;
+=======
 				//			if ((this.yPos-radius > playerPaddleBottomY) && this.yPos-radius < playerPaddleBottomY*0.33 ) {
 				//				this.xDir=-1*this.xDir;
 				//				this.yDir = -1*this.yDir;
@@ -181,6 +203,7 @@ public class Ball {
 				this.xDir=this.xDir*-1;
 				return Collisions.PLAYER_ONE_PADDLE;
 			}
+>>>>>>> develop
 		}
 		return Collisions.NONE;
 	}
@@ -191,6 +214,12 @@ public class Ball {
 		double playerTwoBallXPrediction = this.xPos+radius+speed;
 		double playerTwoBallYPrediction = (this.yPos)+((speed + radius)*this.yDir);
 		if ((playerTwoBallXPrediction > (playerTwo.getxPos() - playerTwo.getWidth())) && this.xDir==1) {
+<<<<<<< HEAD
+		if ((playerTwoBallYPrediction <= playerPaddleTopY) && (playerTwoBallYPrediction >= playerPaddleBottomY)) {
+			this.xDir = -1*xDir;
+			this.xPos = this.xPos - radius/2;
+			return Collisions.PLAYER_TWO_PADDLE;
+=======
 			if ((playerTwoBallYPrediction <= playerPaddleTopY) && (playerTwoBallYPrediction >= playerPaddleBottomY)) {
 				//			if ((ballPosWithPadding > playerPaddleBottomY) && ballPosWithPadding < playerPaddleBottomY*0.33 ) {
 				//				this.xDir=-1*this.xDir;
@@ -207,6 +236,7 @@ public class Ball {
 				//ai.predictionCount=1;
 				return Collisions.PLAYER_TWO_PADDLE;
 			}
+>>>>>>> develop
 		}
 		return Collisions.NONE;
 		//update ball pos/speed
@@ -217,6 +247,28 @@ public class Ball {
 		Collisions collision = this.PlayerOnePaddleCollision(playerOne);
 		collision = this.PlayerTwoPaddleCollision(playerTwo);
 		//aggregate checker function that checks collision conditions and calls rebound functions accordingly
+<<<<<<< HEAD
+	if (collision == Collisions.NONE) {
+		if (this.yPos-radius<= this.minYLimit) {
+			collision = this.reboundBallOffMinY();
+		}
+		else if (this.yPos+radius >= this.maxYLimit) {
+			collision = this.reboundBallOffMaxY();
+       	}
+		else if (this.xPos-radius < this.minXLimit || (this.yPos < this.minYLimit && this.xPos < this.minXLimit)) {
+			collision = this.reboundBallOffMinX();
+		}
+		else if(this.xPos + radius > this.maxXLimit|| (this.yPos > this.maxYLimit && this.xPos > this.maxXLimit)) {
+			collision = this.reboundBallOffMaxX();
+		}
+		else {
+			collision = Collisions.NONE;
+		}
+	
+	}
+	return collision;
+}
+=======
 		if (collision == Collisions.NONE) {
 			if (this.yPos <= this.minYLimit) {
 				collision = this.reboundBallOffMinY();
@@ -237,6 +289,7 @@ public class Ball {
 		}
 		return collision;
 	}
+>>>>>>> develop
 
 	//calls 
 	public void move() {
@@ -245,8 +298,8 @@ public class Ball {
 	}
 
 	public Collisions update(RealPlayer playerOne, Player playerTwo) {
-		this.move();
 		Collisions collision = this.checkCollisions(playerOne, playerTwo);
+		this.move();
 		return collision;
 	}
 

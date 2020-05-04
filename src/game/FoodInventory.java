@@ -5,7 +5,7 @@ public class FoodInventory {
 	int amountOfFood;
 
 	public FoodInventory() {
-		this.amountOfFood=0;
+		this.amountOfFood=15;
 	}
 	
 	public int getFoodAmount() {
