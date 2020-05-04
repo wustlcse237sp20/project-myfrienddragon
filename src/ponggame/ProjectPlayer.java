@@ -62,27 +62,6 @@ public class ProjectPlayer implements Player {
 	
 	public double makePrediction(Ball ball, RealPlayer player) {
 
-		//		double distanceX = Math.abs(this.xPos - ball.getxPos());
-		//		double time = distanceX/ball.getSpeed();
-		//		double predictionY = ball.getyPos()+time*ball.getSpeed();
-		//		if(predictionY>=this.maxY) {
-		//			150=(15)(x)+65
-		//		   double bounceX = (this.maxY/ball.getSpeed())
-		//			
-		//		}
-		//		double intermediatePrediction=0;
-		//		double print1 = (this.xPos) - (distanceX);
-		//		int timeReflected = (int) Math.floor(print1/this.maxY);
-		//		if (timeReflected % 2 == 0) {
-		//			intermediatePrediction= print1 % this.maxY;
-		//			if (intermediatePrediction < 0) {
-		//				predictionY= intermediatePrediction+this.maxY;
-		//			}
-		//		}
-		//		else {
-		//			intermediatePrediction = this.maxY-(print1 % this.maxY);
-		//		}
-
 		this.predictionBall = new Ball(ball);
 
 		while (predictionBall.getxPos() + predictionBall.getRadius() + predictionBall.getSpeed() < this.xPos) {

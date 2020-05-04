@@ -8,82 +8,92 @@ import game.Adult;
 import game.Baby;
 import game.Dragon;
 import game.Egg;
+import game.FoodInventory;
 
 class BabyTest {
 
 	@Test
 	void creationTest() {
-		Baby baby = new Baby();
+		FoodInventory foodInventory = new FoodInventory();
+		Baby baby = new Baby(foodInventory);
 		if (baby != null) {
 			assertTrue(true,"Baby created");
 		}
 	}
 	@Test
 	void creationVariablesTest() {
-		Baby baby = new Baby();
+		FoodInventory foodInventory = new FoodInventory();
+		Baby baby = new Baby(foodInventory);
 		assertEquals(baby.foodLevel, 0);
 		assertEquals(baby.loveLevel, 0);
 	}
 	
 	@Test
 	void addOneFoodTest() {
-		Baby baby = new Baby();
+		FoodInventory foodInventory = new FoodInventory();
+		Baby baby = new Baby(foodInventory);
 		baby.feed();
-		assertEquals(baby.foodLevel, 1);
+		assertEquals(baby.foodLevel, 20);
 	}
 	
 	@Test
 	void addFiveFoodTest() {
-		Baby baby = new Baby();
+		FoodInventory foodInventory = new FoodInventory();
+		Baby baby = new Baby(foodInventory);
 		for (int i = 0; i < 5; ++i) {
 		baby.feed();
 		}
-		assertEquals(baby.foodLevel, 5);
+		assertEquals(baby.foodLevel, 100);
 	}
 	
 	@Test
 	void addSixFoodTest() {
-		Baby baby = new Baby();
+		FoodInventory foodInventory = new FoodInventory();
+		Baby baby = new Baby(foodInventory);
 		for (int i = 0; i < 6; ++i) {
 		baby.feed();
 		}
-		assertEquals(baby.foodLevel, 5);
+		assertEquals(baby.foodLevel, 100);
 	}
 	
 	@Test
 	void addOneLoveTest() {
-		Baby baby = new Baby();
+		FoodInventory foodInventory = new FoodInventory();
+		Baby baby = new Baby(foodInventory);
 		baby.pet();
-		assertEquals(baby.loveLevel, 1);
+		assertEquals(baby.loveLevel, 20);
 	}
 	
 	@Test
 	void addFiveLoveTest() {
-		Baby baby = new Baby();
+		FoodInventory foodInventory = new FoodInventory();
+		Baby baby = new Baby(foodInventory);
 		for (int i = 0; i < 5; ++i) {
 		baby.pet();
 		}
-		assertEquals(baby.loveLevel, 5);
+		assertEquals(baby.loveLevel, 100);
 	}
 	@Test
 	void addSixLoveTest() {
-		Baby baby = new Baby();
+		FoodInventory foodInventory = new FoodInventory();
+		Baby baby = new Baby(foodInventory);
 		for (int i = 0; i < 6; ++i) {
 		baby.pet();
 		}
-		assertEquals(baby.loveLevel, 5);
+		assertEquals(baby.loveLevel, 100);
 	}
 	
 	@Test
 	void ageUpTest() {
-		Baby baby = new Baby();
+		FoodInventory foodInventory = new FoodInventory();
+		Baby baby = new Baby(foodInventory);
 		for (int i = 0; i < 6; ++i) {
 			baby.pet();
 			baby.feed();
 		}
 		Dragon output = baby.ageUp();
-		Dragon tester = new Adult();
-		assertEquals(output, tester);
+		Dragon tester = new Adult(foodInventory);
+		assertEquals(output.equals(tester), true);
 		
 	}
 

@@ -35,7 +35,7 @@ class InvaderTests {
 	@Test
 	void testHurt() {
 		invader.hurt();
-		assertEquals(invader.isAlive(), false);
+		assertEquals(invader.isAlive(), true);
 	}
 	
 	@Test
@@ -51,7 +51,8 @@ class InvaderTests {
 		DragonBullet bullet = new DragonBullet(200,200);
 		DragonBulletCollection collection = new DragonBulletCollection();
 		collection.addBullet(bullet);
-		assertTrue(invader.isHit(collection));
+		invader.update(collection);
+		assertEquals(invader.getCollided(), true);
 	}
 	
 	@Test
@@ -59,7 +60,8 @@ class InvaderTests {
 		DragonBullet bullet = new DragonBullet(190,200);
 		DragonBulletCollection collection = new DragonBulletCollection();
 		collection.addBullet(bullet);
-		assertTrue(invader.isHit(collection));
+		invader.update(collection);
+		assertEquals(invader.getCollided(), true);
 	}
 	
 	@Test
@@ -67,14 +69,16 @@ class InvaderTests {
 		DragonBullet bullet = new DragonBullet(210,200);
 		DragonBulletCollection collection = new DragonBulletCollection();
 		collection.addBullet(bullet);
-		assertTrue(invader.isHit(collection));
+		invader.update(collection);
+		assertEquals(invader.getCollided(), true);
 	}
 	@Test 
 	void testCornerCollision3() {
 		DragonBullet bullet = new DragonBullet(190,220);
 		DragonBulletCollection collection = new DragonBulletCollection();
 		collection.addBullet(bullet);
-		assertTrue(invader.isHit(collection));
+		invader.update(collection);
+		assertEquals(invader.getCollided(), true);
 	}
 	
 	@Test
@@ -84,6 +88,7 @@ class InvaderTests {
 		DragonBulletCollection collection = new DragonBulletCollection();
 		collection.addBullet(bullet1);
 		collection.addBullet(bullet2);
-		assertTrue(invader.isHit(collection));
+		invader.update(collection);
+		assertEquals(invader.getCollided(), true);
 	}
 }
