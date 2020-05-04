@@ -192,9 +192,9 @@ public class Ball {
 	
 	public Collisions checkCollisions(RealPlayer playerOne, Player playerTwo) {
 		Collisions collision = this.PlayerOnePaddleCollision(playerOne);
-		collision = this.PlayerTwoPaddleCollision(playerTwo);
+		Collisions collision2 = this.PlayerTwoPaddleCollision(playerTwo);
 		//aggregate checker function that checks collision conditions and calls rebound functions accordingly
-	if (collision == Collisions.NONE) {
+	if (collision == Collisions.NONE && collision2 == Collisions.NONE) {
 		if (this.yPos-radius<= this.minYLimit) {
 			collision = this.reboundBallOffMinY();
 		}
@@ -212,7 +212,13 @@ public class Ball {
 		}
 	
 	}
+	if (collision!= Collisions.NONE) {
 	return collision;
+	}
+	else if (collision!= collision2) {
+		return collision;
+	}
+	return Collisions.NONE;
 }
 
 	//calls 
