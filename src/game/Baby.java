@@ -2,38 +2,57 @@ package game;
 
 import animations.DragonAnimation;
 
-public class Baby implements Dragon {
+public class Baby implements Dragon, GameEntity {
 
 	public int foodLevel;
 	public int loveLevel;
 	public int age;
+	public FoodInventory foodInventory;
 
-	public Baby() {
+	public Baby(FoodInventory foodInventory) {
 		this.foodLevel = 0;
 		this.loveLevel = 0;
 		this.age = 1;
+		this.foodInventory=foodInventory;
+	}
+	public int getAge() {
+		return this.age;
+	}
+	
+	public int getFoodLevel() {
+		return this.foodLevel;
+	}
+	
+	public int getLoveLevel() {
+		return this.loveLevel;
 	}
 
 	public int pet() {
-		if (this.loveLevel < 5) {
-			this.loveLevel++;
+		if (this.loveLevel < 100) {
+			this.loveLevel += 20;
 		}
 		return this.loveLevel;
 	}
 
 	public int feed() {
-		if (this.foodLevel < 5) {
-			this.foodLevel++;
+		if (this.foodLevel < 100 && this.foodInventory.getFoodAmount() > 0) {
+			this.foodInventory.removeFood();
+			this.foodLevel += 5;
 		}
 		return this.foodLevel;
 	}
 
 	public Dragon ageUp() {
-		if (this.foodLevel == 5 && this.loveLevel == 5) {
-			Adult dragon = new Adult();
-			return dragon;
+		Adult dragon = new Adult(this.foodInventory);
+		return dragon;
+	}
+	
+	@Override
+	public boolean willAge() {
+		if (this.foodLevel == 100 && this.loveLevel == 100) {
+			return true;
 		}
-		return this;
+		return false;
 	}
 
 	public void animateFeed(int frame) {
@@ -48,13 +67,18 @@ public class Baby implements Dragon {
 	public void animateIdle(int frame) {
 		DragonAnimation.babyIdle(frame);
 	}
+	
+	public void animateEvolve(int frame) {
+		DragonAnimation.evolve(frame);
+	}
 
 	/**
 	 * returns an interaction based on where the user clicked
 	 */
 	@Override
 	public Interactions checkInteraction(double mouseX, double mouseY) {
-		if ((mouseX > 25 && mouseX < 85) && (mouseY > 20 && mouseY < 100)) {
+		
+		if ((mouseX > 0 && mouseX < 85) && (mouseY > 20 && mouseY < 100)) {
 			return Interactions.game;
 
 		}
@@ -75,6 +99,9 @@ public class Baby implements Dragon {
 	 */
 	@Override
 	public void update(Interactions interactionValue, int frame) {
+		if (interactionValue == Interactions.evolve) {
+			this.animateEvolve(frame);
+		}
 		if (interactionValue ==  Interactions.idle) {
 			this.animateIdle(frame);
 		}

@@ -3,28 +3,43 @@ package game;
 import animations.DragonAnimation;
 import edu.princeton.cs.introcs.StdDraw;
 
-public class Adult implements Dragon {
+public class Adult implements Dragon, GameEntity {
 
 	public int foodLevel;
 	public int loveLevel;
 	public int age;
+	public FoodInventory foodInventory;
 
-	public Adult() {
+	public Adult(FoodInventory foodInventory) {
 		this.foodLevel = 0;
 		this.loveLevel = 0;
 		this.age = 2;
+		this.foodInventory=foodInventory;
+	}
+
+	public int getAge() {
+		return this.age;
+	}
+	
+	public int getFoodLevel() {
+		return this.foodLevel;
+	}
+
+	public int getLoveLevel() {
+		return this.loveLevel;
 	}
 
 	public int pet() {
-		if (this.loveLevel < 5) {
-			this.loveLevel++;
+		if (this.loveLevel < 100) {
+			this.loveLevel += 20;
 		}
 		return this.loveLevel;
 	}
 
 	public int feed() {
-		if (this.foodLevel < 5) {
-			this.foodLevel++;
+		if (this.foodLevel < 100 && this.foodInventory.getFoodAmount() > 0) {
+			this.foodLevel += 5;
+			this.foodInventory.removeFood();
 		}
 		return this.foodLevel;
 	}
@@ -43,14 +58,21 @@ public class Adult implements Dragon {
 	public void animateIdle(int frame) {
 		DragonAnimation.adultIdle(frame);
 	}
-	
+
+	public void animateEvolve(int frame) {
+		DragonAnimation.evolve(frame);
+	}
+
+	public boolean willAge() {
+		if (this.foodLevel == 100 && this.loveLevel == 100) {
+			return true;
+		}
+		return false;
+	}
+
 	@Override
 	public Dragon ageUp() {
-		if (this.foodLevel == 5 && this.loveLevel == 5) {
-			StdDraw.clear();
-			StdDraw.text(200, 200, "Congratulations, you raised your dragon to an adult");
-		}
-		return this;
+		return null;
 	}
 
 	/**
@@ -58,7 +80,7 @@ public class Adult implements Dragon {
 	 */
 	@Override
 	public Interactions checkInteraction(double mousex, double mousey) {
-		if ((mousex > 25 && mousex < 85) && (mousey > 20 && mousey < 100)) {
+		if ((mousex > 0 && mousex < 85) && (mousey > 20 && mousey < 100)) {
 			return Interactions.game;
 
 		}
@@ -77,6 +99,9 @@ public class Adult implements Dragon {
 	 * displays the proper animation updates the dragon based on user interaction
 	 */
 	public void update(Interactions interactionValue, int frame) {
+		if (interactionValue == Interactions.evolve) {
+			this.animateEvolve(frame);
+		}
 		if (interactionValue ==  Interactions.idle) {
 			this.animateIdle(frame);
 		}

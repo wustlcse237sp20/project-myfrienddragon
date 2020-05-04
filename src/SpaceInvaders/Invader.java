@@ -6,33 +6,55 @@ import java.util.Iterator;
 public class Invader implements Sprite {
 	double xPos;
 	double yPos;
-	int health;
+	int animationTrackerFrame;
+	String image;
 	HitBoxTile SpaceInvaderTile;
 	final double invaderWidth = 50;
 	final double invaderHeight = 41;
-	boolean onScreen;
+	boolean alive;
+	boolean collided;
+	
 	
 	public Invader(double x, double y) {
 		this.xPos = x;
 		this.yPos = y;
-		this.health = 1;
-		this.onScreen = true;
+		this.alive = true;
+		this.collided = false;
 		this.SpaceInvaderTile = new HitBoxTile(this.xPos, this.yPos, invaderHeight , invaderWidth);
+		this.image = "space_invaders_resources/space_invader_ship.png";
+		this.animationTrackerFrame=0;
 		
 
 	}
+	public void setPicture(String imagePath) {
+		this.image = imagePath;
+	}
+	public String getImage( ) {
+		return this.image;
+	}
 	public void hurt() {
-		this.onScreen = false;
+		this.collided = true;
+		
+	}
+	public void destroy() {
+	if (this.collided) {
+		GameAnimations setAnimation = new GameAnimations();
+		setAnimation.spaceInvaderExplode(this);
+		if (this.animationTrackerFrame==15) {
+			this.alive = false;
+			}
+		}
+		
 	}
 	
 	
-	public boolean getOnScreen() {
-		return this.onScreen;
+	public boolean isAlive() {
+		return this.alive;
 	} 
-	
-	public int getHealth() {
-		return health;
+	public boolean getCollided() {
+		return this.collided;
 	}
+	
 
 	@Override
 	public void move() {
@@ -57,33 +79,29 @@ public class Invader implements Sprite {
 		return yPos;
 	}
 
-
-
-	
 	public HitBoxTile getHitBox() {
 		return this.SpaceInvaderTile;
 	}
 	
-	//checks collision with dragon bullets. if collision is detected, the invader is taken off screen, and so is the bullet
-	//in question
-	public void checkCollision(DragonBulletCollection dragonBullets) {
-		Iterator<DragonBullet> it = dragonBullets.getBullets().iterator();
-        while (it.hasNext()) {
-        	DragonBullet element = it.next();
-        HitBoxTile elementHitBox = element.getHitBox();
-        	boolean collided = elementHitBox.isColliding(this.getHitBox());
+	public void update(DragonBulletCollection dragonBullets) {
+		Iterator<DragonBullet> bulletIterator = dragonBullets.getBullets().iterator();
+		this.animationTrackerFrame+=1;
+		if (this.animationTrackerFrame==16) {
+			this.animationTrackerFrame=0;
+		}
+        while (bulletIterator.hasNext()) {
+        	DragonBullet bullet = bulletIterator.next();
+        	HitBoxTile bulletHitBox = bullet.getHitBox();
+        	boolean collided = bulletHitBox.isColliding(this.getHitBox());
         		if (collided) {
-						this.hurt();
-						element.hurt();
-						
-			}
+        			bullet.hurt();
+        			this.hurt();
+        			animationTrackerFrame = 0;
+        		}		
         }
+        this.destroy();
 	}
-	@Override
-	public void destroy() {
-		// TODO Auto-generated method stub
-		
-	}
+
 	@Override
 	public double getHitBoxBottomLeftX() {
 		return this.getHitBox().getBottomLeftX();
@@ -100,6 +118,7 @@ public class Invader implements Sprite {
 	@Override
 	public double getHitBoxTopLeftY() {
 		return this.getHitBox().getTopLeftY();
-	}	
+	}
+
 	
 }

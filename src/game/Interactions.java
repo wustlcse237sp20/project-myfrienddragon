@@ -4,7 +4,12 @@ public enum Interactions {
 		idle,
 		feed,
 		pet,
-		game
-
-
+		game,
+		evolve,
+		wait, 
+		pong,
+		invaders,
+		back,
+		gameover,
+		restart
 }
