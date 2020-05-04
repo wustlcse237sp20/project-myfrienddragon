@@ -1,6 +1,5 @@
 package game_abstractions;
 
-import com.sun.jndi.ldap.ManageReferralControl;
 
 import edu.princeton.cs.introcs.StdDraw;
 import game.Game;
