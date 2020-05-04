@@ -20,6 +20,7 @@ public class Egg implements Dragon{
 		this.fullHealth=20;
 		this.foodInventory=foodInventory;
 	}
+	
 	public int getAge() {
 		return this.age;
 	}
@@ -51,7 +52,7 @@ public class Egg implements Dragon{
 		Baby dragon = new Baby(this.foodInventory);
 		return dragon;
 	}
-	
+
 	public boolean willAge() {
 		if (this.foodLevel == fullFood && this.loveLevel == fullHealth ) {
 			return true;
@@ -77,9 +78,12 @@ public class Egg implements Dragon{
 	public void animateEvolve(int frame) {
 		DragonAnimation.evolve(frame);
 	}
+<<<<<<< HEAD
 	public void updateFoodStore(int foodToAdd) {
 		this.foodInventory.addFood(foodToAdd);
 	}
+=======
+>>>>>>> develop
 
 	/**
 	 * returns an interaction based on where the user clicked
@@ -107,11 +111,15 @@ public class Egg implements Dragon{
 			 }
 		 }
 	 }
+<<<<<<< HEAD
 
 	@Override
 	public FoodInventory getFoodStore() {
 		return this.foodInventory;
 	}
+=======
+	 
+>>>>>>> develop
 }
 
 

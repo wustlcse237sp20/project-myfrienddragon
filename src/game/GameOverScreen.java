@@ -8,6 +8,7 @@ import game_abstractions.GameManager;
 import game_abstractions.GameScene;
 import ponggame.PongGame;
 
+<<<<<<< HEAD
 public class GameOverScreen extends GameScene{
 		double mouseX;
 		double mouseY;
@@ -78,4 +79,24 @@ public GameOverScreen(GameManager manager, GameScene parent) {
 			this.respondToInteraction(interactionLevel, frame);
 			}
 		}
+=======
+public class GameOverScreen implements GameEntity{
+	
+	public void drawGameOverScreen() {
+		UIAnimations.drawGameOverScreen();	
+	}
+
+	@Override
+	public void update(Interactions interactionLevel, int frame) {
+		this.drawGameOverScreen();
+	}
+
+	@Override
+	public Interactions checkInteraction(double mouseX, double mouseY) {
+		if ((mouseX > 150 && mouseX < 250) && (mouseY> 0 && mouseY <100)) {
+			return Interactions.restart;
+		}
+		return Interactions.wait;
+	}
+>>>>>>> develop
 

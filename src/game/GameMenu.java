@@ -9,6 +9,7 @@ import game_abstractions.GameManager;
 import game_abstractions.GameScene;
 import ponggame.PongGame;
 
+<<<<<<< HEAD
 public class GameMenu extends GameScene {
 	double mouseX;
 	double mouseY;
@@ -46,6 +47,19 @@ public class GameMenu extends GameScene {
 			}
 		System.out.println("Interaction level: " + interactionLevel);
 		return interactionLevel;
+=======
+public class GameMenu implements GameEntity {
+
+	public GameMenu() {
+	}
+
+	public void drawGameMenu(int frame) {
+		UIAnimations.drawGameMenu();	
+	}
+
+	public void getGame() {
+
+>>>>>>> develop
 	}
 
 	public GameMenuInteractions checkSceneInteraction(double mouseX, double mouseY) {
@@ -61,6 +75,7 @@ public class GameMenu extends GameScene {
 		return GameMenuInteractions.wait;
 	}
 
+<<<<<<< HEAD
 	
 	public void respondToInteraction(GameMenuInteractions interactionLevel, int frame) {
 		
@@ -97,3 +112,27 @@ public class GameMenu extends GameScene {
 		}
 	}
 	
+=======
+	@Override
+	public void update(Interactions interactionLevel, int frame) {
+		if (interactionLevel == Interactions.invaders) {
+			GameBoard game = new GameBoard();
+			game.setUpGame();
+			game.playGame();
+
+		}
+		if (interactionLevel == Interactions.pong) {
+			PongGame game = new PongGame();
+			game.resetGame();
+
+		}
+		if (interactionLevel == Interactions.back) {
+
+
+		}
+		if (interactionLevel == Interactions.wait)
+			this.drawGameMenu(frame);
+	}
+
+}
+>>>>>>> develop

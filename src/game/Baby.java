@@ -20,14 +20,15 @@ public class Baby implements Dragon {
 		this.fullHealth= 100;
 		this.foodInventory=foodInventory;
 	}
+	
 	public int getAge() {
 		return this.age;
 	}
-	
+
 	public int getFoodLevel() {
 		return this.foodLevel;
 	}
-	
+
 	public int getLoveLevel() {
 		return this.loveLevel;
 	}
@@ -51,7 +52,7 @@ public class Baby implements Dragon {
 		Adult dragon = new Adult(this.foodInventory);
 		return dragon;
 	}
-	
+
 	@Override
 	public boolean willAge() {
 		if (this.foodLevel == fullFood && this.loveLevel == fullHealth) {
@@ -72,7 +73,7 @@ public class Baby implements Dragon {
 	public void animateIdle(int frame) {
 		DragonAnimation.babyIdle(frame);
 	}
-	
+
 	public void animateEvolve(int frame) {
 		DragonAnimation.evolve(frame);
 	}
@@ -85,6 +86,14 @@ public class Baby implements Dragon {
 	/**
 	 * returns an interaction based on where the user clicked
 	 */
+<<<<<<< HEAD
+=======
+	@Override
+	public Interactions checkInteraction(double mouseX, double mouseY) {
+
+		if ((mouseX > 0 && mouseX < 85) && (mouseY > 20 && mouseY < 100)) {
+			return Interactions.game;
+>>>>>>> develop
 
 
 	/**
@@ -108,11 +117,15 @@ public class Baby implements Dragon {
 			}
 		}	
 	}
+<<<<<<< HEAD
 	@Override
 	public FoodInventory getFoodStore() {
 		return this.foodInventory;
 	}
 	
+=======
+
+>>>>>>> develop
 }
 
 

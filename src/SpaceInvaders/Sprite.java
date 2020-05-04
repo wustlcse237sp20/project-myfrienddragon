@@ -1,6 +1,7 @@
 package SpaceInvaders;
 
 public interface Sprite {
+	
 	public void move();
 	public void updateHitBoxPos();
 	public void destroy();
@@ -11,10 +12,5 @@ public interface Sprite {
 	public double getHitBoxBottomLeftY();
 	public double getHitBoxBottomRightX();
 	public double getHitBoxTopLeftY();
-	
-	
-	
-
-	
 
 }

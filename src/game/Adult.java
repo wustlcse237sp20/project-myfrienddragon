@@ -25,7 +25,7 @@ public class Adult implements Dragon {
 	public int getAge() {
 		return this.age;
 	}
-	
+
 	public int getFoodLevel() {
 		return this.foodLevel;
 	}
