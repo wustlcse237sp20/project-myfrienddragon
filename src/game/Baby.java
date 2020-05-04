@@ -2,38 +2,62 @@ package game;
 
 import animations.DragonAnimation;
 
+
 public class Baby implements Dragon {
 
 	public int foodLevel;
 	public int loveLevel;
 	public int age;
+	public int fullFood;
+	public int fullHealth;
+	public FoodInventory foodInventory;
 
-	public Baby() {
+	public Baby(FoodInventory foodInventory) {
 		this.foodLevel = 0;
 		this.loveLevel = 0;
 		this.age = 1;
+		this.fullFood = 100;
+		this.fullHealth= 100;
+		this.foodInventory=foodInventory;
+	}
+	public int getAge() {
+		return this.age;
+	}
+	
+	public int getFoodLevel() {
+		return this.foodLevel;
+	}
+	
+	public int getLoveLevel() {
+		return this.loveLevel;
 	}
 
 	public int pet() {
-		if (this.loveLevel < 5) {
-			this.loveLevel++;
+		if (this.loveLevel < 100) {
+			this.loveLevel += 20;
 		}
 		return this.loveLevel;
 	}
 
 	public int feed() {
-		if (this.foodLevel < 5) {
-			this.foodLevel++;
+		if (this.foodLevel < 100 && this.foodInventory.getFoodAmount() > 0) {
+			this.foodInventory.removeFood();
+			this.foodLevel += 20;
 		}
 		return this.foodLevel;
 	}
 
 	public Dragon ageUp() {
-		if (this.foodLevel == 5 && this.loveLevel == 5) {
-			Adult dragon = new Adult();
-			return dragon;
+		Adult dragon = new Adult(this.foodInventory);
+		return dragon;
+	}
+	
+	@Override
+	public boolean willAge() {
+		if (this.foodLevel == fullFood && this.loveLevel == fullHealth) {
+			return true;
 		}
-		return this;
+		return false;
 	}
 
 	public void animateFeed(int frame) {
@@ -48,27 +72,20 @@ public class Baby implements Dragon {
 	public void animateIdle(int frame) {
 		DragonAnimation.babyIdle(frame);
 	}
+	
+	public void animateEvolve(int frame) {
+		DragonAnimation.evolve(frame);
+	}
+	public void updateFoodStore(int foodToAdd) {
+		this.foodInventory.addFood(foodToAdd);
+	}
+	
+
 
 	/**
 	 * returns an interaction based on where the user clicked
 	 */
-	@Override
-	public Interactions checkInteraction(double mouseX, double mouseY) {
-		if ((mouseX > 25 && mouseX < 85) && (mouseY > 20 && mouseY < 100)) {
-			return Interactions.game;
 
-		}
-		if ((mouseX > 175 && mouseX< 250) && (mouseY > 20 && mouseY<100)) {
-			return Interactions.feed;
-		}
-		if ((mouseX >350 && mouseX < 410 ) && (mouseY > 20 && mouseY < 100)) {
-			return Interactions.pet;
-		}
-		else {
-			return Interactions.idle;
-		}
-
-	}
 
 	/**
 	 * displays the proper animation updates the dragon based on user interaction
@@ -78,7 +95,7 @@ public class Baby implements Dragon {
 		if (interactionValue ==  Interactions.idle) {
 			this.animateIdle(frame);
 		}
-		if (interactionValue == Interactions.feed) {
+		if (interactionValue == Interactions.feed && this.foodInventory.getFoodAmount()>0) {
 			this.animateFeed(frame);
 			if (frame == 0) {
 				this.feed();
@@ -91,8 +108,11 @@ public class Baby implements Dragon {
 			}
 		}	
 	}
+	@Override
+	public FoodInventory getFoodStore() {
+		return this.foodInventory;
+	}
 	
 }
-
 
 

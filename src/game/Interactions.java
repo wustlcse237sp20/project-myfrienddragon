@@ -1,10 +1,13 @@
 package game;
 
+
 public enum Interactions {
 		idle,
 		feed,
 		pet,
-		game
-
-
+		game,
+		evolve,
+		gameover,
+		restart, 
 }
+
