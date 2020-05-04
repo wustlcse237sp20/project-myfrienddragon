@@ -1,8 +1,7 @@
 package ponggame;
 
-
 public class ProjectPlayer implements Player {
-	
+
 	double xPos;
 	double yPos; 
 	double yDir;
@@ -20,6 +19,7 @@ public class ProjectPlayer implements Player {
 	double reactionSpeed;
 	int predictionCount = 0;
 	Ball predictionBall;
+	
 	public ProjectPlayer() {
 		xPos = 350;
 		yPos = 200;
@@ -34,56 +34,61 @@ public class ProjectPlayer implements Player {
 		this.error=0;
 		this.reactionSpeed = 25;
 		this.yDir = 0;
-		
 	}
+	
 	public double getxPos() {
 		return xPos;
 	}
+	
 	public void setxPos(double xPos) {
 		this.xPos = xPos;
 	}
+	
 	public double getyPos() {
 		return yPos;
 	}
+	
 	public void setyPos(double yPos) {
 		this.yPos = yPos;
 	}
+	
 	public int getScore() {
 		return score;
 	}
+	
 	public void setScore(int score) {
 		this.score = score;
 	}
-	public double makePrediction(Ball ball, RealPlayer player) {
-		
-//		double distanceX = Math.abs(this.xPos - ball.getxPos());
-//		double time = distanceX/ball.getSpeed();
-//		double predictionY = ball.getyPos()+time*ball.getSpeed();
-//		if(predictionY>=this.maxY) {
-//			150=(15)(x)+65
-//		   double bounceX = (this.maxY/ball.getSpeed())
-//			
-//		}
-//		double intermediatePrediction=0;
-//		double print1 = (this.xPos) - (distanceX);
-//		int timeReflected = (int) Math.floor(print1/this.maxY);
-//		if (timeReflected % 2 == 0) {
-//			intermediatePrediction= print1 % this.maxY;
-//			if (intermediatePrediction < 0) {
-//				predictionY= intermediatePrediction+this.maxY;
-//			}
-//		}
-//		else {
-//			intermediatePrediction = this.maxY-(print1 % this.maxY);
-//		}
 	
+	public double makePrediction(Ball ball, RealPlayer player) {
+
+		//		double distanceX = Math.abs(this.xPos - ball.getxPos());
+		//		double time = distanceX/ball.getSpeed();
+		//		double predictionY = ball.getyPos()+time*ball.getSpeed();
+		//		if(predictionY>=this.maxY) {
+		//			150=(15)(x)+65
+		//		   double bounceX = (this.maxY/ball.getSpeed())
+		//			
+		//		}
+		//		double intermediatePrediction=0;
+		//		double print1 = (this.xPos) - (distanceX);
+		//		int timeReflected = (int) Math.floor(print1/this.maxY);
+		//		if (timeReflected % 2 == 0) {
+		//			intermediatePrediction= print1 % this.maxY;
+		//			if (intermediatePrediction < 0) {
+		//				predictionY= intermediatePrediction+this.maxY;
+		//			}
+		//		}
+		//		else {
+		//			intermediatePrediction = this.maxY-(print1 % this.maxY);
+		//		}
+
 		this.predictionBall = new Ball(ball);
-		
+
 		while (predictionBall.getxPos() + predictionBall.getRadius() + predictionBall.getSpeed() < this.xPos) {
 			System.out.println("Updating prediction ball");
 			predictionBall.update(player, this);
 			System.out.println("Prediction ball update: " + predictionBall.getxPos() + " " + predictionBall.yPos);
-			
 		}
 		double predictionY = predictionBall.getyPos();
 		double err = determineErr(player);
@@ -93,8 +98,8 @@ public class ProjectPlayer implements Player {
 			this.doubleyPrediction=this.maxY;
 		}
 		return this.doubleyPrediction;	
-		
 	}
+	
 	public double determineErr(RealPlayer player) {
 		int difference = player.getScore()-this.getScore();
 		switch(difference) {
@@ -169,8 +174,8 @@ public class ProjectPlayer implements Player {
 		}
 		double AInoise = this.error;
 		return AInoise;		
-		
 	}
+	
 	public void redoPrediction(Ball ball, RealPlayer player) {
 		//make prediction if ball is moving towards ai side of court
 		//}
@@ -178,8 +183,8 @@ public class ProjectPlayer implements Player {
 			predictionCount = 0;
 		}
 		if (ball.getxDir()== 1 && predictionCount == 0) {
-	     	this.makePrediction(ball, player);
-	     	predictionCount = 1;
+			this.makePrediction(ball, player);
+			predictionCount = 1;
 		}
 		if (this.doubleyPrediction < (this.maxY) && this.doubleyPrediction > (this.yPos)) {
 			this.yDir = 1;
@@ -189,14 +194,12 @@ public class ProjectPlayer implements Player {
 			this.yDir = -1;
 			this.moveTo();
 		}
-		
 	}
-	
+
 	public void moveTo() {
 		if (this.yPos != this.doubleyPrediction) {
-		this.yPos = this.yPos + (this.yDir*this.reactionSpeed);
+			this.yPos = this.yPos + (this.yDir*this.reactionSpeed);
 		}
-		
 	}
 
 	public void checkScoreUpdate(Collisions collision) {
@@ -205,14 +208,17 @@ public class ProjectPlayer implements Player {
 			System.out.println("Update project player score" + this.score);
 		}
 	}
+	
 	public void update(Ball ball, RealPlayer player, Collisions collision) {
 		this.redoPrediction(ball, player);
 		this.checkScoreUpdate(collision);
 	}
+	
 	public double getWidth() {
 		// TODO Auto-generated method stub
 		return this.width;
 	}
+	
 	public double getHeight() {
 		return this.height;
 	}
@@ -220,18 +226,17 @@ public class ProjectPlayer implements Player {
 	@Override
 	public void updateScore() {
 		this.score+=1;
-		
 	}
+	
 	@Override
 	public void moveUp() {
 		// TODO Auto-generated method stub
-		
 	}
+	
 	@Override
 	public void moveDown() {
 		// TODO Auto-generated method stub
-		
 	}
 
-
 }
+
